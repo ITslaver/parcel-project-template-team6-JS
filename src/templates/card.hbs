@@ -1,22 +1,18 @@
-{{!-- {{#each this}}
-  <li class='card'>
-    <div class='front'>
+{{#each this}}
+  <li class='card' id='{{id}}'>
+    <div class='card-top'>
       <img
         src='https://image.tmdb.org/t/p/w500{{poster_path}}'
-        alt=''
-        width='340'
+        alt='{{title}}'
       />
-      <div class='card-box'>
-        <h3 class='card-title'>{{title}}</h3>
-        <p class='text'>{{genre_ids}}| {{release_date}}</p>
-      </div>
-      <div class='rating'>
-        <span class='rating-value'>{{vote_average}}</span>
+    </div>
+    <div class='card-box'>
+      <h3 class='card-title'>{{title}}</h3>
+      <div class='card-bottom'>
+        <p class='card-bottom-genres'>{{genre_ids}} |</p>
+        <span class='card-bottom-year'>{{release_date}}</span>
       </div>
     </div>
-    <div class='back'>
-      <p class='back-text'>{{overview}}</p>
-      <button type='button' id='{{genres.id}}'>Add to libriary</button>
-    </div>
+    <span class='card-rating'>{{vote_average}}</span>
   </li>
-{{/each}} --}}
+{{/each}}
