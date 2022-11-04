@@ -1,4 +1,3 @@
-import axios from 'axios';
 
 const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
 const TRENDING_URL = 'https://api.themoviedb.org/3/trending/movie/day';
