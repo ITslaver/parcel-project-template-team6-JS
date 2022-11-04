@@ -1,2 +1,5 @@
 @import './common';
-@import './example';
+@import './utils/mixin';
+@import './utils/variables';
+
+@import './components/test-section';
