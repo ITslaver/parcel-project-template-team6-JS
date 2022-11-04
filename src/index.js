@@ -39,7 +39,6 @@ async function fetchApiFilms() {
   try {
     await filmApiTrendFetch.filmsAndGenres().then(data => {
       const makrup = card(data);
-      console.log(data);
       gallery.innerHTML = '';
       gallery.insertAdjacentHTML('beforeend', makrup);
     });
