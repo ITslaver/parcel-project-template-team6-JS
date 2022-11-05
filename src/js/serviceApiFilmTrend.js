@@ -7,7 +7,7 @@ export default class FilmApiTrendFetch {
   constructor() {
     this.query = '';
     this.page = 1;
-    this.currentLang = 'eu';
+    this.currentLang = 'en-US';
     this.genres;
     this.films;
   }
