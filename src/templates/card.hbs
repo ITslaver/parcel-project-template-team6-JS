@@ -1,18 +1,19 @@
 {{#each this}}
   <li class='card' id='{{id}}'>
-    <div class='card-top'>
+    <div class='card-top' id='{{id}}'>
       <img
         src='https://image.tmdb.org/t/p/w500{{poster_path}}'
         alt='{{title}}'
+        id='{{id}}'
       />
     </div>
-    <div class='card-box'>
-      <h3 class='card-title'>{{title}}</h3>
-      <div class='card-bottom'>
-        <p class='card-bottom-genres'>{{genre_ids}} |</p>
-        <span class='card-bottom-year'>{{release_date}}</span>
+    <div class='card-box' id='{{id}}'>
+      <h3 class='card-title' id='{{id}}'>{{title}}</h3>
+      <div class='card-bottom' id='{{id}}'>
+        <p class='card-bottom-genres' id='{{id}}'>{{genre_ids}} |</p>
+        <span class='card-bottom-year' id='{{id}}'>{{release_date}}</span>
       </div>
     </div>
-    <span class='card-rating'>{{vote_average}}</span>
+    <span class='card-rating' id='{{id}}'>{{vote_average}}</span>
   </li>
 {{/each}}

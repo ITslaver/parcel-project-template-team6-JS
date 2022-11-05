@@ -4,8 +4,8 @@ import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
 
 const gallery = document.querySelector('.card-list');
-// const btnEn = document.querySelector('#en');
-// const btnUk = document.querySelector('#uk');
+const btnEn = document.querySelector('#en');
+const btnUk = document.querySelector('#uk');
 const searchForm = document.querySelector('#search-form');
 searchForm.addEventListener('submit', onSubmitQuery);
 
@@ -16,8 +16,8 @@ const filmApiTrendFetch = new FilmApiTrendFetch();
 fetchApiFilms();
 
 // ------------Переключение языка--------------
-// btnEn.addEventListener('click', onEnClick);
-// btnUk.addEventListener('click', onUkClick);
+btnEn.addEventListener('click', onEnClick);
+btnUk.addEventListener('click', onUkClick);
 
 async function onEnClick() {
   try {
@@ -51,4 +51,33 @@ async function fetchApiFilms() {
   }
 }
 
-// ------------------------------------
+// ------------Модальное окно----------------
+
+// const listFilms = document.querySelector(".card-list")
+
+  gallery.addEventListener('click', onCardClick);
+
+
+async function onCardClick(event) {      
+    if (event.target.classList.contains('card-list')) {    
+      return;
+    }     
+    filmApiTrendFetch.idFilm = event.target.getAttribute('id');
+    console.log(filmApiTrendFetch.idFilm); 
+    await fetchModalCard();
+} 
+
+  async function fetchModalCard() {
+    try {
+      await filmApiTrendFetch.fetchFilmCard().then(data => {
+        // const makrup = modal-card(data);
+        // console.log(data.overview);
+        console.log(data);        
+        console.log(filmApiTrendFetch.movie_id); 
+        // modalCard.innerHTML = '';
+        // modalCard.insertAdjacentHTML('beforeend', makrup);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }  

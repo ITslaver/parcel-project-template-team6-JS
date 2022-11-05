@@ -1,15 +1,17 @@
 const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
 const TRENDING_URL = 'https://api.themoviedb.org/3/trending/movie/day';
 const SEARCH_FILMS_URL = 'https://api.themoviedb.org/3/search/movie';
+const CARD_MOVIE = 'https://api.themoviedb.org/3/movie/';
 const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
 
 export default class FilmApiTrendFetch {
   constructor() {
     this.query = '';
     this.page = 1;
-    this.currentLang = 'eu';
+    this.currentLang = 'en';
     this.genres;
     this.films;
+    this.movie_id;
   }
 
   async fetchFilmsGenres() {
@@ -80,6 +82,19 @@ export default class FilmApiTrendFetch {
       .catch(err => console.log(err));
   }
 
+  async fetchFilmCard() {
+    // this.movie_id = 766475;
+    try{      
+      return await fetch(
+      `${CARD_MOVIE}${this.movie_id}?api_key=${API_KEY}&language=${this.currentLang}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)  
+        console.log(data.overview); 
+      })}
+      catch(err) {console.log(err)};      
+  }
+
   get lang() {
     return this.currentLang;
   }
@@ -92,5 +107,12 @@ export default class FilmApiTrendFetch {
   }
   set currentPage(value) {
     this.page = value;
+  }
+
+  get idFilm (){
+    return this.movie_id;
+  }
+  set idFilm (value) {
+    this.movie_id = value;
   }
 }
