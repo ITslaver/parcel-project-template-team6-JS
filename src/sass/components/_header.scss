@@ -1,13 +1,6 @@
-.header {
-  border-color: gray;
-  width: 100%;
-  height: 40px;
-}
 .header__wrap {
   display: flex;
+  position: relative;
+  align-items: center;
   justify-content: space-between;
-}
-
-.logo__wrap {
-  display: flex;
 }

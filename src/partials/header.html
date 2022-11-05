@@ -1,17 +1,28 @@
 <header class="header">
   <div class="header__conteiner conteiner">
     <div class="header__wrap">
-        <div class="logo__wrap">
-        <a href="./index.html" class="header__logo-link link">
+        
+        <a href="./index.html" class="logo__icon link">
         <svg class="header__logo" width="24" height="24">
                 <use href="./images/icons.svg#icon-logo"></use>
             </svg>
+            <span class="logo__text"><h1>Filmoteka</h1></span>
         </a>
-      <h1 class="text__logo"><a href="/">Filmoteka</a></h1>
-      </div>
-      <div class="search-form__wrap">
+      <ul class="nav__list nav__list-library">
+					<li class="nav__item">
+						<a class="nav__link" href="index.html">Home</a>
+					</li>
+					<li class="nav__item active">
+						<a class="nav__link" href="/">
+							MY LIBRARY
+						</a>
+					</li>
+      </ul>
+      
+      
       <form class="search-form" id="search-form">
       <input
+        class="nav__item-button nav__item-log-out button"
         type="text"
         name="searchQuery"
         autocomplete="off"
@@ -19,11 +30,6 @@
       />
       <button type="submit">
       </button>
-      </div>
-      <div class="menu__wrap">
-      <a class="Home_link" href="/">Home</a>
-      <a class="Home_link" href="/">MY LIBRARY</a>
-      </div>
-    </div>
-  </div>
+      
 </header>
+
