@@ -1,10 +1,10 @@
 import FilmApiTrendFetch from './js/serviceApiFilmTrend';
 import card from './templates/card.hbs';
+import './js/pagination';
 
 const gallery = document.querySelector('.card-list');
 // const btnEn = document.querySelector('#en');
 // const btnUk = document.querySelector('#uk');
-
 
 const filmApiTrendFetch = new FilmApiTrendFetch();
 // --------- При открытии сайта ---------------------
