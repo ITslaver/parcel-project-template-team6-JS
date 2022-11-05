@@ -11,13 +11,29 @@
     />
     <link rel="stylesheet" href="./sass/index.scss" />
     <script type="module" src="./index.js"></script>
+    <script type="module" src="./js/cabinet.js"></script>
   </head>
 
   <body>
     <!-- ❗️❗️❗️ Add partials like so for every page -->
     <include src="./partials/header.html"></include>
+    <div class="username"></div>
+<form class="auth-form" id="auth-form">
+<label>Email</label>
+<input type="email" id="email">
+<label>Пароль</label>
+<input type="password" id="password">
+<button type="submit" id="sign">Вхід</button>
+<button type="submit" id="register">Реєстрація</button>
+<button type="submit" id="exit">Вийти</button>
+<button type="submit" id="favorite">Обране</button>
+<button type="submit" id="watched">Переглянуте</button>
+</form>
+</div>
     <main>
       <include src="./partials/testButttons.html"></include>
+      <ul class="favorite"></ul>
+      <ul class="watched"></ul>
       <include src="./partials/gallery.html"></include>
       <!-- <include src="./partials/modal-card.html"></include> -->
       <include src="./partials/pagination.html"></include>      
