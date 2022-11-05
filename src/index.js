@@ -1,12 +1,16 @@
 import FilmApiTrendFetch from './js/serviceApiFilmTrend';
 import card from './templates/card.hbs';
 import './js/pagination';
+import onSubmitQuery from './js/on-submit-query';
 
 const gallery = document.querySelector('.card-list');
 // const btnEn = document.querySelector('#en');
 // const btnUk = document.querySelector('#uk');
+const searchForm = document.querySelector('#search-form');
+searchForm.addEventListener('submit', onSubmitQuery);
 
 const filmApiTrendFetch = new FilmApiTrendFetch();
+
 // --------- При открытии сайта ---------------------
 
 fetchApiFilms();
@@ -46,3 +50,5 @@ async function fetchApiFilms() {
     console.log(error);
   }
 }
+
+// ------------------------------------
