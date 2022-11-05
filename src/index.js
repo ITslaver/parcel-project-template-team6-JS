@@ -2,6 +2,7 @@ import FilmApiTrendFetch from './js/serviceApiFilmTrend';
 import card from './templates/card.hbs';
 import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
+import './js/cabinet';
 
 const gallery = document.querySelector('.card-list');
 const btnEn = document.querySelector('#en');
