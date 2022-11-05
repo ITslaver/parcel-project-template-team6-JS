@@ -1,0 +1,6 @@
+.pagination-section {
+  padding-bottom: 40px;
+  @include tablet {
+    padding-bottom: 60px;
+  }
+}
