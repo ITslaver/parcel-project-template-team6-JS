@@ -58,7 +58,7 @@ export default teamMembers = [
     {
         name: 'Mykyta Bazykin',
         role: 'team member',
-        genres: 'art-house, 18+',
+        genres: 'adventure, comedy',
         poster: 'man-004',
     },
 
