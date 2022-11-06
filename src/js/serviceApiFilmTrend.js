@@ -87,7 +87,6 @@ export default class FilmApiTrendFetch {
   async searchFilmsAndGenres() {
     try {
       const response = await this.fetchSearchFilms();
-      // console.log(response);
       const data = {
         films: this.films,
         total_results: response.total_results,
