@@ -3,6 +3,8 @@ import card from './templates/card.hbs';
 import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
 import hbsContainer from './templates/modal-card.hbs'
+import './js/cabinet';
+
 
 
 const modalCard = document.querySelector('.modalCard');

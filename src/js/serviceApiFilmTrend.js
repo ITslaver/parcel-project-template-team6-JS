@@ -8,9 +8,7 @@ export default class FilmApiTrendFetch {
   constructor() {
     this.query = '';
     this.page = 1;
-    
     this.currentLang = 'en-US';
-
     this.genres;
     this.films;
     this.movie_id;
@@ -31,7 +29,7 @@ export default class FilmApiTrendFetch {
 
   async fetchFilmsTrend() {
     return await fetch(
-      `${TRENDING_URL}?api_key=${API_KEY}&${this.page}&language=${this.currentLang}`
+      `${TRENDING_URL}?api_key=${API_KEY}&page=${this.page}&language=${this.currentLang}`
     )
       .then(res => res.json())
       .then(data => {
@@ -80,6 +78,7 @@ export default class FilmApiTrendFetch {
     )
       .then(resp => resp.json())
       .then(data => {
+        // console.log(data);
         this.films = data.results;
         return data;
       })
