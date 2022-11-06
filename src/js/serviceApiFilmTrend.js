@@ -12,6 +12,7 @@ export default class FilmApiTrendFetch {
     this.genres;
     this.films;
     this.movie_id;
+    this.card;
   }
 
   async fetchFilmsGenres() {
@@ -32,6 +33,7 @@ export default class FilmApiTrendFetch {
     )
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         this.films = data.results;
         //    return data.results
       })
@@ -84,16 +86,31 @@ export default class FilmApiTrendFetch {
   }
 
   async fetchFilmCard() {
-    // this.movie_id = 766475;
-    try{      
+    try{  
       return await fetch(
       `${CARD_MOVIE}${this.movie_id}?api_key=${API_KEY}&language=${this.currentLang}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)  
-        console.log(data.overview); 
+        // console.log(data)    
+        this.card = data;     
+        return data;     
       })}
-      catch(err) {console.log(err)};      
+      catch(error) {console.log(error)};      
+  }
+  async extendFetchFilmCard() {
+    try {
+      await this.fetchFilmCard();
+      const card = this.card;
+      // const genres = this.genres;
+      card.title = card.title.toUpperCase();
+      card.vote_average = card.vote_average.toFixed(1);
+      card.popularity = card.popularity.toFixed(1);
+      card.original_title = card.original_title.toUpperCase();
+      // processing genres 
+      card.genres = card.genres.flatMap(genre => genre.name).join(' ');
+      console.log(card)   
+    return card;
+    }    catch (error) {console.log(error);}      
   }
 
   get lang() {
