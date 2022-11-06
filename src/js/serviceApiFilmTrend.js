@@ -30,7 +30,7 @@ export default class FilmApiTrendFetch {
 
   async fetchFilmsTrend() {
     return await fetch(
-      `${TRENDING_URL}?api_key=${API_KEY}&${this.page}&language=${this.currentLang}`
+      `${TRENDING_URL}?api_key=${API_KEY}&page=${this.page}&language=${this.currentLang}`
     )
       .then(res => res.json())
       .then(data => {
