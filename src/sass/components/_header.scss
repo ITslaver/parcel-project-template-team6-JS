@@ -1,6 +1,104 @@
+.header {
+  height: 240px;
+  @include mobile {
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.56),
+        rgba(0, 0, 0, 0.56)
+      ),
+      url('./../images/backgraund-header/header320.jpg');
+    @include retina {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url('./../images/backgraund-header/header320@2x.jpg');
+    }
+  }
+
+  @include tablet {
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.56),
+        rgba(0, 0, 0, 0.56)
+      ),
+      url('./../images/backgraund-header/header768.jpg');
+    @include retina {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url('./../images/backgraund-header/header768@2x.jpg');
+    }
+  }
+
+  @include desktop {
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.56),
+        rgba(0, 0, 0, 0.56)
+      ),
+      url('./../images/backgraund-header/header1024.jpg');
+    @include retina {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url('./../images/backgraund-header/header1024@2x.jpg');
+    }
+  }
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.header__container {
+  text-align: center;
+}
+
 .header__wrap {
   display: flex;
   position: relative;
   align-items: center;
   justify-content: space-between;
+}
+
+.logo__icon {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  color: #818181;
+  font-family: 'Roboto';
+  font-size: 30px;
+  line-height: 1.16;
+}
+
+.mein-logo__text {
+  display: none;
+  @include tablet {
+    display: block;
+  }
+}
+
+.nav__list {
+  display: flex;
+}
+
+.nav__item:not(:first-child) {
+  margin-left: 39px;
+}
+
+.nav__link {
+  text-decoration: none;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.16;
+  display: flex;
+  text-transform: uppercase;
+  color: #ffffff;
 }
