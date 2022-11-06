@@ -23,6 +23,7 @@ export default async function onSubmitQuery(evt) {
         `The films you requested could not be found!`
       );
     }
+    // console.log(data.films);
     renderCards(data.films);
     // тимчасово, далі буде перевірка на мову
     Notiflix.Notify.success(`We found ${data.total_results} films.`);
@@ -53,10 +54,13 @@ async function searchFilmsAndGenres() {
       // форматуємо дату виходу фільму
       film.release_date = film.release_date.slice(0, 4);
       // форматуємо кількість жанрів фільму
+      if (film.genre_ids.length === 0) {
+        film.genre_ids[0] = 'no movie genre';
+      }
       if (film.genre_ids.length >= 3) {
         film.genre_ids[2] = 'Other';
-        film.genre_ids = film.genre_ids.slice(0, 3);
       }
+      film.genre_ids = film.genre_ids.slice(0, 3).join(', ');
     }
 
     function searchGenres(ids) {

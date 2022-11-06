@@ -9,11 +9,7 @@
     <div class='card-box'>
       <h3 class='card-title'>{{title}}</h3>
       <div class='card-bottom'>
-        <p class='card-bottom-genres'>{{#each genre_ids}}{{this}}{{#unless
-              @last
-            }},
-            {{/unless}}{{/each}}
-          |</p>
+        <p class='card-bottom-genres'>{{genre_ids}} |</p>
         <span class='card-bottom-year'>{{release_date}}</span>
       </div>
     </div>
