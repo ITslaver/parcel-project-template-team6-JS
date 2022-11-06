@@ -10,9 +10,12 @@ const btnUk = document.querySelector('#uk');
 const searchForm = document.querySelector('#search-form');
 
 window.addEventListener('load', onLoadPreloaderHide);
-searchForm.addEventListener('submit', onSubmitQuery);
 
 const filmApiTrendFetch = new FilmApiTrendFetch();
+
+searchForm.addEventListener('submit', function (evt) {
+  onSubmitQuery(evt, filmApiTrendFetch);
+});
 
 // --------- При открытии сайта ---------------------
 
