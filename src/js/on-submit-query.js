@@ -25,5 +25,3 @@ export default async function onSubmitQuery(evt, instance) {
     console.log(error);
   }
 }
-
-// ------------------------------------
