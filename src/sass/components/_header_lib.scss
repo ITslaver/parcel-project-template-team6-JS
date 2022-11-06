@@ -1,0 +1,138 @@
+.container_lib {
+    padding-top: 40px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56),rgba(0, 0, 0, 0.56)), url('../images/header-lib/library1024.jpg');
+height: 216px;
+background-repeat: no-repeat;
+
+background-size: cover;
+@include tablet{
+    height: 219px;
+    // background-position: center;
+}
+@include desktop{
+    height: 216px;
+    background-position: center;
+}
+}
+
+.logo__icon {
+display: flex;
+font-weight: 500;
+align-items: center;
+color: #ffffff;
+font-family: 'Roboto';
+font-size: 30px;
+line-height: 1.16;
+}
+
+.header__logo-svg {
+margin-right: 10px;
+}
+
+.header__btn-style{
+    width: 130px;
+    height: 44px;
+    background-color: inherit;
+    color: #ffffff;
+    border-radius: 4px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid;
+    @include tablet{
+        width: 152px;
+        height: 44px;
+    }
+    @include desktop{
+        width: 148px;
+        height: 42px;
+    }
+
+color: #FFFFFF;
+}
+
+.header__btn-list{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    @include tablet{
+        margin-top: 40px;
+    }
+}
+
+.header__btn-item:not(:last-child){
+    margin-right: 20px;
+    @include tablet{
+        margin-right: 32px;
+    }
+    @include desktop{
+        margin-right: 16px;
+    }
+}
+
+.header__btn-style:hover,
+.header__btn-style:focus {
+    background-color: #FF6B01;
+    border: 1px solid #000000;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+}
+
+.header__pages-list{
+    display: flex;
+}
+
+.header__pages-link{
+    text-decoration: none; 
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.16;
+    display: flex;
+    // align-items: center;
+    // text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.header__pages-item:not(:first-child){
+margin-left: 39px;
+}
+
+.header__lib-nav{
+    display: flex;
+    align-items:center ;
+}
+
+.header__pages{
+    margin-left: auto;
+}
+
+.current {
+    position: relative;
+    
+}
+
+.current:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    left: 0;
+    bottom: -2px;
+    background-color: #FF001B;
+}
+
+
+.logo__text{
+    display: none;
+    @include tablet{
+        display: block;
+    }
+
+}
