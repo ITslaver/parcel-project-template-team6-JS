@@ -2,7 +2,10 @@ import FilmApiTrendFetch from './js/serviceApiFilmTrend';
 import card from './templates/card.hbs';
 import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
+import hbsContainer from './templates/modal-card.hbs'
 
+
+const modalCard = document.querySelector('.modalCard');
 const gallery = document.querySelector('.card-list');
 const btnEn = document.querySelector('#en');
 const btnUk = document.querySelector('#uk');
@@ -42,6 +45,7 @@ async function onUkClick() {
 async function fetchApiFilms() {
   try {
     await filmApiTrendFetch.filmsAndGenres().then(data => {
+      console.log(data)
       const makrup = card(data);
       gallery.innerHTML = '';
       gallery.insertAdjacentHTML('beforeend', makrup);
@@ -69,15 +73,16 @@ async function onCardClick(event) {
 
   async function fetchModalCard() {
     try {
-      await filmApiTrendFetch.fetchFilmCard().then(data => {
-        // const makrup = modal-card(data);
-        // console.log(data.overview);
+      await filmApiTrendFetch.extendFetchFilmCard().then(data => {
+        const makrup = hbsContainer(data);
+        console.log(data.overview);
         console.log(data);        
         console.log(filmApiTrendFetch.movie_id); 
-        // modalCard.innerHTML = '';
-        // modalCard.insertAdjacentHTML('beforeend', makrup);
+        modalCard.innerHTML = '';
+        modalCard.insertAdjacentHTML('beforeend', makrup);
       });
     } catch (error) {
       console.log(error);
-    }
+    }  
   }  
+  
