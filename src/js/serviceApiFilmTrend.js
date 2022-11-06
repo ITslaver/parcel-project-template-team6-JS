@@ -8,9 +8,7 @@ export default class FilmApiTrendFetch {
   constructor() {
     this.query = '';
     this.page = 1;
-    
     this.currentLang = 'en-US';
-
     this.genres;
     this.films;
     this.movie_id;
@@ -78,6 +76,7 @@ export default class FilmApiTrendFetch {
     )
       .then(resp => resp.json())
       .then(data => {
+        // console.log(data);
         this.films = data.results;
         return data;
       })
