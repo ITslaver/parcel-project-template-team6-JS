@@ -26,21 +26,11 @@ const app = initializeApp(firebaseConfig);
 
 export let uid;
 authStatus();
-let library = "favorite";
 
-
-
-//getLibrary()
-
-function getLibrary() {
-  console.log(library)
-  getPage(uid).then(console.log(response))
-  console.log(library)
-}
 
 //---------------------------- Слушатели кнопок--------------------------------
 document.getElementById('header_btn').addEventListener('submit', cabinetAction);
-document.getElementById('modalCard').addEventListener('click', itemAction);
+document.getElementById('card-div').addEventListener('click', itemAction);
 
 //---------------------------Функции кнопок в хедере---------------------------
 function itemAction(event) {
