@@ -24,6 +24,6 @@ export default async function onSubmitQuery(evt, instance) {
     Notiflix.Notify.success(`We found ${data.total_results} films.`);
   } catch (error) {
     console.log(error);
-    // onError();
+    onError();
   }
 }
