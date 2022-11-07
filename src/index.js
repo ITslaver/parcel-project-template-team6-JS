@@ -5,6 +5,7 @@ import onSubmitQuery from './js/on-submit-query';
 import onLoadPreloaderHide from './js/preloader';
 import hbsContainer from './templates/modal-card.hbs';
 import './js/cabinet';
+import './js/modal-film-card';
 
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
@@ -63,8 +64,10 @@ async function fetchApiFilms() {
 // ------------Модальное окно----------------
 
 // const listFilms = document.querySelector(".card-list")
-
 gallery.addEventListener('click', onCardClick);
+
+const modalDialog = document.querySelector('.modal-one-film');
+const html = document.querySelector('html');
 
 async function onCardClick(event) {
   if (event.target.classList.contains('card-list')) {
@@ -74,7 +77,14 @@ async function onCardClick(event) {
   console.log(filmApiTrendFetch.idFilm);
   await fetchModalCard();
 
+  const closeOnEsc = async e => {    
+    if (e.key === 'Escape' || e.key === 'Esc') {
+      await closeModal();
+    }
+  };
+
   await openModal();
+ 
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
@@ -88,5 +98,18 @@ async function onCardClick(event) {
     } catch (error) {
       console.log(error);
     }
+  } 
+  
+  async function openModal() {
+    console.log('это Модалка')
+    document.addEventListener('keydown', closeOnEsc);
+    modalDialog.classList.remove('modal-one-film--hidden');
+    html.classList.add('disable-scroll');
+  } 
+
+  async function closeModal() {
+      document.removeEventListener('keydown', closeOnEsc);
+      modalDialog.classList.add('modal-one-film--hidden');
+      html.classList.remove('disable-scroll');
   }
 }
