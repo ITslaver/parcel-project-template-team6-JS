@@ -109,21 +109,31 @@
   color: #ffffff;
 }
 // ----------------------------------------------форма поиска------------------------
-.nav__item-button {
+.search-form__input {
   height: 20px;
   font-weight: 400;
   font-size: 18px;
+  color: #ffffff;
   background: none;
   border: none;
   border-bottom: 0.5px solid #ffffff;
   padding: 0 0 4px 1px;
-  color: #ffffff;
   outline: none;
   width: 320px;
+  @include tablet {
+    width: 356px;
+  }
+}
+
+.search-form__input::placeholder {
+  color: #ffffff;
+}
+
+.icon-search__logo {
+  margin-left: -13px;
 }
 
 .search__button {
-  content: '';
   padding: 0 0 4px 1px;
   bottom: 6px;
   border: none;
