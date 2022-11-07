@@ -30,7 +30,6 @@ import memberImage010x2 from '../images/footer-modal-posters/woman-004@2x.jpg';
 
 
 
-
 export default teamMembers = [
     {
         name: 'Viacheslav Polishuk',
