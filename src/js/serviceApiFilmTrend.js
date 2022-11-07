@@ -17,7 +17,7 @@ export default class FilmApiTrendFetch {
 
   async fetchFilmsGenres() {
     return await fetch(
-      `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}`
+      `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}page=${this.page}`
     )
       .then(res => res.json())
       .then(data => {
@@ -71,6 +71,7 @@ export default class FilmApiTrendFetch {
       console.log(error);
     }
   }
+
   async fetchSearchFilms() {
     return await fetch(
       `${SEARCH_FILMS_URL}?api_key=${API_KEY}&language=${this.currentLang}&query=${this.query}`
@@ -84,17 +85,67 @@ export default class FilmApiTrendFetch {
       .catch(err => console.log(err));
   }
 
+  async searchFilmsAndGenres() {
+    try {
+      const response = await this.fetchSearchFilms();
+      const data = {
+        films: this.films,
+        total_results: response.total_results,
+      };
+      // console.log(data.films);
+      const genresIdArrFromApi = this.genres;
+      // console.log(genresIdArrFromApi);
+
+      for (let film of data.films) {
+        film.genre_ids = searchGenres(film.genre_ids);
+        // console.log(film.genre_ids);
+        // форматуємо рейтинг
+        film.vote_average = film.vote_average.toFixed(1);
+        // форматуємо дату виходу фільму
+        film.release_date = film.release_date.slice(0, 4);
+        // форматуємо кількість жанрів фільму
+        if (film.genre_ids.length === 0) {
+          film.genre_ids[0] = 'no movie genre';
+        }
+        if (film.genre_ids.length >= 3) {
+          film.genre_ids[2] = 'Other';
+        }
+        film.genre_ids = film.genre_ids.slice(0, 3).join(', ');
+      }
+
+      function searchGenres(ids) {
+        let genresNamesArr = [];
+        let searchId = ids;
+        let genreName;
+
+        for (let i = 0; i < ids.length; i += 1) {
+          genreName = genresIdArrFromApi.find(
+            list => list.id === searchId[i]
+          ).name;
+          genresNamesArr.push(genreName);
+        }
+        return genresNamesArr;
+      }
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async fetchFilmCard() {
-    try{  
+    try {
       return await fetch(
-      `${CARD_MOVIE}${this.movie_id}?api_key=${API_KEY}&language=${this.currentLang}`)
-      .then(res => res.json())
-      .then(data => {
-        // console.log(data)    
-        this.card = data;     
-        return data;     
-      })}
-      catch(error) {console.log(error)};      
+        `${CARD_MOVIE}${this.movie_id}?api_key=${API_KEY}&language=${this.currentLang}`
+      )
+        .then(res => res.json())
+        .then(data => {
+          // console.log(data)
+          this.card = data;
+          return data;
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
   async extendFetchFilmCard() {
     try {
@@ -104,10 +155,13 @@ export default class FilmApiTrendFetch {
       card.vote_average = card.vote_average.toFixed(1);
       card.popularity = card.popularity.toFixed(1);
       card.original_title = card.original_title.toUpperCase();
-      // processing genres 
-      card.genres = card.genres.flatMap(genre => genre.name).join(', ');   
-    return card;
-    }    catch (error) {console.log(error);}      
+
+      // processing genres
+      card.genres = card.genres.flatMap(genre => genre.name).join(', ');
+      return card;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   get lang() {
@@ -124,10 +178,10 @@ export default class FilmApiTrendFetch {
     this.page = value;
   }
 
-  get idFilm (){
+  get idFilm() {
     return this.movie_id;
   }
-  set idFilm (value) {
+  set idFilm(value) {
     this.movie_id = value;
   }
 }
