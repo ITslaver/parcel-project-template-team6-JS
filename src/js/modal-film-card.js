@@ -1,6 +1,6 @@
 const modalDialog = document.querySelector('.modal-one-film');
 const html = document.querySelector('html');
-const modalContent = document.querySelector('.modal-one-film__content');
+// const modalContent = document.querySelector('.modal-one-film__content');
 const closeButton = document.querySelector('.modal-close-btn');
 
 const closeOnEsc = e => {    
@@ -9,12 +9,12 @@ const closeOnEsc = e => {
   }
 };
 
-async function openModal() {
-  console.log('это Модалка')
-  document.addEventListener('keydown', closeOnEsc);
-  modalDialog.classList.remove('modal-one-film--hidden');
-  html.classList.add('disable-scroll');
-}
+// async function openModal() {
+//   console.log('это Модалка')
+//   document.addEventListener('keydown', closeOnEsc);
+//   modalDialog.classList.remove('modal-one-film--hidden');
+//   html.classList.add('disable-scroll');
+// }
 
 async function closeModal() {
     document.removeEventListener('keydown', closeOnEsc);
