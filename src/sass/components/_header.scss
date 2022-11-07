@@ -54,8 +54,9 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  padding-top: 40px;
 }
-
+// -------------------------------------------------Контейнер-------
 .header__container {
   text-align: center;
 }
@@ -66,24 +67,29 @@
   align-items: center;
   justify-content: space-between;
 }
-
-.logo__icon {
+// --------------------------------------------------Логотип---------------
+.logo-home__link {
   display: flex;
   font-weight: 500;
   align-items: center;
-  color: #818181;
+  color: #ffffff;
   font-family: 'Roboto';
-  font-size: 30px;
+  font-size: 23px;
   line-height: 1.16;
 }
 
-.mein-logo__text {
+.header-home__logo {
+  margin-right: 10px;
+  color: blue;
+}
+
+.logo-home__text {
   display: none;
   @include tablet {
     display: block;
   }
 }
-
+// ------------------------------------------------навигация------
 .nav__list {
   display: flex;
 }
@@ -102,7 +108,38 @@
   text-transform: uppercase;
   color: #ffffff;
 }
+// ----------------------------------------------форма поиска------------------------
+.search-form__input {
+  height: 20px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #ffffff;
+  background: none;
+  border: none;
+  border-bottom: 0.5px solid #ffffff;
+  padding: 0 0 4px 1px;
+  outline: none;
+  width: 320px;
+  @include tablet {
+    width: 356px;
+  }
+}
+
+.search-form__input::placeholder {
+  color: #ffffff;
+}
+
+.icon-search__logo {
+  margin-left: -13px;
+}
 
 .search__button {
-  background-color: transparent;
+  padding: 0 0 4px 1px;
+  bottom: 6px;
+  border: none;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 0.5px solid #ffffff;
 }

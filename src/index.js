@@ -74,8 +74,8 @@ async function onCardClick(event) {
   if (event.target.classList.contains('card-list')) {
     return;
   }
-  filmApiTrendFetch.idFilm = event.target.getAttribute('id');
-  console.log(filmApiTrendFetch.idFilm);
+  filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
+  console.log('Это data-film:', filmApiTrendFetch.idFilm);
   await fetchModalCard();
 
   const closeOnEsc = async e => {
