@@ -105,13 +105,19 @@ async function onCardClick(event) {
     console.log('это Модалка');
     document.addEventListener('keydown', closeOnEsc);
     modalDialog.classList.remove('modal-one-film--hidden');
-    html.classList.add('disable-scroll');
+    html.classList.add('disable-scroll-all');
   }
 
   async function closeModal() {
     document.removeEventListener('keydown', closeOnEsc);
     modalDialog.classList.add('modal-one-film--hidden');
-    html.classList.remove('disable-scroll');
+    html.classList.add('disable-scroll-all');
+  } 
+
+  async function closeModal() {
+      document.removeEventListener('keydown', closeOnEsc);
+      modalDialog.classList.add('modal-one-film--hidden');
+      html.classList.remove('disable-scroll-all');
   }
 }
 
