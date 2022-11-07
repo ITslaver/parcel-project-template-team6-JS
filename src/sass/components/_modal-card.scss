@@ -1,6 +1,11 @@
-.disable-scroll-all {
+// body {
+//   scrollbar-width: 20px;
+// }
+
+.disable-scroll-all body {
   overflow: hidden;
-  touch-action: none;
+  touch-action: none;  
+  margin-right: 17px;
 }
 
 .modal-one-film {
