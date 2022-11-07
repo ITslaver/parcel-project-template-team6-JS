@@ -5,3 +5,10 @@
   --footer-background-color: #F7F7F7;
   --footer-text-color: #545454;
 }
+
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1200px;
+
+$time-function: cubic-bezier(0.4, 0, 0.2, 1);
+$transition-duration: 250ms;
