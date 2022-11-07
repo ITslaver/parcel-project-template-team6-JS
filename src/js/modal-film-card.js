@@ -9,6 +9,7 @@ const closeOnEsc = e => {
   }
 };
 
+
 // async function openModal() {
 //   console.log('это Модалка')
 //   document.addEventListener('keydown', closeOnEsc);
@@ -19,7 +20,7 @@ const closeOnEsc = e => {
 async function closeModal() {
     document.removeEventListener('keydown', closeOnEsc);
     modalDialog.classList.add('modal-one-film--hidden');
-    html.classList.remove('disable-scroll');
+    html.classList.remove('disable-scroll-all');
 }
 
 closeButton.addEventListener('click', e => {

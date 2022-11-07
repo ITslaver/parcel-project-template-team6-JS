@@ -1,3 +1,8 @@
+.disable-scroll-all {
+  overflow: hidden;
+  touch-action: none;
+}
+
 .modal-one-film {
   position: fixed;
   width: 100vw;
