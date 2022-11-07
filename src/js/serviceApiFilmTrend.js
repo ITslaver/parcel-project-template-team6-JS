@@ -23,7 +23,7 @@ export default class FilmApiTrendFetch {
       .then(res => res.json())
       .then(data => {
         this.genres = data.genres;
-        localStorage.setItem(LOCAL_KEY_GENRES, JSON.stringify(this.genres))
+        localStorage.setItem(LOCAL_KEY_GENRES, JSON.stringify(this.genres));
 
         // return data.genres
       })
@@ -107,17 +107,42 @@ export default class FilmApiTrendFetch {
 
       for (let film of data.films) {
         film.genre_ids = searchGenres(film.genre_ids);
-        // console.log(film.genre_ids);
-        // форматуємо рейтинг
         film.vote_average = film.vote_average.toFixed(1);
         // форматуємо дату виходу фільму
+        if (!film.release_date) {
+          switch (this.currentLang) {
+            case 'uk-UA':
+              film.release_date = '-----';
+              break;
+
+            case 'en-US':
+              film.release_date = 'n/f ';
+              break;
+          }
+        }
         film.release_date = film.release_date.slice(0, 4);
         // форматуємо кількість жанрів фільму
         if (film.genre_ids.length === 0) {
-          film.genre_ids[0] = 'no movie genre';
+          switch (this.currentLang) {
+            case 'uk-UA':
+              film.genre_ids[0] = 'жанри не вказані';
+              break;
+
+            case 'en-US':
+              film.genre_ids[0] = 'no movie genre';
+              break;
+          }
         }
         if (film.genre_ids.length >= 3) {
-          film.genre_ids[2] = 'Other';
+          switch (this.currentLang) {
+            case 'uk-UA':
+              film.genre_ids[2] = 'Інші';
+              break;
+
+            case 'en-US':
+              film.genre_ids[2] = 'Other';
+              break;
+          }
         }
         film.genre_ids = film.genre_ids.slice(0, 3).join(', ');
       }
