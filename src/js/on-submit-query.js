@@ -1,5 +1,6 @@
 import renderCards from './render-cards';
 import Notiflix from 'notiflix';
+import onError from './on-error';
 
 export default async function onSubmitQuery(evt, instance) {
   evt.preventDefault();
@@ -23,5 +24,6 @@ export default async function onSubmitQuery(evt, instance) {
     Notiflix.Notify.success(`We found ${data.total_results} films.`);
   } catch (error) {
     console.log(error);
+    onError();
   }
 }
