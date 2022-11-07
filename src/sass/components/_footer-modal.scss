@@ -92,7 +92,6 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     width: calc((100% - 20px)/2);
     min-width: 150px;
     border: 1px solid var(--accent-color);
-    padding: 6px;
     transition: box-shadow 250ms $time-function,
     transform 250ms $time-function;
 
@@ -110,6 +109,10 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
 }
 
+.footer-modal__img-container {
+    display: flex;
+    justify-content: center;
+}
 
 .footer-modal__image {
     height: 180px;
@@ -117,6 +120,18 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 
     @include tablet {
         height: 260px;
+    }
+}
+
+.footer-modal__card-text {
+    padding: 5px;
+
+    @include tablet {
+        padding: 7px;
+    }
+    
+    @include desktop {
+        padding: 10px;
     }
 }
 
