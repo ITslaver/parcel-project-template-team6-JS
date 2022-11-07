@@ -1,0 +1,16 @@
+{{#each this}}
+    <li class="footer-modal__member-card">
+        <div class="footer-modal__img-container">
+            <img 
+                srcset="./images/footer-modal-posters/{{this.poster}}.jpg 1x, ./images/footer-modal-posters/{{poster}}@2x.jpg 2x"
+                src="./images/footer-modal-posters/{{this.poster}}.jpg" 
+                alt="{{this.name}}"
+                class="footer-modal__image"
+            />
+        </div>
+        <h3 class="footer-modal__card-title">{{this.name}}</h3>
+        <h4 class="footer-modal__member-role">{{this.role}}</h4>
+        <p class="footer-modal__card-genres">{{this.genres}}</p>
+        <span class="footer-modal__card-rating">10.0</span>
+    </li>
+{{/each}}
