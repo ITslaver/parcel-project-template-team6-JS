@@ -23,8 +23,7 @@ export default class FilmApiTrendFetch {
       .then(res => res.json())
       .then(data => {
         this.genres = data.genres;
-        localStorage.setItem(LOCAL_KEY_GENRES, JSON.stringify(this.genres))
-
+        localStorage.setItem(LOCAL_KEY_GENRES, JSON.stringify(this.genres));
         // return data.genres
       })
       .catch(err => console.log(err));
@@ -37,7 +36,7 @@ export default class FilmApiTrendFetch {
       .then(res => res.json())
       .then(data => {
         this.films = data.results;
-        //    return data.results
+        return data.results;
       })
       .catch(err => console.log(err));
   }
@@ -83,7 +82,7 @@ export default class FilmApiTrendFetch {
 
   async fetchSearchFilms() {
     return await fetch(
-      `${SEARCH_FILMS_URL}?api_key=${API_KEY}&language=${this.currentLang}&query=${this.query}`
+      `${SEARCH_FILMS_URL}?api_key=${API_KEY}&page=${this.page}&language=${this.currentLang}&query=${this.query}`
     )
       .then(resp => resp.json())
       .then(data => {
@@ -96,6 +95,7 @@ export default class FilmApiTrendFetch {
 
   async searchFilmsAndGenres() {
     try {
+      await this.fetchFilmsGenres();
       const response = await this.fetchSearchFilms();
       const data = {
         films: this.films,

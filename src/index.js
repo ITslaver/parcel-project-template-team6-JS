@@ -78,14 +78,14 @@ async function onCardClick(event) {
   console.log(filmApiTrendFetch.idFilm);
   await fetchModalCard();
 
-  const closeOnEsc = async e => {    
+  const closeOnEsc = async e => {
     if (e.key === 'Escape' || e.key === 'Esc') {
       await closeModal();
     }
   };
 
   await openModal();
- 
+
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
@@ -99,19 +99,19 @@ async function onCardClick(event) {
     } catch (error) {
       console.log(error);
     }
-  } 
-  
+  }
+
   async function openModal() {
-    console.log('это Модалка')
+    console.log('это Модалка');
     document.addEventListener('keydown', closeOnEsc);
     modalDialog.classList.remove('modal-one-film--hidden');
     html.classList.add('disable-scroll');
-  } 
+  }
 
   async function closeModal() {
-      document.removeEventListener('keydown', closeOnEsc);
-      modalDialog.classList.add('modal-one-film--hidden');
-      html.classList.remove('disable-scroll');
+    document.removeEventListener('keydown', closeOnEsc);
+    modalDialog.classList.add('modal-one-film--hidden');
+    html.classList.remove('disable-scroll');
   }
 }
 
