@@ -70,14 +70,29 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     justify-content: center;
 
     cursor: pointer;
-    border-radius: 50%;
 
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
 
     background-color: transparent;
-    color: black;
-    border: 1px solid var(--accent-color);
+    border: none;
+
+    transition: background-color 250ms $time-function;
+
+    &:hover, &:focus {
+        background-color: var(--accent-color);
+    }
+}
+
+.modal__close-icon {
+    stroke: black;
+
+    transition: stroke 250ms $time-function;
+
+    .footer-modal__close-btn:hover &, 
+    .footer-modal__close-btn:focus & {
+        stroke: #FFFFFF;
+    }
 }
 
 .footer-modal__team-list {
@@ -91,8 +106,8 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     width: calc((100% - 20px)/2);
     min-width: 150px;
-    border: 1px solid var(--accent-color);
-    padding: 6px;
+    // border: 1px solid var(--accent-color);
+    border-radius: 5px;
     transition: box-shadow 250ms $time-function,
     transform 250ms $time-function;
 
@@ -110,13 +125,31 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
 }
 
+.footer-modal__img-container {
+    display: flex;
+    justify-content: center;
+}
 
 .footer-modal__image {
     height: 180px;
     object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 
     @include tablet {
         height: 260px;
+    }
+}
+
+.footer-modal__card-text {
+    padding: 5px;
+
+    @include tablet {
+        padding: 7px;
+    }
+    
+    @include desktop {
+        padding: 10px;
     }
 }
 
