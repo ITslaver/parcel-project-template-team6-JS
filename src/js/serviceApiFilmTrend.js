@@ -3,6 +3,7 @@ const TRENDING_URL = 'https://api.themoviedb.org/3/trending/movie/day';
 const SEARCH_FILMS_URL = 'https://api.themoviedb.org/3/search/movie';
 const CARD_MOVIE = 'https://api.themoviedb.org/3/movie/';
 const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
+const LOCAL_KEY_GENRES = 'genres';
 
 export default class FilmApiTrendFetch {
   constructor() {
@@ -17,11 +18,13 @@ export default class FilmApiTrendFetch {
 
   async fetchFilmsGenres() {
     return await fetch(
-      `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}page=${this.page}`
+      `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}`
     )
       .then(res => res.json())
       .then(data => {
         this.genres = data.genres;
+        localStorage.setItem(LOCAL_KEY_GENRES, JSON.stringify(this.genres))
+
         // return data.genres
       })
       .catch(err => console.log(err));
@@ -47,12 +50,18 @@ export default class FilmApiTrendFetch {
       const genres = this.genres;
 
       for (let film of films) {
-        let ids = searchGenres(film.genre_ids);
-        film.genre_ids = ids;
+        film.genre_ids = searchGenres(film.genre_ids);
         // форматуємо рейтинг
         film.vote_average = film.vote_average.toFixed(1);
         // форматуємо дату виходу фільму
         film.release_date = film.release_date.slice(0, 4);
+        if (film.genre_ids.length === 0) {
+          film.genre_ids[0] = 'no movie genre';
+        }
+        if (film.genre_ids.length >= 3) {
+          film.genre_ids[2] = 'Other';
+        }
+        film.genre_ids = film.genre_ids.slice(0, 3).join(', ');
       }
 
       function searchGenres(ids) {

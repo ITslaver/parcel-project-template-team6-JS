@@ -32,7 +32,7 @@ btnUk.addEventListener('click', onUkClick);
 
 async function onEnClick() {
   try {
-    filmApiTrendFetch.lang = 'en';
+    filmApiTrendFetch.currentLang = 'en-US';
     await fetchApiFilms();
   } catch (error) {
     console.log(error);
@@ -41,7 +41,7 @@ async function onEnClick() {
 
 async function onUkClick() {
   try {
-    filmApiTrendFetch.lang = 'uk';
+    filmApiTrendFetch.currentLang = 'uk-UA';
     await fetchApiFilms();
   } catch (error) {
     console.log(error);
