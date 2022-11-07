@@ -105,7 +105,7 @@ async function onCardClick(event) {
     console.log('это Модалка');
     document.addEventListener('keydown', closeOnEsc);
     modalDialog.classList.remove('modal-one-film--hidden');
-    html.classList.add('disable-scroll-all');
+    html.classList.add('disable-scroll-all');    
   }
 
   async function closeModal() {
