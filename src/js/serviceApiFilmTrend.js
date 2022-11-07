@@ -33,7 +33,6 @@ export default class FilmApiTrendFetch {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.films = data.results;
         //    return data.results
       })
@@ -152,14 +151,13 @@ export default class FilmApiTrendFetch {
     try {
       await this.fetchFilmCard();
       const card = this.card;
-      // const genres = this.genres;
       card.title = card.title.toUpperCase();
       card.vote_average = card.vote_average.toFixed(1);
       card.popularity = card.popularity.toFixed(1);
       card.original_title = card.original_title.toUpperCase();
+
       // processing genres
-      card.genres = card.genres.flatMap(genre => genre.name).join(' ');
-      console.log(card);
+      card.genres = card.genres.flatMap(genre => genre.name).join(', ');
       return card;
     } catch (error) {
       console.log(error);
