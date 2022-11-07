@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import card from '../templates/card.hbs';
-import extendFetchFilmCard from './serviceApiFilmTrend';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -24,25 +23,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export let uid;
+let uid;
 authStatus();
-let library = "favorite";
 
+document.getElementById('auth-form').addEventListener('submit', cabinetAction);
+document.getElementById('gallery').addEventListener('click', itemAction);
 
-
-//getLibrary()
-
-function getLibrary() {
-  console.log(library)
-  getPage(uid).then(console.log(response))
-  console.log(library)
-}
-
-//---------------------------- Слушатели кнопок--------------------------------
-document.getElementById('header_btn').addEventListener('submit', cabinetAction);
-document.getElementById('modalCard').addEventListener('click', itemAction);
-
-//---------------------------Функции кнопок в хедере---------------------------
 function itemAction(event) {
   event.preventDefault();
   console.log('нажато ' + event.target.name + event.target.id);
@@ -63,21 +49,15 @@ function itemAction(event) {
   }
 }
 
-
-//------------------------Функции кнопок в модальном окне---------------------------
-
 function cabinetAction(event) {
   event.preventDefault();
   console.log(event.target.name);
-
+  const email = event.target.querySelector('#email').value;
+  const password = event.target.querySelector('#password').value;
   if (event.submitter.id === 'sign') {
-    const email = event.target.querySelector('#email').value;
-    const password = event.target.querySelector('#password').value;
     authFormSend(email, password);
     event.submitter.disabled = true;
   } else if (event.submitter.id === 'register') {
-    const email = event.target.querySelector('#email').value;
-    const password = event.target.querySelector('#password').value;
     authFormReg(email, password);
     event.submitter.disabled = true;
   } else if (event.submitter.id === 'exit') {
@@ -94,32 +74,26 @@ function cabinetAction(event) {
   }
 }
 
-//---------------------------Получение фильмов с базы---------------------------
-
-export function getList(category, user) {
-  console.log(category, user);
+function getList(category, user) {
   const requestOptions = {
     method: 'GET',
     redirect: 'follow',
   };
 
- fetch(
+  fetch(
     `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}/${category}.json`,
     requestOptions
   )
     .then(response => response.json())
     .then(result => {
       console.log(result);
+      document.querySelector(`.${category}`).innerHTML = '';
       document
-        .getElementById('card-list').innerHTML = '';
-      document
-        .getElementById('card-list')
+        .querySelector(`.${category}`)
         .insertAdjacentHTML('beforeend', card(result));
     })
     .catch(error => console.log('error', error));
 }
-
-//---------------------------Запись фильмов в базу---------------------------
 
 function setList(category, user, itemId, card) {
   console.log(card);
@@ -135,13 +109,11 @@ function setList(category, user, itemId, card) {
     `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}/${category}.json`,
     requestOptions
   )
-    .then(response => response.json())
+    .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
   console.log(itemId + ' успешно добавлено в ' + category);
 }
-
-//---------------------Запись страници на которой пользователь-----------------------
 
 function setPage(category, user) {
   const raw = `{"page" : "${category}"}`;
@@ -156,32 +128,10 @@ function setPage(category, user) {
     `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}.json`,
     requestOptions
   )
-    .then(response => response.json())
+    .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
 }
-
-//---------------------Получение страници на которой пользователь-----------------------
-
-export function getPage(user) {
-  const requestOptions = {
-    method: 'GET',
-    redirect: 'follow',
-  };
-
-  fetch(
-    `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}/page.json`,
-    requestOptions
-  )
-    .then(response => response.json())
-    .then(result =>  {console.log(result)
-    return result
-})
-    .catch(error => console.log('error', error));
-}
-
-
-//---------------------------Удаление фильмов с базы---------------------------
 
 function delItem(itemId, user, category) {
   const requestOptions = {
@@ -199,9 +149,7 @@ function delItem(itemId, user, category) {
   console.log(itemId + ' успешно удалено');
 }
 
-//-------------------------Получение данных пользователя ---------------------------
-
-export function authStatus() {
+function authStatus() {
   const auth = getAuth();
   onAuthStateChanged(auth, user => {
     if (user) {
@@ -218,8 +166,6 @@ export function authStatus() {
   });
 }
 
-//---------------------------Авторизация---------------------------
-
 function authFormSend(email, password) {
   const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password)
@@ -234,8 +180,6 @@ function authFormSend(email, password) {
       const errorMessage = error.message;
     });
 }
-
-//---------------------------Отправка запроса регистрации---------------------------
 
 function authFormReg(email, password) {
   const auth = getAuth();
@@ -253,9 +197,7 @@ function authFormReg(email, password) {
     });
 }
 
-//------------------------------Выход------------------------------
-
- function authOut() {
+function authOut() {
   const auth = getAuth();
   signOut(auth)
     .then(() => {
