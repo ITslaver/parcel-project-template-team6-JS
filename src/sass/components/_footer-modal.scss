@@ -39,7 +39,7 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     max-width: 450px;
     width: 100%;
 
-    padding: 25px;
+    padding: 40px;
 
     background: #FFFFFF;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
@@ -50,6 +50,7 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 
     @include tablet {
         top: 80px;
+        max-width: 800px;
     }
     
     @include desktop {
@@ -61,8 +62,8 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 
 .footer-modal__close-btn {
     position: absolute;
-    top: 14px;
-    right: 14px;
+    top: 8px;
+    right: 8px;
 
     display: flex;
     align-items: center;
@@ -76,7 +77,7 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 
     background-color: transparent;
     color: black;
-    border: 1px solid black;
+    border: 1px solid var(--accent-color);
 }
 
 .footer-modal__team-list {
@@ -88,8 +89,9 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 
 .footer-modal__member-card {
     position: relative;
-    width: calc((100% - 80px)/5);
-    border: 2px solid black;
+    width: calc((100% - 20px)/2);
+    min-width: 150px;
+    border: 1px solid var(--accent-color);
     padding: 6px;
     transition: box-shadow 250ms $time-function,
     transform 250ms $time-function;
@@ -98,13 +100,24 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
         transform: scale(1.05);
         box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.75);
       }
+
+    @include tablet {
+        width: calc((100% - 40px)/3);
+    }
+    
+    @include desktop {
+        width: calc((100% - 80px)/5);
+    }
 }
 
 
 .footer-modal__image {
-    height: 280px;
+    height: 180px;
     object-fit: cover;
-    border-radius: 50px;
+
+    @include tablet {
+        height: 260px;
+    }
 }
 
 .footer-modal__card-title {
