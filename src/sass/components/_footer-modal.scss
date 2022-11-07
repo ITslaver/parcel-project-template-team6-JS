@@ -91,7 +91,8 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     width: calc((100% - 20px)/2);
     min-width: 150px;
-    border: 1px solid var(--accent-color);
+    // border: 1px solid var(--accent-color);
+    border-radius: 5px;
     transition: box-shadow 250ms $time-function,
     transform 250ms $time-function;
 
@@ -117,6 +118,8 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 .footer-modal__image {
     height: 180px;
     object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 
     @include tablet {
         height: 260px;
