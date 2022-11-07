@@ -41,3 +41,5 @@ export default function renderTeamCards(arr) {
 // }
 
 // test2(shalala);
+
+// for each????
