@@ -25,6 +25,7 @@
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.5",
     "regenerator-runtime": "^0.13.10",
+    "smoothscroll-for-websites": "^1.4.10",
     "tui-pagination": "^3.4.1"
   },
   "devDependencies": {

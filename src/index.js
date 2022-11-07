@@ -6,6 +6,7 @@ import onLoadPreloaderHide from './js/preloader';
 import hbsContainer from './templates/modal-card.hbs';
 import './js/cabinet';
 import './js/modal-film-card';
+import SmoothScroll from 'smoothscroll-for-websites';
 
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
@@ -113,3 +114,18 @@ async function onCardClick(event) {
       html.classList.remove('disable-scroll');
   }
 }
+
+// --------- SmoothScroll ---------- //
+
+SmoothScroll({
+  stepSize: 175,
+  animationTime: 800,
+  accelerationDelta: 200,
+  accelerationMax: 6,
+  keyboardSupport: true,
+  arrowScroll: 100,
+});
+
+// console.log(query);
+
+// -------- dancing Gif --------- //
