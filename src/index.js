@@ -7,7 +7,7 @@ import hbsContainer from './templates/modal-card.hbs';
 import './js/cabinet';
 import './js/modal-film-card';
 import SmoothScroll from 'smoothscroll-for-websites';
-import './js/footer-modal';
+// import './js/footer-modal';
 
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
