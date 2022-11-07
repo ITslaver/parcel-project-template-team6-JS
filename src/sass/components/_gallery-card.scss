@@ -24,6 +24,7 @@
   }
   @include desktop {
     width: 394px;
+    height: 672px;
   }
   &:hover {
     transform: scale(1.05);
@@ -60,6 +61,10 @@
   width: 100%;
   height: 398px;
   overflow: hidden;
+  background-image: url(../images/card-back.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   @include tablet {
     height: 455px;
     @include desktop {
