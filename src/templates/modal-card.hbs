@@ -1,7 +1,7 @@
 {{!-- {{#each this}} --}}
 <section class="section-modal">
-    <div class="modal">      
-      <div class="card-div"
+    <div class="modal" id="modal">      
+      <div class="card-div" 
             ><img
               class="movie-poster"
               src='https://image.tmdb.org/t/p/w500/{{poster_path}}'
@@ -38,8 +38,8 @@
         <p class="info-about">About</p>
             <p class="info-overview">{{overview}}</p>
             <div class="buttons">
-              <button type="submit" id="addWatched" class="button-watched" data-movieId={{id}}>Add to watched</button>
-              <button type="submit" id="addFavorite" class="button-queue" data-movieId={{id}}>Add to queue</button>
+              <button type="submit" name="addWatched" id="{{id}}" class="button-watched" data-card='"id" : "{{id}}", "poster_path" : "{{poster_path}}", "title" : "{{title}}", "genre_ids" : "{{genres}}", "relesedate" : "{{release_date}}", "vote_average" : "{{vote_average}}", "overview" : "{{overview}}"'>Add to watched</button>
+              <button type="submit" name="addFavorite" id="{{id}}" class="button-queue" data-card='"id" : "{{id}}", "poster_path" : "{{poster_path}}", "title" : "{{title}}", "genre_ids" : "{{genres}}", "relesedate" : "{{release_date}}", "vote_average" : "{{vote_average}}", "overview" : "{{overview}}"'>Add to queue</button>
             </div>    
       </div>
     </div>
