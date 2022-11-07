@@ -70,14 +70,29 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     justify-content: center;
 
     cursor: pointer;
-    border-radius: 50%;
 
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
 
     background-color: transparent;
-    color: black;
-    border: 1px solid var(--accent-color);
+    border: none;
+
+    transition: background-color 250ms $time-function;
+
+    &:hover, &:focus {
+        background-color: var(--accent-color);
+    }
+}
+
+.modal__close-icon {
+    stroke: black;
+
+    transition: stroke 250ms $time-function;
+
+    .footer-modal__close-btn:hover &, 
+    .footer-modal__close-btn:focus & {
+        stroke: #FFFFFF;
+    }
 }
 
 .footer-modal__team-list {
