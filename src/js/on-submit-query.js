@@ -1,6 +1,6 @@
 import renderCards from './render-cards';
 import Notiflix from 'notiflix';
-import onError from './on-error';
+import { onErrorEN, onErrorUK} from './on-error';
 import { spinnerOff, spinnerOn } from './preloader';
 
 export default async function onSubmitQuery(evt, instance) {
@@ -29,7 +29,10 @@ export default async function onSubmitQuery(evt, instance) {
     // тимчасово, далі буде перевірка на мову
     Notiflix.Notify.success(`We found ${data.total_results} films.`);
   } catch (error) {
-    console.log(error);
-    onError();
+    if (instance.currentLang === 'en-US') {
+      onErrorEN();
+    } else {
+      onErrorUK();
+    }
   }
 }
