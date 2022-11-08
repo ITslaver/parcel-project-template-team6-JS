@@ -4,7 +4,7 @@ import './js/authorization';
 import card from './templates/card.hbs';
 import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
-import onLoadPreloaderHide from './js/preloader';
+import { onLoadPreloaderHide } from './js/preloader';
 import hbsContainer from './templates/modal-card.hbs';
 import './js/modal-film-card';
 import SmoothScroll from 'smoothscroll-for-websites';
