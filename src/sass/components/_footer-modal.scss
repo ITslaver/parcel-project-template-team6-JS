@@ -13,7 +13,7 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     width: 100vw;
     height: 100%;
 
-    background: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.25);
 
     transition: opacity 500ms $time-function,
         transform 500ms $time-function;
@@ -150,15 +150,19 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 
 .footer-modal__card-title {
     margin-bottom: 3px;
+
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 12px;
     line-height: 1.17;
     text-transform: uppercase;
+
     color: var(--card-title-text-color);
+
     @include tablet {
         line-height: 1.33;
     }
+
     @include desktop {
         font-size: 14px;
         line-height: 1.2;
@@ -167,17 +171,22 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 
 .footer-modal__member-role {
     margin-bottom: 6px;
+
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 10px;
     line-height: 1.17;
     text-transform: uppercase;
+
     color: var(--card-title-text-color);
+
     @include tablet {
         line-height: 1.33;
     }
+
     @include desktop {
         margin-bottom: 10px;
+        
         font-size: 12px;
         line-height: 1.2;
     }
@@ -189,7 +198,9 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 12px;
     line-height: 1.33;
     text-transform: capitalize;
+
     color: var(--card-genres-year-text-color);
+
     @include desktop {
       font-size: 14px;
       line-height: 1.2;
@@ -200,12 +211,15 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     position: absolute;
     top: 8px;
     right: 8px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     width: 30px;
     height: 20px;
     border-radius: 4px;
+
     background-color: var(--accent-color);
 
     font-family: 'Roboto', sans-serif;
