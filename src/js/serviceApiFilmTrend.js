@@ -4,6 +4,7 @@ const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
 const TRENDING_URL = 'https://api.themoviedb.org/3/trending/movie/day';
 const SEARCH_FILMS_URL = 'https://api.themoviedb.org/3/search/movie';
 const CARD_MOVIE = 'https://api.themoviedb.org/3/movie/';
+const TRAILER_MOVIE = 'https://api.themoviedb.org/3/movie/';
 const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
 const LOCAL_KEY_GENRES = 'genres';
 
@@ -73,9 +74,6 @@ export default class FilmApiTrendFetch {
       const favorite = Object.keys(await this.getListId('favorite', uid));
 
       for (let film of films) {
-        console.log(film);
-        console.log(favorite);
-        console.log(watched);
 
         film.genre_ids = searchGenres(film.genre_ids);
         film.list = searchList(film.id, 'favorite', 'watched');
@@ -94,19 +92,16 @@ export default class FilmApiTrendFetch {
       }
 
       function searchList(filmId, fav, watch) {
-        let categoryName;
         let list = '';
         fav = favorite;
         watch = watched
   
         if (fav.includes(filmId.toString())) {
           list = "favorite";
-          console.log(list)
         }
 
         else if (watch.includes(filmId.toString())) {
           list = "watched";
-          console.log(list)
         }
 
         return list;
@@ -242,6 +237,22 @@ export default class FilmApiTrendFetch {
       // processing genres
       card.genres = card.genres.flatMap(genre => genre.name).join(', ');
       return card;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async fetchTrailerMovie() {
+    try {
+      return await fetch(
+        `${TRAILER_MOVIE}${this.movie_id}/videos?api_key=${API_KEY}&language=${this.currentLang}`
+      )
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          this.trailer = data;
+          return data;
+        });
     } catch (error) {
       console.log(error);
     }

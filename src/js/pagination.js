@@ -12,13 +12,19 @@ const pagination = new Pagination(document.getElementById('pagination'), {
 const filmApiTrendFetch = new FilmApiTrendFetch();
 const submitRef = document.querySelector('#search-form');
 
-submitRef.addEventListener('submit', onSubmit);
+submitRef.addEventListener('submit', onSubmitforPaginate);
 let searchQuery = '';
 
-function onSubmit(e) {
+async function onSubmitforPaginate(e) {
   e.preventDefault();
-  console.log(e.target.elements.searchQuery.value);
+  pagination.reset();
   searchQuery = e.target.elements.searchQuery.value;
+  try {
+    const totalFilmsForPaginate = await localStorage.getItem('totalResult');
+    await pagination.setTotalItems(Number(totalFilmsForPaginate));
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 pagination.on('afterMove', function (eventData) {
@@ -27,7 +33,6 @@ pagination.on('afterMove', function (eventData) {
     filmApiTrendFetch
       .filmsAndGenres()
       .then(data => {
-        console.log(data);
         renderCards(data);
       })
       .catch(err => console.log(err));

@@ -7,6 +7,8 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
+import { save, load, remove } from './storage';
+import Notiflix from 'notiflix';
 // Import the functions you need from the SDKs you need
 
 const firebaseConfig = {
@@ -23,62 +25,93 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export let uid;
-if (!uid) {
-getAuth()
-}
+const KEY_ID = 'userId';
 
-//---------------------------- Слушатели кнопок--------------------------------
-document.getElementById('header_btn').addEventListener('submit', cabinetAction);
+export let uid;
+getUserId();
+authStatus();
+
+//---------------------------- Слушатели --------------------------------
+document.getElementById('header').addEventListener('submit', cabinetAction);
 document.getElementById('card-div').addEventListener('click', itemAction);
+document.querySelector('#exit').addEventListener('click', onSignOut);
+try {
+  document
+    .querySelector('.sign-in-modal')
+    .addEventListener('submit', onSignInModalForm);
+  document
+    .querySelector('.authrization-modal')
+    .addEventListener('submit', onAuthrizationModalForm);
+} catch {}
 
 //---------------------------Функции кнопок в хедере---------------------------
+
 function itemAction(event) {
   event.preventDefault();
-  console.log('нажато ' + event.target.name + event.target.id);
+  // console.log('нажато ' + event.target.name + event.target.id);
   if (event.target.name === 'addFavorite') {
-    console.log('сработало ' + event.target.id, event.target.name);
+    // console.log('сработало ' + event.target.id, event.target.name);
     delItem(event.target.id, uid, 'watched');
     setList('favorite', uid, event.target.id, event.target.dataset.card);
   } else if (event.target.name === 'addWatched') {
-    console.log('сработало ' + event.target.id, event.target.name);
+    // console.log('сработало ' + event.target.id, event.target.name);
     delItem(event.target.id, uid, 'favorite');
     setList('watched', uid, event.target.id, event.target.dataset.card);
   } else if (event.target.name === 'delFavorite') {
-    console.log('сработало ' + event.target.name);
+    // console.log('сработало ' + event.target.name);
     delItem(event.target.id, uid, 'favorite');
   } else if (event.target.name === 'delWatched') {
-    console.log('сработало ' + event.target.name);
+    // console.log('сработало ' + event.target.name);
     delItem(event.target.id, uid, 'watched');
   }
 }
 
-
 //------------------------Функции кнопок в модальном окне---------------------------
+
+function onSignInModalForm(e) {
+  e.preventDefault();
+  const email = e.target.querySelector('#email-to-sign-in').value;
+  const password = e.target.querySelector('#password-to-sign-in').value;
+  authFormReg(email, password);
+}
+
+function onAuthrizationModalForm(e) {
+  e.preventDefault();
+
+  const email = e.target.querySelector('#email-to-authorize').value;
+  const password = e.target.querySelector('#password-to-authorize').value;
+  authFormSend(email, password);
+}
+
+function onSignOut(e) {
+  authOut();
+  window.location.href = '../index.html';
+}
 
 function cabinetAction(event) {
   event.preventDefault();
-  console.log(event.target.name);
+  // console.log(event.target.name);
 
-  if (event.submitter.id === 'sign') {
-    const email = event.target.querySelector('#email').value;
-    const password = event.target.querySelector('#password').value;
-    authFormSend(email, password);
-    event.submitter.disabled = true;
-  } else if (event.submitter.id === 'register') {
-    const email = event.target.querySelector('#email').value;
-    const password = event.target.querySelector('#password').value;
-    authFormReg(email, password);
-    event.submitter.disabled = true;
-  } else if (event.submitter.id === 'exit') {
+  // if (event.submitter.id === 'sign') {
+  //   const email = event.target.querySelector('#email').value;
+  //   const password = event.target.querySelector('#password').value;
+  //   authFormSend(email, password);
+  //   // event.submitter.disabled = true;
+  // } else if (event.submitter.id === 'register') {
+  //   const email = event.target.querySelector('#email').value;
+  //   const password = event.target.querySelector('#password').value;
+  //   authFormReg(email, password);
+  //   // event.submitter.disabled = true;
+  // } else
+  if (event.submitter.id === 'exit') {
     authOut();
-    event.submitter.disabled = true;
+    // event.submitter.disabled = true;
   } else if (event.submitter.id === 'favorite') {
-    console.log(uid);
+    // console.log(uid);
     getList('favorite', uid);
     setPage('favorite', uid);
   } else if (event.submitter.id === 'watched') {
-    console.log(uid);
+    // console.log(uid);
     getList('watched', uid);
     setPage('watched', uid);
   }
@@ -92,16 +125,14 @@ export function getList(category, user) {
     method: 'GET',
     redirect: 'follow',
   };
-
-return fetch(
+  return fetch(
     `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}/${category}.json`,
     requestOptions
   )
     .then(response => response.json())
     .then(result => {
       console.log(result);
-      document
-        .getElementById('card-list').innerHTML = '';
+      document.getElementById('card-list').innerHTML = '';
       document
         .getElementById('card-list')
         .insertAdjacentHTML('beforeend', card(result));
@@ -164,12 +195,12 @@ export function getPage(user) {
     requestOptions
   )
     .then(response => response.json())
-    .then(result =>  {console.log(result.keys())
-    return result
-})
+    .then(result => {
+      console.log(result.keys());
+      return result;
+    })
     .catch(error => console.log('error', error));
 }
-
 
 //---------------------------Удаление фильмов с базы---------------------------
 
@@ -193,7 +224,7 @@ function delItem(itemId, user, category) {
 
 export function authStatus() {
   const auth = getAuth();
- return onAuthStateChanged(auth, user => {
+  return onAuthStateChanged(auth, user => {
     if (user) {
       uid = user.uid;
       document.querySelector('.username').textContent = user.name;
@@ -217,11 +248,17 @@ function authFormSend(email, password) {
       // Signed in
       const user = userCredential.user;
       console.log('Вхід успішний ' + userCredential.user.email);
-      document.querySelector('.username').textContent = user.email;
+      // document.querySelector('.username').textContent = user.email;
+      save(KEY_ID, userCredential.user.uid);
+      document
+        .querySelector('[data-authrization-modal]')
+        .classList.add('is-hidden');
+      renderSingIn();
     })
     .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      Notiflix.Notify.failure(error.message);
     });
 }
 
@@ -233,26 +270,55 @@ function authFormReg(email, password) {
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
+      console.log('User', userCredential.user);
       console.log('Користувача успішно створено ' + userCredential.user.email);
-      document.querySelector('.username').textContent = user.email;
+      // document.querySelector('.username').textContent = user.email;
+      save(KEY_ID, userCredential.user.uid);
+      document.querySelector('[data-sign-in-modal]').classList.add('is-hidden');
+      renderSingIn();
     })
     .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      Notiflix.Notify.failure(error.message);
       // ..
     });
 }
 
 //------------------------------Выход------------------------------
 
- function authOut() {
+function authOut() {
   const auth = getAuth();
   signOut(auth)
     .then(() => {
-      document.querySelector('.username').textContent = user.email;
+      // document.querySelector('.username').textContent = user.email;
+
+      remove(KEY_ID);
       console.log('Вихід виконано');
     })
     .catch(error => {
       // An error happened.
     });
+}
+
+//------------------------------Sign In Logic------------------------------
+
+function getUserId() {
+  if (load(KEY_ID)) {
+    uid = load(KEY_ID);
+    renderSingIn();
+  }
+}
+
+function renderSingIn() {
+  const hidden = document.querySelectorAll('.nav__item');
+  const vissible = Array.prototype.map.call(hidden, item => {
+    item.hidden = false;
+  });
+  if (document.querySelector('.header__authrization-button')) {
+    document.querySelector('.header__authrization-button').hidden = true;
+  }
+  if (document.querySelector('.header__sign-in-button')) {
+    document.querySelector('.header__sign-in-button').hidden = true;
+  }
 }

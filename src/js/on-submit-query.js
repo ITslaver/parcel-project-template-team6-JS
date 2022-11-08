@@ -11,6 +11,7 @@ export default async function onSubmitQuery(evt, instance) {
   // console.log(instance.query);
   try {
     const data = await instance.searchFilmsAndGenres();
+    localStorage.setItem('totalResult', data.total_results);
     if (data.films.length === 0) {
       // gallery.innerHTML = '';
       // тимчасово, далі буде перевірка на мову
