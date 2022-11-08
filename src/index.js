@@ -89,17 +89,46 @@ async function onCardClick(event) {
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
-        const makrup = hbsContainer(data);
+        const markup = hbsContainer(data);
         // console.log(data.overview);
         console.log(data);
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
-        modalCard.insertAdjacentHTML('beforeend', makrup);
+        modalCard.insertAdjacentHTML('beforeend', markup);
       });
     } catch (error) {
       console.log(error);
     }
+    await filmApiTrendFetch.fetchTrailerMovie();
   }
+
+  const videoTrailer = document.querySelector('.movie-poster');
+  videoTrailer.addEventListener('click', onPosterClick);
+  trailerCard = document.querySelector('.modal-one-film__window');
+  console.log(trailerCard);
+
+  async function onPosterClick(event) {
+    console.log("Это постер");
+    try {
+      await filmApiTrendFetch.fetchTrailerMovie().then(data => {
+        // const markup = hbsContainer(data);
+        // console.log(data.overview);
+        console.log("Это трейлер:", data);
+
+        console.log(filmApiTrendFetch.movie_id);
+        result = data.results.map(item => 
+          `<li><iframe width="560" height="315" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
+        // trailerCard.innerHTML = '';
+        trailerCard.insertAdjacentHTML('beforeend', result);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    // filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
+    console.log('Это data-film:', filmApiTrendFetch.idFilm);
+    await fetchModalCard();}
+
+
 
   async function openModal() {
     console.log('это Модалка');
