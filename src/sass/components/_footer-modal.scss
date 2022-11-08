@@ -76,12 +76,6 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 
     background-color: transparent;
     border: none;
-
-    transition: background-color 250ms $time-function;
-
-    &:hover, &:focus {
-        background-color: var(--accent-color);
-    }
 }
 
 .modal__close-icon {
@@ -91,7 +85,7 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 
     .footer-modal__close-btn:hover &, 
     .footer-modal__close-btn:focus & {
-        stroke: #FFFFFF;
+        stroke: var(--accent-color);
     }
 }
 
