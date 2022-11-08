@@ -72,7 +72,7 @@
   display: flex;
   font-weight: 500;
   align-items: center;
-  color: #ffffff;
+  color: var(--header-color-text);
   font-family: 'Roboto';
   font-size: 23px;
   line-height: 1.16;
@@ -80,10 +80,10 @@
 
 .header-home__logo {
   margin-right: 10px;
-  color: blue;
 }
 
 .logo-home__text {
+  font-size: 20px;
   display: none;
   @include tablet {
     display: block;
@@ -92,6 +92,9 @@
 // ------------------------------------------------навигация------
 .nav__list {
   display: flex;
+  @include tablet {
+    // display: inline;
+  }
 }
 
 .nav__item:not(:first-child) {
@@ -106,31 +109,39 @@
   line-height: 1.16;
   display: flex;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--header-color-text);
 }
 // ----------------------------------------------форма поиска------------------------
+.search-form__wrap {
+  padding-top: 40px;
+}
+
 .search-form__input {
   height: 20px;
   font-weight: 400;
-  font-size: 18px;
-  color: #ffffff;
+  font-size: 16px;
+  color: var(--header-color-text);
   background: none;
   border: none;
-  border-bottom: 0.5px solid #ffffff;
+  border-bottom: 0.5px solid var(--header-color-text);
   padding: 0 0 4px 1px;
   outline: none;
-  width: 320px;
-  @include tablet {
-    width: 356px;
+  @include mobile {
+    width: 260px;
   }
+  @include tablet {
+    width: 350px;
+  }
+  width: 380px;
 }
 
 .search-form__input::placeholder {
-  color: #ffffff;
+  color: var(--header-color-text);
 }
 
 .icon-search__logo {
   margin-left: -13px;
+  color: var(--header-color-text);
 }
 
 .search__button {
@@ -141,5 +152,5 @@
   border: none;
   margin: 0;
   padding: 0;
-  border-bottom: 0.5px solid #ffffff;
+  border-bottom: 0.5px solid var(--header-color-text);
 }
