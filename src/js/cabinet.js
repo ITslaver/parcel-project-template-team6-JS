@@ -27,11 +27,10 @@ const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
 
-export let uid = '';
+export let uid;
 getUserId();
 authStatus();
 console.log(uid);
-
 
 //---------------------------- Слушатели --------------------------------
 // document.getElementById('header_btn').addEventListener('submit', cabinetAction);
@@ -127,8 +126,7 @@ export function getList(category, user) {
     method: 'GET',
     redirect: 'follow',
   };
-return fetch(
-
+  return fetch(
     `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}/${category}.json`,
     requestOptions
   )
@@ -198,9 +196,10 @@ export function getPage(user) {
     requestOptions
   )
     .then(response => response.json())
-    .then(result =>  {console.log(result.keys())
-    return result
-})
+    .then(result => {
+      console.log(result.keys());
+      return result;
+    })
     .catch(error => console.log('error', error));
 }
 
@@ -226,7 +225,7 @@ function delItem(itemId, user, category) {
 
 export function authStatus() {
   const auth = getAuth();
- return onAuthStateChanged(auth, user => {
+  return onAuthStateChanged(auth, user => {
     if (user) {
       uid = user.uid;
       document.querySelector('.username').textContent = user.name;
