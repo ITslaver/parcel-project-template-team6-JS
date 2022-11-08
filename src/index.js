@@ -103,31 +103,31 @@ async function onCardClick(event) {
     await filmApiTrendFetch.fetchTrailerMovie();
   }
 
-  const videoTrailer = document.querySelector('.movie-poster');
-  videoTrailer.addEventListener('click', onPosterClick);
-  trailerCard = document.querySelector('.modal-one-film__window');
-  console.log(trailerCard);
+  // const videoTrailer = document.querySelector('.movie-poster');
+  // videoTrailer.addEventListener('click', onPosterClick);
+  // trailerCard = document.querySelector('.modal-one-film__window');
+  // console.log(trailerCard);
 
-  async function onPosterClick(event) {
-    console.log("Это постер");
-    try {
-      await filmApiTrendFetch.fetchTrailerMovie().then(data => {
-        // const markup = hbsContainer(data);
-        // console.log(data.overview);
-        console.log("Это трейлер:", data);
+  // async function onPosterClick(event) {
+  //   console.log("Это постер");
+  //   try {
+  //     await filmApiTrendFetch.fetchTrailerMovie().then(data => {
+  //       // const markup = hbsContainer(data);
+  //       // console.log(data.overview);
+  //       console.log("Это трейлер:", data);
 
-        console.log(filmApiTrendFetch.movie_id);
-        result = data.results.map(item => 
-          `<li><iframe width="560" height="315" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
-        // trailerCard.innerHTML = '';
-        trailerCard.insertAdjacentHTML('beforeend', result);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    // filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
-    console.log('Это data-film:', filmApiTrendFetch.idFilm);
-    await fetchModalCard();}
+  //       console.log(filmApiTrendFetch.movie_id);
+  //       result = data.results.map(item => 
+  //         `<li><iframe width="560" height="315" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
+  //       // trailerCard.innerHTML = '';
+  //       trailerCard.insertAdjacentHTML('beforeend', result);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   // filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
+  //   console.log('Это data-film:', filmApiTrendFetch.idFilm);
+  //   await fetchModalCard();}
 
 
 
