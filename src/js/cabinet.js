@@ -9,6 +9,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { save, load, remove } from './storage';
+import Notiflix from 'notiflix';
 // Import the functions you need from the SDKs you need
 
 const firebaseConfig = {
@@ -36,8 +37,11 @@ authStatus();
 document.getElementById('header_btn').addEventListener('submit', cabinetAction);
 document.getElementById('card-div').addEventListener('click', itemAction);
 document
-  .querySelector('.js-speaker-form')
-  .addEventListener('submit', onAuthrizationForm);
+  .querySelector('.sign-in-modal')
+  .addEventListener('submit', onSignInModalForm);
+document
+  .querySelector('.authrization-modal')
+  .addEventListener('submit', onAuthrizationModalForm);
 
 //---------------------------Функции кнопок в хедере---------------------------
 
@@ -63,11 +67,18 @@ function itemAction(event) {
 
 //------------------------Функции кнопок в модальном окне---------------------------
 
-function onAuthrizationForm(e) {
+function onSignInModalForm(e) {
+  e.preventDefault();
+  const email = e.target.querySelector('#email-to-sign-in').value;
+  const password = e.target.querySelector('#password-to-sign-in').value;
+  authFormReg(email, password);
+}
+
+function onAuthrizationModalForm(e) {
   e.preventDefault();
 
-  const email = event.target.querySelector('#email-to-authorize').value;
-  const password = event.target.querySelector('#password-to-authorize').value;
+  const email = e.target.querySelector('#email-to-authorize').value;
+  const password = e.target.querySelector('#password-to-authorize').value;
   authFormSend(email, password);
 }
 
@@ -233,12 +244,14 @@ function authFormSend(email, password) {
       console.log('Вхід успішний ' + userCredential.user.email);
       // document.querySelector('.username').textContent = user.email;
       save(KEY_ID, userCredential.user.uid);
-      // window.location.href = '../library.html';
+      document
+        .querySelector('[data-authrization-modal]')
+        .classList.add('is-hidden');
     })
     .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(error);
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      Notiflix.Notify.failure(error.message);
     });
 }
 
@@ -250,14 +263,18 @@ function authFormReg(email, password) {
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
+      console.log('User', userCredential.user);
       console.log('Користувача успішно створено ' + userCredential.user.email);
       // document.querySelector('.username').textContent = user.email;
       save(KEY_ID, userCredential.user.uid);
+      document
+        .querySelector('[data-authrization-modal]')
+        .classList.add('is-hidden');
     })
     .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(error);
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      Notiflix.Notify.failure(error.message);
       // ..
     });
 }

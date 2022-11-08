@@ -120,7 +120,7 @@ const onSigInClick = e => {
   }
 };
 
-// refs.sigInModal.addEventListener('click', onSigInClick);
+refs.sigInModal.addEventListener('click', onSigInClick);
 
 // refs.sigInEmailInput.addEventListener('input', onSigInEmailInput);
 // refs.sigInPasswordInput.addEventListener('input', onSigInPasswordInput);
