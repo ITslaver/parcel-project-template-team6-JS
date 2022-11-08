@@ -1,5 +1,7 @@
-import "./team-members.js";
+import teamMembers from "./team-members";
 import renderTeamCards from './render-team-cards';
+
+console.log(teamMembers);
 
 const footerModal = document.querySelector('.js-footer-modal');
 const footerModalOpenBtn = document.querySelector('.js-footer-modal-open');

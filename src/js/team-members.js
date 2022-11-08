@@ -30,8 +30,7 @@ import memberImage010x2 from '../images/footer-modal-posters/woman-004@2x.jpg';
 
 
 
-
-export default teamMembers = [
+export let teamMembers = [
     {
         name: 'Viacheslav Polishuk',
         role: 'team lead',
