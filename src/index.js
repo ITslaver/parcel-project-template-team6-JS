@@ -1,4 +1,5 @@
 import FilmApiTrendFetch from './js/serviceApiFilmTrend';
+import './js/authorization';
 import card from './templates/card.hbs';
 import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
