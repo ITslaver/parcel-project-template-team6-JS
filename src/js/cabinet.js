@@ -8,6 +8,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
+import { save, load, remove } from './storage';
 // Import the functions you need from the SDKs you need
 
 const firebaseConfig = {
@@ -24,61 +25,75 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export let uid;
+const KEY_ID = 'userId';
+
+export let uid = '';
+getUserId();
+
 authStatus();
 
-
-//---------------------------- Слушатели кнопок--------------------------------
+//---------------------------- Слушатели --------------------------------
 document.getElementById('header_btn').addEventListener('submit', cabinetAction);
 document.getElementById('card-div').addEventListener('click', itemAction);
+document
+  .querySelector('.js-speaker-form')
+  .addEventListener('submit', onAuthrizationForm);
 
 //---------------------------Функции кнопок в хедере---------------------------
+
 function itemAction(event) {
   event.preventDefault();
-  console.log('нажато ' + event.target.name + event.target.id);
+  // console.log('нажато ' + event.target.name + event.target.id);
   if (event.target.name === 'addFavorite') {
-    console.log('сработало ' + event.target.id, event.target.name);
+    // console.log('сработало ' + event.target.id, event.target.name);
     delItem(event.target.id, uid, 'watched');
     setList('favorite', uid, event.target.id, event.target.dataset.card);
   } else if (event.target.name === 'addWatched') {
-    console.log('сработало ' + event.target.id, event.target.name);
+    // console.log('сработало ' + event.target.id, event.target.name);
     delItem(event.target.id, uid, 'favorite');
     setList('watched', uid, event.target.id, event.target.dataset.card);
   } else if (event.target.name === 'delFavorite') {
-    console.log('сработало ' + event.target.name);
+    // console.log('сработало ' + event.target.name);
     delItem(event.target.id, uid, 'favorite');
   } else if (event.target.name === 'delWatched') {
-    console.log('сработало ' + event.target.name);
+    // console.log('сработало ' + event.target.name);
     delItem(event.target.id, uid, 'watched');
   }
 }
 
-
 //------------------------Функции кнопок в модальном окне---------------------------
+
+function onAuthrizationForm(e) {
+  e.preventDefault();
+
+  const email = event.target.querySelector('#email-to-authorize').value;
+  const password = event.target.querySelector('#password-to-authorize').value;
+  authFormSend(email, password);
+}
 
 function cabinetAction(event) {
   event.preventDefault();
-  console.log(event.target.name);
+  // console.log(event.target.name);
 
   if (event.submitter.id === 'sign') {
     const email = event.target.querySelector('#email').value;
     const password = event.target.querySelector('#password').value;
     authFormSend(email, password);
-    event.submitter.disabled = true;
+    // event.submitter.disabled = true;
   } else if (event.submitter.id === 'register') {
     const email = event.target.querySelector('#email').value;
     const password = event.target.querySelector('#password').value;
     authFormReg(email, password);
-    event.submitter.disabled = true;
+    // event.submitter.disabled = true;
   } else if (event.submitter.id === 'exit') {
     authOut();
-    event.submitter.disabled = true;
+    // event.submitter.disabled = true;
   } else if (event.submitter.id === 'favorite') {
-    console.log(uid);
+    // console.log(uid);
     getList('favorite', uid);
     setPage('favorite', uid);
   } else if (event.submitter.id === 'watched') {
-    console.log(uid);
+    // console.log(uid);
     getList('watched', uid);
     setPage('watched', uid);
   }
@@ -93,15 +108,14 @@ export function getList(category, user) {
     redirect: 'follow',
   };
 
- fetch(
+  fetch(
     `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}/${category}.json`,
     requestOptions
   )
     .then(response => response.json())
     .then(result => {
       console.log(result);
-      document
-        .getElementById('card-list').innerHTML = '';
+      document.getElementById('card-list').innerHTML = '';
       document
         .getElementById('card-list')
         .insertAdjacentHTML('beforeend', card(result));
@@ -164,12 +178,12 @@ export function getPage(user) {
     requestOptions
   )
     .then(response => response.json())
-    .then(result =>  {console.log(result)
-    return result
-})
+    .then(result => {
+      console.log(result);
+      return result;
+    })
     .catch(error => console.log('error', error));
 }
-
 
 //---------------------------Удаление фильмов с базы---------------------------
 
@@ -217,11 +231,14 @@ function authFormSend(email, password) {
       // Signed in
       const user = userCredential.user;
       console.log('Вхід успішний ' + userCredential.user.email);
-      document.querySelector('.username').textContent = user.email;
+      // document.querySelector('.username').textContent = user.email;
+      save(KEY_ID, userCredential.user.uid);
+      // window.location.href = '../library.html';
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.log(error);
     });
 }
 
@@ -234,25 +251,37 @@ function authFormReg(email, password) {
       // Signed in
       const user = userCredential.user;
       console.log('Користувача успішно створено ' + userCredential.user.email);
-      document.querySelector('.username').textContent = user.email;
+      // document.querySelector('.username').textContent = user.email;
+      save(KEY_ID, userCredential.user.uid);
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.log(error);
       // ..
     });
 }
 
 //------------------------------Выход------------------------------
 
- function authOut() {
+function authOut() {
   const auth = getAuth();
   signOut(auth)
     .then(() => {
-      document.querySelector('.username').textContent = user.email;
+      // document.querySelector('.username').textContent = user.email;
+
+      remove(KEY_ID);
       console.log('Вихід виконано');
     })
     .catch(error => {
       // An error happened.
     });
+}
+
+//------------------------------Check and Get User Id------------------------------
+
+function getUserId() {
+  if (load(KEY_ID)) {
+    uid = load(KEY_ID);
+  }
 }
