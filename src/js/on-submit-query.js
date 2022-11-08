@@ -1,7 +1,7 @@
 import renderCards from './render-cards';
 import Notiflix from 'notiflix';
 import onError from './on-error';
-import { spinnerOf, spinnerOn } from './preloader';
+import { spinnerOff, spinnerOn } from './preloader';
 
 export default async function onSubmitQuery(evt, instance) {
   evt.preventDefault();
@@ -16,18 +16,19 @@ export default async function onSubmitQuery(evt, instance) {
     if (data.films.length === 0) {
       // gallery.innerHTML = '';
       // тимчасово, далі буде перевірка на мову
+      spinnerOff();
       return Notiflix.Notify.failure(
         `The films you requested could not be found!`
       );
     }
     // console.log(data.films);
-    spinnerOf();
+    spinnerOff();
     renderCards(data.films);
 
     // тимчасово, далі буде перевірка на мову
     Notiflix.Notify.success(`We found ${data.total_results} films.`);
   } catch (error) {
     console.log(error);
-    // onError();
+    onError();
   }
 }
