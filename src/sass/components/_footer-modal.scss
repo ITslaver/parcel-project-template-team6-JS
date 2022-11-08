@@ -5,7 +5,7 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     left: 0;
     top: 0;
     z-index: 20;
-    overflow: scroll;
+    overflow: auto;
 
     visibility: visible;
     opacity: 1;
@@ -100,8 +100,9 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     width: calc((100% - 20px)/2);
     min-width: 150px;
-    // border: 1px solid var(--accent-color);
+
     border-radius: 5px;
+
     transition: box-shadow 250ms $time-function,
     transform 250ms $time-function;
 
