@@ -1,61 +1,68 @@
 <header class="header_lib" id="header">
-    <div class="header__bg">
-        <div class="container_lib container">
-            <nav class="header__lib-nav">
-                <div class="header__wrap">
-                    <a href="./index.html" class="logo__icon link">
-                    <svg class="header__logo-svg" width="24" height="23">
-                            <use href="./images/icons.svg#icon-film"></use>
-                        </svg>
-                        <span class="logo__text"><h1>Filmoteka</h1></span>
-                    </a>
-                </div> 
-                <div class="header__pages">
-                    <ul class="header__pages-list">
-                        <li class="header__pages-item">
-                            <button class="btn__icon-lib"><svg class="header__change-color" width="25" height="25">
-                                <use href="./images/icons.svg#icon-star-half"></use>
-                            </svg></button>
-                            </li>
-                        <li class="header__pages-item">
-                            <a class="header__pages-link" href="./index.html">home</a>
-                        </li>
-                        <li class="header__pages-item current">
-                            <a class="header__pages-link" href="">my library</a>
-                        </li>
-                    </ul>
-                </div>  
-            </nav>
-            <div class="search-form__wraplib">
-                <form class="search-form search-form__style" id="search-form">
-                  <input
-                    class="nav__item-button nav__item-log-out button input-style"
-                    type="text"
-                    name="searchQuery"
-                    autocomplete="off"
-                    placeholder="Search films..."
-                  />
-                  <button type="submit" class="search__button search__button-style">
-                    <svg class="header__logo" width="10" height="10">
-                      <use href="./images/icons.svg#icon-search-2"></use>
-                    </svg>
-                  </button>
-                </form>
-              </div>
-    
-            <div class="username"></div>
-            <div class="header__btn" id="header_btn">
-                <form>
-                <ul class="header__btn-list">
-                    <li class="header__btn-item">
-                        <button  class="header__btn-style" id="watched">watched</button>
-                    </li>
-                    <li class="header__btn-item">
-                        <button  class="header__btn-style" id="favorite">queue</button>
-                    </li>
-                </ul>
-            </form>
-            </div>
+  <div class="header__bg">
+    <div class="container_lib container">
+      <nav class="header__lib-nav">
+        <div class="header__wrap">
+          <a href="./index.html" class="logo__icon link">
+            <svg class="header__logo-svg" width="24" height="23">
+              <use href="./images/icons.svg#icon-film"></use>
+            </svg>
+            <span class="logo__text"><h1>Filmoteka</h1></span>
+          </a>
         </div>
+        <div class="header__pages">
+          <ul class="header__pages-list">
+            <li class="header__pages-item">
+              <button class="btn__icon-lib">
+                <svg class="header__change-color" width="25" height="25">
+                  <use href="./images/icons.svg#icon-star-half"></use>
+                </svg>
+              </button>
+            </li>
+            <li class="header__pages-item">
+              <a class="header__pages-link" href="./index.html">home</a>
+            </li>
+            <li class="header__pages-item current">
+              <a class="header__pages-link" href="">my library</a>
+            </li>
+            <li class="header__pages-item">
+              <a class="header__pages-link" href="index.html" id="exit"
+                >Sign Out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="search-form__wraplib">
+        <form class="search-form search-form__style" id="search-form">
+          <input
+            class="nav__item-button nav__item-log-out button input-style"
+            type="text"
+            name="searchQuery"
+            autocomplete="off"
+            placeholder="Search films..."
+          />
+          <button type="submit" class="search__button search__button-style">
+            <svg class="header__logo" width="10" height="10">
+              <use href="./images/icons.svg#icon-search-2"></use>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <div class="username"></div>
+      <div class="header__btn" id="header_btn">
+        <form>
+          <ul class="header__btn-list">
+            <li class="header__btn-item">
+              <button class="header__btn-style" id="watched">watched</button>
+            </li>
+            <li class="header__btn-item">
+              <button class="header__btn-style" id="favorite">queue</button>
+            </li>
+          </ul>
+        </form>
+      </div>
     </div>
+  </div>
 </header>
