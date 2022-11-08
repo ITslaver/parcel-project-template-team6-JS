@@ -1,3 +1,5 @@
+import { uid } from './cabinet';
+
 const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
 const TRENDING_URL = 'https://api.themoviedb.org/3/trending/movie/day';
 const SEARCH_FILMS_URL = 'https://api.themoviedb.org/3/search/movie';
@@ -25,7 +27,7 @@ export default class FilmApiTrendFetch {
       .then(data => {
         this.genres = data.genres;
         localStorage.setItem(LOCAL_KEY_GENRES, JSON.stringify(this.genres));
-        
+
         // return data.genres
       })
       .catch(err => console.log(err));
@@ -43,15 +45,42 @@ export default class FilmApiTrendFetch {
       .catch(err => console.log(err));
   }
 
+  async getListId(category, user) {
+    console.log(category, user);
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+    };
+
+    return await fetch(
+      `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}/${category}.json`,
+      requestOptions
+    )
+      .then(response => response.json())
+      .then(result => {
+        this.result = Object.keys(result);
+        return result;
+      })
+      .catch(error => console.log('error', error));
+  }
+
   async filmsAndGenres() {
     try {
       await this.fetchFilmsGenres();
       await this.fetchFilmsTrend();
       const films = this.films;
       const genres = this.genres;
+      const watched = Object.keys(await this.getListId('watched', uid));
+      const favorite = Object.keys(await this.getListId('favorite', uid));
 
       for (let film of films) {
+        console.log(film);
+        console.log(favorite);
+        console.log(watched);
+
         film.genre_ids = searchGenres(film.genre_ids);
+        film.list = searchList(film.id, 'favorite', 'watched');
+
         // форматуємо рейтинг
         film.vote_average = film.vote_average.toFixed(1);
         // форматуємо дату виходу фільму
@@ -63,6 +92,25 @@ export default class FilmApiTrendFetch {
           film.genre_ids[2] = 'Other';
         }
         film.genre_ids = film.genre_ids.slice(0, 3).join(', ');
+      }
+
+      function searchList(filmId, fav, watch) {
+        let categoryName;
+        let list = '';
+        fav = favorite;
+        watch = watched
+  
+        if (fav.includes(filmId.toString())) {
+          list = "favorite";
+          console.log(list)
+        }
+
+        else if (watch.includes(filmId.toString())) {
+          list = "watched";
+          console.log(list)
+        }
+
+        return list;
       }
 
       function searchGenres(ids) {
