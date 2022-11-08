@@ -53,7 +53,13 @@ const refs = {
   function toggleModal() {
     document.body.classList.toggle("modal-open")
     refs.authModal.classList.toggle("is-hidden");
-    
+    if (!refs.authModal.classList.contains("is-hidden")) {
+      // Disable scroll
+      refs.body.style.overflow = "hidden";
+  } else {
+      // Enable scroll
+      refs.body.style.overflow = "auto";
+  }
   }; 
   
   refs.authEmailInput.addEventListener('input', onAuthEmailInput);
@@ -110,6 +116,13 @@ const refs = {
   function toggleSigInModal() {
     document.body.classList.toggle("modal-open")
     refs.sigInModal.classList.toggle("is-hidden");
+    if (!refs.sigInModal.classList.contains("is-hidden")) {
+      // Disable scroll
+      refs.body.style.overflow = "hidden";
+  } else {
+      // Enable scroll
+      refs.body.style.overflow = "auto";
+  }
   };
   
   const onSigInClick = e =>{
