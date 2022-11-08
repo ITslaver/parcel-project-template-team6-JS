@@ -20,6 +20,98 @@
         <button id="register">Реєстрація</button>
         <button id="exit">Вийти</button>
       </form>
+<!-- ------------------------------------------------------Кнопки авторицації та реєстрації -->
+<button data-authrization-modal-open type="button" class="header__authrization-button">Authorization</button>
+<div class="header__backdrop is-hidden" data-authrization-modal>
+    <div class="authrization-modal ">
+        <button data-authrization-modal-close type="button" class="authrization-modal__button-close ">
+            <svg class="authrization-modal__button-close-icon" width="17" height="17">
+                <use href=".//images/icons-authorization.svg#icon-cross"></use>
+            </svg>
+        </button>
+
+        <b class="authrization-modal__header">Please enter authorizing credentials</b>
+
+        <form class="authrization-modal-form js-speaker-form " autocomplete="off">
+            <div class="authrization-modal-form__field">
+                <label class="authrization-modal-form__label" for="email-to-authorize">E-mail</label>
+                <div class="authrization-modal-form__input-field">
+                    <input class="authrization-modal-form__input-email form__input" type="email" name="email" id="email-to-authorize" minlength="11" placeholder="name@subdomain.dom" required>
+                    <svg class="form__icon" >
+                        <use href=".//images/icons-authorization.svg#icon-mail4"></use>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="authrization-modal-form__field">
+                <label class="authrization-modal-form__label" for="password-to-authorize">Password</label>
+                <div class="authrization-modal-form__input-field">
+                    <input class="authrization-modal-form__input-password form__input" type="password" name="password" id="password-to-authorize" placeholder="(8 characters minimum)" minlength="8" required>
+                    <svg class="form__icon">
+                        <use href=".//images/icons-authorization.svg#icon-lock"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="submit">
+                <button class="authrization-modal__button-submit" type="submit">Submit</button>
+            </div>
+        </form>
+            
+        
+    </div>
+</div>
+<button data-sign-in-modal-open type="button" class="header__sign-in-button">Sign in</button>
+<div class="header__backdrop is-hidden" data-sign-in-modal>
+    <div class="sign-in-modal ">
+        <button data-sign-in-modal-close type="button" class="sign-in-modal__button-close ">
+            <svg class="sign-in-modal__button-close-icon" width="17" height="17">
+                <use href=".//images/icons-authorization.svg#icon-cross"></use>
+            </svg>
+        </button>
+
+        <b class="sign-in-modal__header">Please enter your sign-in information </b>
+
+        <form class="sign-in-modal-form js-speaker-form " autocomplete="off">
+
+            <div class="sign-in-modal-form__field">
+                <label class="sign-in-modal-form__label" for="name">Name</label>
+                <div class="sign-in-modal-form__input-field">
+                    <input class="sign-in-modal-form__input-name form__input" type="text" name="name" id="name" placeholder="name" required>
+                    <svg class="form__icon" >
+                        <use href=".//images/icons-authorization.svg#icon-user"></use>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="sign-in-modal-form__field">
+                <label class="sign-in-modal-form__label" for="email-to-sign-in">E-mail</label>
+                <div class="sign-in-modal-form__input-field">
+                    <input class="sign-in-modal-form__input-email form__input" type="email" name="email-to-sign-in" id="email-to-sign-in" minlength="11" placeholder="name@subdomain.dom" required>
+                    <svg class="form__icon" >
+                        <use href=".//images/icons-authorization.svg#icon-mail4"></use>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="sign-in-modal-form__field">
+                <label class="sign-in-modal-form__label" for="password-to-sign-in">Password</label>
+                <div class="sign-in-modal-form__input-field">
+                    <input class="sign-in-modal-form__input-password form__input" type="password" name="password-to-sign-in" id="password-to-sign-in" placeholder="(8 characters minimum)" minlength="8" required>
+                    <svg class="form__icon">
+                        <use href=".//images/icons-authorization.svg#icon-lock"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="submit">
+                <button class="sign-in-modal__button-submit" type="submit">Submit</button>
+            </div>
+            
+        </form>
+        
+    </div>
+</div>
+
+
       <!-- ------------------------------------------------Навигация/Регистрация -->
 
       <ul class="nav__list nav__list-library">

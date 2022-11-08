@@ -1,10 +1,16 @@
+.header__bg{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56),rgba(0, 0, 0, 0.56)), url('../images/header-lib/library1024.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
 .container_lib {
     padding-top: 40px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.56),rgba(0, 0, 0, 0.56)), url('../images/header-lib/library1024.jpg');
-height: 216px;
-background-repeat: no-repeat;
-
-background-size: cover;
+    height: 216px;
+    background-repeat: no-repeat;
+    background-size: cover;
 @include tablet{
     height: 219px;
     // background-position: center;
@@ -60,9 +66,9 @@ color: #FFFFFF;
     margin-right: auto;
     display: flex;
     justify-content: center;
-    margin-top: 60px;
+    margin-top: 20px;
     @include tablet{
-        margin-top: 40px;
+        margin-top: 10px;
     }
 }
 
@@ -85,7 +91,23 @@ color: #FFFFFF;
 
 .header__pages-list{
     display: flex;
+    align-items: center;
 }
+
+///////////  icon-style ///////////////
+.header__change-color{
+    fill: #ffffff;
+    text-align: center;
+}
+
+.btn__icon-lib{
+    padding: 0px;
+    border: none;
+    background-color: inherit;
+    justify-content: center;
+}
+
+///////////////////////////////////////
 
 .header__pages-link{
     text-decoration: none; 
@@ -134,5 +156,44 @@ margin-left: 39px;
     @include tablet{
         display: block;
     }
-
 }
+
+
+//////////////////////////////   FORM_STYLE /////////////////////
+.search-form__wraplib{
+display: flex;
+justify-content: center;
+margin-top: 30px;
+@include tablet{
+    justify-content: end;
+margin-top: 10px;
+}
+}
+
+.input-style{
+    background-color: transparent;
+    border: none;
+    // border-bottom: 1px solid #FF6B01;
+    @include tablet{
+        width: 140px;
+    }
+}
+
+.search__button-style{
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    // border-bottom: 1px solid #FF6B01;
+}
+
+.search-form__style{
+    border-bottom: 2px solid #FF6B01;
+    
+}
+
+.input-style:focus {
+    outline: none;
+    color: #ffffff;
+    opacity: 0.5;
+  
+  }
