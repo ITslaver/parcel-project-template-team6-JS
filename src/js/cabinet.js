@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import card from '../templates/card.hbs';
-import extendFetchFilmCard from './serviceApiFilmTrend';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -25,8 +24,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export let uid;
-authStatus();
-
+if (!uid) {
+getAuth()
+}
 
 //---------------------------- Слушатели кнопок--------------------------------
 document.getElementById('header_btn').addEventListener('submit', cabinetAction);
@@ -93,7 +93,7 @@ export function getList(category, user) {
     redirect: 'follow',
   };
 
- fetch(
+return fetch(
     `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}/${category}.json`,
     requestOptions
   )
@@ -133,7 +133,7 @@ function setList(category, user, itemId, card) {
 
 //---------------------Запись страници на которой пользователь-----------------------
 
-function setPage(category, user) {
+export function setPage(category, user) {
   const raw = `{"page" : "${category}"}`;
   //
   const requestOptions = {
@@ -164,7 +164,7 @@ export function getPage(user) {
     requestOptions
   )
     .then(response => response.json())
-    .then(result =>  {console.log(result)
+    .then(result =>  {console.log(result.keys())
     return result
 })
     .catch(error => console.log('error', error));
@@ -193,7 +193,7 @@ function delItem(itemId, user, category) {
 
 export function authStatus() {
   const auth = getAuth();
-  onAuthStateChanged(auth, user => {
+ return onAuthStateChanged(auth, user => {
     if (user) {
       uid = user.uid;
       document.querySelector('.username').textContent = user.name;

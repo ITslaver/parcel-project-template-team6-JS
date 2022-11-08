@@ -1,12 +1,12 @@
-import FilmApiTrendFetch from './js/serviceApiFilmTrend';
+import './js/cabinet';
 import card from './templates/card.hbs';
 import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
 import onLoadPreloaderHide from './js/preloader';
 import hbsContainer from './templates/modal-card.hbs';
-import './js/cabinet';
 import './js/modal-film-card';
 import SmoothScroll from 'smoothscroll-for-websites';
+import FilmApiTrendFetch from './js/serviceApiFilmTrend';
 
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
