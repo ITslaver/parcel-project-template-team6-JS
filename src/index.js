@@ -3,7 +3,7 @@ import './js/authorization';
 import card from './templates/card.hbs';
 import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
-import onLoadPreloaderHide from './js/preloader';
+import { onLoadPreloaderHide } from './js/preloader';
 import hbsContainer from './templates/modal-card.hbs';
 import './js/cabinet';
 import './js/modal-film-card';
@@ -118,7 +118,7 @@ async function onCardClick(event) {
   //       console.log("Это трейлер:", data);
 
   //       console.log(filmApiTrendFetch.movie_id);
-  //       result = data.results.map(item => 
+  //       result = data.results.map(item =>
   //         `<li><iframe width="560" height="315" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
   //       // trailerCard.innerHTML = '';
   //       trailerCard.insertAdjacentHTML('beforeend', result);
@@ -130,25 +130,23 @@ async function onCardClick(event) {
   //   console.log('Это data-film:', filmApiTrendFetch.idFilm);
   //   await fetchModalCard();}
 
-
-
   async function openModal() {
     console.log('это Модалка');
     document.addEventListener('keydown', closeOnEsc);
     modalDialog.classList.remove('modal-one-film--hidden');
-    html.classList.add('disable-scroll-all');    
+    html.classList.add('disable-scroll-all');
   }
 
   async function closeModal() {
     document.removeEventListener('keydown', closeOnEsc);
     modalDialog.classList.add('modal-one-film--hidden');
     html.classList.add('disable-scroll-all');
-  } 
+  }
 
   async function closeModal() {
-      document.removeEventListener('keydown', closeOnEsc);
-      modalDialog.classList.add('modal-one-film--hidden');
-      html.classList.remove('disable-scroll-all');
+    document.removeEventListener('keydown', closeOnEsc);
+    modalDialog.classList.add('modal-one-film--hidden');
+    html.classList.remove('disable-scroll-all');
   }
 }
 

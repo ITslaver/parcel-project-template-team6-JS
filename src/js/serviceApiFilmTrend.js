@@ -112,16 +112,8 @@ export default class FilmApiTrendFetch {
         film.vote_average = film.vote_average.toFixed(1);
         // форматуємо дату виходу фільму
         if (!film.release_date) {
-          switch (this.currentLang) {
-            case 'uk-UA':
-              film.release_date = '-----';
-              break;
-
-            case 'en-US':
-              film.release_date = 'n/f ';
-              break;
+            film.release_date = '-----';
           }
-        }
         film.release_date = film.release_date.slice(0, 4);
         // форматуємо кількість жанрів фільму
         if (film.genre_ids.length === 0) {
