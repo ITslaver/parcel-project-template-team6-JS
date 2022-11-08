@@ -35,9 +35,10 @@ const refs = {
 //   email: '',
 //   password: '',
 // };
-
-refs.openAuthModalBtn.addEventListener('click', toggleModal);
-refs.closeAuthModalBtn.addEventListener('click', toggleModal);
+try {
+  refs.openAuthModalBtn.addEventListener('click', toggleModal);
+  refs.closeAuthModalBtn.addEventListener('click', toggleModal);
+} catch {}
 
 const onAuthClick = e => {
   if (e.target === e.currentTarget) {
@@ -45,7 +46,9 @@ const onAuthClick = e => {
   }
 };
 
-refs.authModal.addEventListener('click', onAuthClick);
+try {
+  refs.authModal.addEventListener('click', onAuthClick);
+} catch {}
 
 const onEscClick = e => {
   if (e.key === 'Escape') {
@@ -106,8 +109,10 @@ function toggleModal() {
 
 // ____________________________________sign in form_________________________________________________
 
-refs.openSigInModalBtn.addEventListener('click', toggleSigInModal);
-refs.closeSigInModalBtn.addEventListener('click', toggleSigInModal);
+try {
+  refs.openSigInModalBtn.addEventListener('click', toggleSigInModal);
+  refs.closeSigInModalBtn.addEventListener('click', toggleSigInModal);
+} catch {}
 
 function toggleSigInModal() {
   document.body.classList.toggle('modal-open');
@@ -120,7 +125,9 @@ const onSigInClick = e => {
   }
 };
 
-refs.sigInModal.addEventListener('click', onSigInClick);
+try {
+  refs.sigInModal.addEventListener('click', onSigInClick);
+} catch {}
 
 // refs.sigInEmailInput.addEventListener('input', onSigInEmailInput);
 // refs.sigInPasswordInput.addEventListener('input', onSigInPasswordInput);

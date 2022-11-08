@@ -30,18 +30,21 @@ const KEY_ID = 'userId';
 
 export let uid = '';
 getUserId();
-
 authStatus();
+console.log(uid);
 
 //---------------------------- Слушатели --------------------------------
-document.getElementById('header_btn').addEventListener('submit', cabinetAction);
+// document.getElementById('header_btn').addEventListener('submit', cabinetAction);
 document.getElementById('card-div').addEventListener('click', itemAction);
-document
-  .querySelector('.sign-in-modal')
-  .addEventListener('submit', onSignInModalForm);
-document
-  .querySelector('.authrization-modal')
-  .addEventListener('submit', onAuthrizationModalForm);
+document.querySelector('#exit').addEventListener('click', onSignOut);
+try {
+  document
+    .querySelector('.sign-in-modal')
+    .addEventListener('submit', onSignInModalForm);
+  document
+    .querySelector('.authrization-modal')
+    .addEventListener('submit', onAuthrizationModalForm);
+} catch {}
 
 //---------------------------Функции кнопок в хедере---------------------------
 
@@ -82,21 +85,27 @@ function onAuthrizationModalForm(e) {
   authFormSend(email, password);
 }
 
+function onSignOut(e) {
+  authOut();
+  window.location.href = '../index.html';
+}
+
 function cabinetAction(event) {
   event.preventDefault();
   // console.log(event.target.name);
 
-  if (event.submitter.id === 'sign') {
-    const email = event.target.querySelector('#email').value;
-    const password = event.target.querySelector('#password').value;
-    authFormSend(email, password);
-    // event.submitter.disabled = true;
-  } else if (event.submitter.id === 'register') {
-    const email = event.target.querySelector('#email').value;
-    const password = event.target.querySelector('#password').value;
-    authFormReg(email, password);
-    // event.submitter.disabled = true;
-  } else if (event.submitter.id === 'exit') {
+  // if (event.submitter.id === 'sign') {
+  //   const email = event.target.querySelector('#email').value;
+  //   const password = event.target.querySelector('#password').value;
+  //   authFormSend(email, password);
+  //   // event.submitter.disabled = true;
+  // } else if (event.submitter.id === 'register') {
+  //   const email = event.target.querySelector('#email').value;
+  //   const password = event.target.querySelector('#password').value;
+  //   authFormReg(email, password);
+  //   // event.submitter.disabled = true;
+  // } else
+  if (event.submitter.id === 'exit') {
     authOut();
     // event.submitter.disabled = true;
   } else if (event.submitter.id === 'favorite') {
@@ -247,6 +256,7 @@ function authFormSend(email, password) {
       document
         .querySelector('[data-authrization-modal]')
         .classList.add('is-hidden');
+      renderSingIn();
     })
     .catch(error => {
       // const errorCode = error.code;
@@ -267,9 +277,8 @@ function authFormReg(email, password) {
       console.log('Користувача успішно створено ' + userCredential.user.email);
       // document.querySelector('.username').textContent = user.email;
       save(KEY_ID, userCredential.user.uid);
-      document
-        .querySelector('[data-authrization-modal]')
-        .classList.add('is-hidden');
+      document.querySelector('[data-sign-in-modal]').classList.add('is-hidden');
+      renderSingIn();
     })
     .catch(error => {
       // const errorCode = error.code;
@@ -295,10 +304,24 @@ function authOut() {
     });
 }
 
-//------------------------------Check and Get User Id------------------------------
+//------------------------------Sign In Logic------------------------------
 
 function getUserId() {
   if (load(KEY_ID)) {
     uid = load(KEY_ID);
+    renderSingIn();
+  }
+}
+
+function renderSingIn() {
+  const hidden = document.querySelectorAll('.nav__item');
+  const vissible = Array.prototype.map.call(hidden, item => {
+    item.hidden = false;
+  });
+  if (document.querySelector('.header__authrization-button')) {
+    document.querySelector('.header__authrization-button').hidden = true;
+  }
+  if (document.querySelector('.header__sign-in-button')) {
+    document.querySelector('.header__sign-in-button').hidden = true;
   }
 }
