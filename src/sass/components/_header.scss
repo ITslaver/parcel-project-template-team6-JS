@@ -119,7 +119,7 @@
 .search-form__input {
   height: 20px;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 17px;
   color: var(--header-color-text);
   background: none;
   border: none;
@@ -153,4 +153,12 @@
   margin: 0;
   padding: 0;
   border-bottom: 0.5px solid var(--header-color-text);
+  cursor: pointer;
+  transition: var(--transition-duration);
+  transition-timing-function: var(--timing-function);
+  &:hover,
+  &:focus {
+    stroke: var(--card-genres-year-text-color);
+    transform: scale(1.2);
+  }
 }
