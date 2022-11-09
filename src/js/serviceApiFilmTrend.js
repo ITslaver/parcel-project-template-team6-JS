@@ -62,7 +62,7 @@ export default class FilmApiTrendFetch {
           return 0;
         }
         else 
-        return this.result
+        return result
        // this.result = Object.keys(result);
       })
       .catch(error => console.log('error', error));
@@ -96,7 +96,7 @@ export default class FilmApiTrendFetch {
       }
 
       function searchList(filmId, fav, watch) {
-        let list 
+        let list
         fav = favorite;
         watch = watched
   
