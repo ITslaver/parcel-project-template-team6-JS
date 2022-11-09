@@ -112,13 +112,14 @@ async function onCardClick(event) {
         modalCard.insertAdjacentHTML('beforeend', markup);
 
         if (list === 'favorite') {
-          document.querySelector('.button-queue').hidden = true;
-          document.querySelector('.button-queue-del').hidden = true;
+         // document.querySelector('.button-queue').hidden = true;
+          document.querySelector('.button-queue').textContent = "DEL QUEYUE";
+          document.querySelector('.button-queue').classList = "button-watched-del";
         } else if (list === 'watched') {
-          document.querySelector('.button-watched').hidden = true;
-          document.querySelector('.button-queue-del').hidden = true;
+          document.querySelector('.button-watched').textContent = "DEL Watched";
+          document.querySelector('.button-watched').classList = "button-queue-del";
         } else if (list === '') {
-          document.querySelector('.button-queue-del').hidden = true;
+          document.querySelector('.button-watched-del').hidden = true;
           document.querySelector('.button-queue-del').hidden = true;
         }
       });
