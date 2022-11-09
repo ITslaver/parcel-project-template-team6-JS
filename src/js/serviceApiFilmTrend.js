@@ -96,7 +96,7 @@ export default class FilmApiTrendFetch {
       }
 
       function searchList(filmId, fav, watch) {
-        let list = '';
+        let list 
         fav = favorite;
         watch = watched
   
