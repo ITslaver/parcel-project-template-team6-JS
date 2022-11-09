@@ -101,12 +101,9 @@ async function onCardClick(event) {
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
-<<<<<<< Updated upstream
-        data.list = list;
-=======
+
         data.list = list
         console.log("в лист "+list)
->>>>>>> Stashed changes
         const markup = hbsContainer(data);
         // console.log(data.overview);
         //console.log(data.list);
@@ -120,23 +117,10 @@ async function onCardClick(event) {
         } else if (list === 'watched') {
           document.querySelector('.button-watched').hidden = true;
           document.querySelector('.button-queue-del').hidden = true;
-        } else if (list.length < 1) {
+        } else if (list === '') {
           document.querySelector('.button-queue-del').hidden = true;
           document.querySelector('.button-queue-del').hidden = true;
         }
-<<<<<<< Updated upstream
-=======
-       else if (list === "watched")
-       {
-        document.querySelector('.button-watched').hidden = true
-        document.querySelector('.button-queue-del').hidden = true   
-       }
-       else if (list === ""){
-        console.log("не в листах "+list)
-        document.querySelector('.button-queue-del').hidden = true
-        document.querySelector('.button-watched-del').hidden = true  
-       }
->>>>>>> Stashed changes
       });
     } catch (error) {
       console.log(error);
