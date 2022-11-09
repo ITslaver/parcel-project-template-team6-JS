@@ -1,34 +1,80 @@
-.header__authrization-button,
-.header__sign-in-button
- {
-    padding: 4px 4px;
+.authbtns{
+    @include mobile{
+    display: flex;
+    flex-direction: column;
+    }
+    @include tablet{
+    display: flex;
+    flex-direction: row;
+    }
+}
 
-    min-width: 90px;
+.header__authrization-button,
+.header__sign-in-button{
+    padding: 4px;
+
+    max-width: 75px;
     display: inline-block;
 
-
+    font-family: inherit;
+    font-weight: 500;
     font-size: 12px;
-    line-height: 1.87;
+    line-height: 16px;
     letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background-color: transparent;
 
-    background: #FFFFFF;
-    color: #000000;
+
+    color: var(--header-color-text);
 
     cursor: pointer;
     
-    border: 1px solid #000000;
+    border: 1px solid #FFFFFF;
     border-radius: 5px;
 
-    transition-property: filter, background-color;
+    transition-property: background-color, border;
     transition-duration: 250ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
+
     &:hover,
     &:focus {
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
         background-color: #FF6B01;
+        border: 1px solid transparent;
         }
+
 };
+
+.header__authrization-button{
+    @include mobile{
+        margin-bottom: 4px;
+        font-size: 10px;
+        line-height: 14px;
+        
+    }
+    @include tablet{
+    margin-right: 7px;
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 0;
+    }
+    @include desktop{
+        margin-left: 155px;
+    }
+};
+
+.header__sign-in-button{
+    @include mobile{
+        font-size: 10px;
+        line-height: 14px;
+    }
+    @include tablet{
+    margin-left: 0;
+    font-size: 12px;
+    line-height: 16px;
+    }
+};
+
 
 .header__backdrop {
     position: fixed;
@@ -138,11 +184,6 @@
         }
 };
 
-// .authrization-modal__button-close-icon,
-// .sign-in-modal__button-close-icon{
-//     color: #000000;
-// }
-
 
 .authrization-modal__header , 
 .sign-in-modal__header {
@@ -180,7 +221,8 @@
     // border: 1px solid #000000;
     border-radius: 5px;
     
-    font-weight: 700;
+    font-family: inherit;
+    font-weight: 500;
     font-size: 16px;
     line-height: 1.88;
     letter-spacing: 0.06em;
@@ -280,4 +322,4 @@
     transition-property: fill;
     transition-duration: 250ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
+};
