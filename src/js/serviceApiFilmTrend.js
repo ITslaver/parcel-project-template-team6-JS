@@ -58,8 +58,12 @@ export default class FilmApiTrendFetch {
     )
       .then(response => response.json())
       .then(result => {
-        this.result = Object.keys(result);
-        return result;
+        if (result === null) {
+          return 0;
+        }
+        else 
+        return this.result
+       // this.result = Object.keys(result);
       })
       .catch(error => console.log('error', error));
   }
