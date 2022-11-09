@@ -101,10 +101,12 @@ async function onCardClick(event) {
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
-        data.list = list;
+
+        data.list = list
+        console.log("в лист "+list)
         const markup = hbsContainer(data);
         // console.log(data.overview);
-        console.log(data);
+        //console.log(data.list);
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
@@ -115,7 +117,7 @@ async function onCardClick(event) {
         } else if (list === 'watched') {
           document.querySelector('.button-watched').hidden = true;
           document.querySelector('.button-queue-del').hidden = true;
-        } else if (list.length < 1) {
+        } else if (list === '') {
           document.querySelector('.button-queue-del').hidden = true;
           document.querySelector('.button-queue-del').hidden = true;
         }
