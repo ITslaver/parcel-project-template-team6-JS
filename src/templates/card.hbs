@@ -1,5 +1,5 @@
 {{#each this}}
-  <li class='card' data-film='{{id}}'>
+  <li class='card' data-film='{{id}}' data-list="{{list}}" id="{{id}}">
     <div class='card-top' data-film='{{id}}'>
       <img
         src='https://image.tmdb.org/t/p/w500{{poster_path}}'
@@ -15,6 +15,6 @@
       </div>
     </div>
     <span class='card-rating' data-film='{{id}}'>{{vote_average}}</span>
-    <div class="{{list}}">{{list}}</div>
+    <div class="{{list}}" id="list">{{list}}</div>
   </li>
 {{/each}}

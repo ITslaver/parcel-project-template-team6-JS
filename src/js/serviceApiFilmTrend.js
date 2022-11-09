@@ -58,8 +58,10 @@ export default class FilmApiTrendFetch {
     )
       .then(response => response.json())
       .then(result => {
-        this.result = Object.keys(result);
-        return result;
+        if (result === null) {
+          return 0;
+        } else return this.result;
+        // this.result = Object.keys(result);
       })
       .catch(error => console.log('error', error));
   }
@@ -74,10 +76,6 @@ export default class FilmApiTrendFetch {
       const favorite = Object.keys(await this.getListId('favorite', uid));
 
       for (let film of films) {
-        console.log(film);
-        console.log(favorite);
-        console.log(watched);
-
         film.genre_ids = searchGenres(film.genre_ids);
         film.list = searchList(film.id, 'favorite', 'watched');
 
@@ -95,17 +93,14 @@ export default class FilmApiTrendFetch {
       }
 
       function searchList(filmId, fav, watch) {
-        let categoryName;
-        let list = '';
+        let list;
         fav = favorite;
         watch = watched;
 
         if (fav.includes(filmId.toString())) {
           list = 'favorite';
-          console.log(list);
         } else if (watch.includes(filmId.toString())) {
           list = 'watched';
-          console.log(list);
         }
 
         return list;
@@ -246,6 +241,7 @@ export default class FilmApiTrendFetch {
         .then(res => res.json())
         .then(data => {
           console.log(data);
+
           this.trailer = data;
           return data;
         });
