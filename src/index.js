@@ -9,6 +9,8 @@ import hbsContainer from './templates/modal-card.hbs';
 import './js/modal-film-card';
 import SmoothScroll from 'smoothscroll-for-websites';
 import FilmApiTrendFetch from './js/serviceApiFilmTrend';
+import { uid } from './js/cabinet';
+import { getList } from './js/cabinet';
 import './js/goTop';
 // import './js/footer-modal';
 
@@ -28,7 +30,12 @@ searchForm.addEventListener('submit', function (evt) {
 
 // --------- При открытии сайта ---------------------
 
-fetchApiFilms();
+if (document.title === "Filmoteka") {
+  fetchApiFilms();
+}
+
+else getList('favorite', uid);
+
 
 // ------------Переключение языка--------------
 btnEn.addEventListener('click', onEnClick);
@@ -79,7 +86,8 @@ async function onCardClick(event) {
     return;
   }
   filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
-  console.log('Это data-film:', filmApiTrendFetch.idFilm);
+  const list = document.getElementById(filmApiTrendFetch.idFilm).dataset.list
+  console.log('Это data-film:', filmApiTrendFetch.idFilm, list);
   await fetchModalCard();
 
   const closeOnEsc = async e => {
@@ -93,12 +101,26 @@ async function onCardClick(event) {
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
+        data.list = list
         const markup = hbsContainer(data);
         // console.log(data.overview);
         console.log(data);
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
+        if (list === "favorite") {
+          document.querySelector('.button-queue').hidden = true
+          document.querySelector('.button-queue-del').hidden = true 
+        }
+       else if (list === "watched")
+       {
+        document.querySelector('.button-watched').hidden = true
+        document.querySelector('.button-queue-del').hidden = true   
+       }
+       else if (list.length < 1){
+        document.querySelector('.button-queue-del').hidden = true
+        document.querySelector('.button-queue-del').hidden = true  
+       }
       });
     } catch (error) {
       console.log(error);
