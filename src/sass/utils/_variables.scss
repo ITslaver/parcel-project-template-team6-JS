@@ -5,6 +5,7 @@
   --footer-background-color: #F7F7F7;
   --footer-text-color: #545454;
   --header-color-text: #FFFFFF;
+  --modal-info-text: #8C8C8C;
 }
 
 $mobile: 480px;
@@ -13,3 +14,6 @@ $desktop: 1200px;
 
 $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 $transition-duration: 250ms;
+
+$animation--delay: 100ms;
+$animation: 200ms cubic-bezier(0.4, 0, 0.2, 1);

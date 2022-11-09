@@ -1,6 +1,10 @@
 .disable-scroll-all body {
   overflow: hidden;
-  touch-action: none;  
+  touch-action: none; 
+  margin: 0;
+  @include tablet {
+    margin-right: 17px;
+  }
   @include desktop {
     margin-right: 17px;
   }
@@ -9,11 +13,12 @@
 .modal-one-film {
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   top: 0;
   left: 0;
-  overflow: auto;
+  // overflow: auto;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -28,47 +33,61 @@
 
   @include tablet {
     align-items: center;
+    left: -8px;
   }
 }
 
 .modal-one-film__window {
   width: 280px;
   max-width: 100%;
-  padding: 45px 20px;
   margin: 20px;  
   border-radius: 5px;
-  outline: 1px solid tomato;
 
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
 
   margin-bottom: 30px;
-  background: #fff;
+  background: var(--header-color-text);
   position: relative;
 
   @include tablet {
     width: 704px;
     margin: 0;
-    padding: 40px 29px;
   }
 
   @include desktop {
+    height: 658px;
     width: 882px;
-    padding: 50px 30px;
   }
 }
 
 .modal-close-btn {
   cursor: pointer;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   width: 30px;
   height: 30px;
   background: none;
   padding: 0;
-  top: 18px;
-  right: 18px;
+  top: 8px;
+  right: 8px;
+  border-radius: 50%;
+  z-index: 10;
+
+  stroke: black;
+  // cubic-bezier(0.4, -0.16, 0.09, 1.51) rgba(55, 126, 240, 0.747);
+  transition: transform 0.3s linear, stroke 0.3s linear,
+  background-color 0.3s linear; 
+    &:hover, :focus {
+      background: rgba(255, 107, 8, 0.89);
+      border-color: var(--accent-color);
+      transform: rotate(-360deg);
+      stroke: var(--header-color-text);      
+    }
 }
 
 .modal-one-film__content {
@@ -83,27 +102,21 @@
   }
 }
 
-
-
 .modal {
   // position: absolute;
-  top: 0;
-  left: 50%;
-  // margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  // top: 0;
-  // left: 50%;
-  // transform: translate(-50%);
+  gap: 20px;
+
+  top: 0;
   width: 100%;
-  // max-height: 940px;
-  // max-width: 720px;
-  padding: 0;
+  max-height: 940px;
+  max-width: 480px;
+  padding: 48px 20px;
+  padding-bottom: 40px;
   overflow: auto;
-  // background-color: ;
   border-radius: 5px;
-  outline: 2px solid tomato;
+  // outline: 2px solid tomato;
   overflow-x: hidden;
   
   font-weight: 500;
@@ -112,20 +125,23 @@
   
   @include tablet {
     flex-direction: row;
+
     position: static;
     transform: translate(0);
     display: flex;
     width: auto;
     height: 552px;
     max-width: 704px;
-    padding: 40px 36px;
+    padding: 40px 30px;
+    gap: 31px;
   }
   
 
   @include desktop {
-    height: 558px;
-    max-width: 806px;
-    padding: 40px 12px;
+    height: 658px;
+    max-width: 882px;
+    padding: 40px 30px;
+    gap: 30px;
   }
 
   p,
@@ -134,17 +150,39 @@
   }  
   }
 
+  .modal-rendered {
+    display: flex;
+    max-height: 100%;
+  
+    @include tablet {
+      max-height: 552px;
+    }
+  
+    @include desktop {
+      max-height: 658px;
+    }
+ 
+
   .card-div {
-    // max-width: 375px;
-    width: 375;
-    height: 478px;
+    width: 240px;
+    height: 357px;
     flex-shrink: 0;
     position: relative;
-    // border-radius: 5px;
     overflow: hidden;
+    transition: transform 250ms;
+    
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 1), -23px 0 20px -23px rgba(0, 0, 0, 0.8),
+    23px 0 20px -23px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 
-    @mixin tablet {
-      width: 575;
+    @include tablet {
+      width: 307px;
+      height: 460px;
+    }
+
+    @include desktop {
+      width: 396px;
+      height: 578px;
+      border-radius: 10px;
     }
 
     &:hover::before {
@@ -179,8 +217,14 @@
   display: flex;
   flex-direction: column;
   display: block;
-  outline: 2px solid lightblue;
-  max-height: 558px;
+  // outline: 2px solid lightblue;
+
+  @include mobile {
+    height: 357px;
+  }
+  @include tablet {
+    max-height: 578px;
+  }
    
   .card-title {
     margin-bottom: 20px;
@@ -190,9 +234,11 @@
     font-weight: 500;
     font-size: 30px;
     line-height: 35px;
+    text-shadow: 0px 1px 3px rgba(77, 77, 77, 0.2),
+    0px 1px 1px rgba(99, 99, 99, 0.14), 0px 2px 1px rgba(92, 92, 92, 0.2);
   }
 }
-
+}
 .info-block {
   border-spacing: 0;
 
@@ -206,14 +252,14 @@
   }
   .list-keys {
     width: 152px;
-    color: #8C8C8C;
+    color: var(--modal-info-text);
   }
 }
 
 .vote-span {
-  color: #ffffff;
+  color: var(--header-color-text);
   padding: 1px 10px;
-  background: #FF6B08;
+  background: var(--accent-color);
   border-radius: 5px;
 }
 
@@ -225,6 +271,15 @@
   line-height: 20px;
   margin-bottom: 20px;
   overflow-y: auto;
+  height: unset;
+  
+
+  @include tablet {
+    max-height: 185px;
+  }
+  @include desktop {
+    max-height: 260px;
+  }
 
   &::-webkit-scrollbar {
     width: 5px;
@@ -233,7 +288,7 @@
     background: rgba(0, 0, 0, 0.3);
   }
   &::-webkit-scrollbar-thumb {
-    background: #FF6B08;
+    background: var(--accent-color);
     border-radius: 5px;
   }
 }
@@ -246,16 +301,15 @@
     width: 136px;
     height: 44px;
     text-transform: uppercase;
-    // padding: 12px 10px 14px;
-    border: 1px solid #000000;
+    border: 1px solid var(--card-title-text-color);
     border-radius: 5px;
     cursor: pointer;
     transition: 250ms ease-in;
 
-    &:hover {
-      background: #FF6B08;
-      border-color: #FF6B08;
-      color: #ffffff;
+    &:hover, &:focus {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      color: var(--header-color-text);
     }
   }
 }
@@ -263,8 +317,9 @@
 @media screen and (max-width: 1279px) {
   .modal-rendered {
     .card-div {
-      max-width: 264px;
-      max-height: 374px;
+      max-width: 307px;
+      max-height: 460px;
+      border-radius: 5px;
 
       &::before {
         width: 120px;
@@ -294,3 +349,5 @@
     }
   }
 }  
+
+

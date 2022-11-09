@@ -4,7 +4,7 @@ import './js/authorization';
 import card from './templates/card.hbs';
 import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
-import onLoadPreloaderHide from './js/preloader';
+import { onLoadPreloaderHide } from './js/preloader';
 import hbsContainer from './templates/modal-card.hbs';
 import './js/modal-film-card';
 import SmoothScroll from 'smoothscroll-for-websites';
@@ -13,6 +13,9 @@ import { uid } from './js/cabinet';
 import { getList } from './js/cabinet';
 import './js/goTop';
 // import './js/footer-modal';
+import './js/goTop';
+import './js/footer-modal';
+import './js/notify-init';
 
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
@@ -30,12 +33,9 @@ searchForm.addEventListener('submit', function (evt) {
 
 // --------- При открытии сайта ---------------------
 
-if (document.title === "Filmoteka") {
+if (document.title === 'Filmoteka') {
   fetchApiFilms();
-}
-
-else getList('favorite', uid);
-
+} else getList('favorite', uid);
 
 // ------------Переключение языка--------------
 btnEn.addEventListener('click', onEnClick);
@@ -86,7 +86,7 @@ async function onCardClick(event) {
     return;
   }
   filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
-  const list = document.getElementById(filmApiTrendFetch.idFilm).dataset.list
+  const list = document.getElementById(filmApiTrendFetch.idFilm).dataset.list;
   console.log('Это data-film:', filmApiTrendFetch.idFilm, list);
   await fetchModalCard();
 
@@ -101,26 +101,24 @@ async function onCardClick(event) {
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
-        data.list = list
+        data.list = list;
         const markup = hbsContainer(data);
         // console.log(data.overview);
         console.log(data);
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
-        if (list === "favorite") {
-          document.querySelector('.button-queue').hidden = true
-          document.querySelector('.button-queue-del').hidden = true 
+
+        if (list === 'favorite') {
+          document.querySelector('.button-queue').hidden = true;
+          document.querySelector('.button-queue-del').hidden = true;
+        } else if (list === 'watched') {
+          document.querySelector('.button-watched').hidden = true;
+          document.querySelector('.button-queue-del').hidden = true;
+        } else if (list.length < 1) {
+          document.querySelector('.button-queue-del').hidden = true;
+          document.querySelector('.button-queue-del').hidden = true;
         }
-       else if (list === "watched")
-       {
-        document.querySelector('.button-watched').hidden = true
-        document.querySelector('.button-queue-del').hidden = true   
-       }
-       else if (list.length < 1){
-        document.querySelector('.button-queue-del').hidden = true
-        document.querySelector('.button-queue-del').hidden = true  
-       }
       });
     } catch (error) {
       console.log(error);
@@ -137,8 +135,7 @@ async function onCardClick(event) {
   //   console.log("Это постер");
   //   try {
   //     await filmApiTrendFetch.fetchTrailerMovie().then(data => {
-  //       // const markup = hbsContainer(data);
-  //       // console.log(data.overview);
+  //       // const markup = hbsTest(data);
   //       console.log("Это трейлер:", data);
 
   //       console.log(filmApiTrendFetch.movie_id);
@@ -162,15 +159,12 @@ async function onCardClick(event) {
   }
 
   async function closeModal() {
-    document.removeEventListener('keydown', closeOnEsc);
-    modalDialog.classList.add('modal-one-film--hidden');
-    html.classList.add('disable-scroll-all');
-  }
+      document.removeEventListener('keydown', closeOnEsc);
+      modalDialog.classList.add('modal-one-film--hidden');
+      html.classList.remove('disable-scroll-all');
 
-  async function closeModal() {
-    document.removeEventListener('keydown', closeOnEsc);
-    modalDialog.classList.add('modal-one-film--hidden');
-    html.classList.remove('disable-scroll-all');
+   
+
   }
 }
 

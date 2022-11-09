@@ -32,7 +32,11 @@ getUserId();
 authStatus();
 
 //---------------------------- Слушатели --------------------------------
-document.getElementById('header').addEventListener('submit', cabinetAction);
+// document.getElementById('header').addEventListener('submit', cabinetAction);
+console.log(uid);
+
+//---------------------------- Слушатели --------------------------------
+// document.getElementById('header_btn').addEventListener('submit', cabinetAction);
 document.getElementById('card-div').addEventListener('click', itemAction);
 document.querySelector('#exit').addEventListener('click', onSignOut);
 try {
@@ -59,20 +63,17 @@ function itemAction(event) {
     setList('watched', uid, event.target.id, event.target.dataset.card);
   } else if (event.target.name === 'delFavorite') {
     // console.log('сработало ' + event.target.name);
-    document.querySelector('.button-queue-del').hidden = true
-    document.querySelector('.button-queue').hidden = false
-    delItem(event.target.id, uid, 'favorite');
+    document.querySelector('.button-queue-del').hidden = true;
+    document.querySelector('.button-queue').hidden = false;
 
+    delItem(event.target.id, uid, 'favorite');
   } else if (event.target.name === 'delWatched') {
     // console.log('сработало ' + event.target.name);
     delItem(event.target.id, uid, 'watched');
-    document.querySelector('.button-watched-del').hidden = true
-    document.querySelector('.button-watched').hidden = false
-
-    }
+    document.querySelector('.button-watched-del').hidden = true;
+    document.querySelector('.button-watched').hidden = false;
+  }
 }
-
-
 
 //------------------------Функции кнопок в модальном окне---------------------------
 
@@ -226,7 +227,7 @@ function delItem(itemId, user, category) {
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
   console.log(itemId + ' успешно удалено');
-  getList(category, user)
+  getList(category, user);
 }
 
 //-------------------------Получение данных пользователя ---------------------------
