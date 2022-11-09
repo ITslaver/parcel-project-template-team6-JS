@@ -37,13 +37,34 @@
 
         <p class="info-about">About</p>
             <p class="info-overview">{{overview}}</p>
+
             <div class="buttons" id={{id}}>
               <button type="submit" name="addWatched" id="{{id}}" class="button-watched" data-card='"id" : "{{id}}", "poster_path" : "{{poster_path}}", "title" : "{{title}}", "genre_ids" : "{{genres}}", "relesedate" : "{{release_date}}", "vote_average" : "{{vote_average}}", "overview" : "{{overview}}", "list" : "{{list}}"'>Add to watched</button>
               <button type='submit' name='delFavorite' id={{id}} class="button-watched-del">Выдалити з обраного</button>
               <button type="submit" name="addFavorite" id="{{id}}" class="button-queue" data-card='"id" : "{{id}}", "poster_path" : "{{poster_path}}", "title" : "{{title}}", "genre_ids" : "{{genres}}", "relesedate" : "{{release_date}}", "vote_average" : "{{vote_average}}", "overview" : "{{overview}}", "list" : "{{list}}"'>Add to queue</button>
               <button type="submit" name='delWatched' id="{{id}}" class="button-queue-del">Выдалити з проглянутого</button>
             </div>    
+
+            <div class="buttons">
+              <button type="submit" name="addWatched" id="{{id}}" class="button-watched" data-card='"id" : "{{id}}", "poster_path" : "{{poster_path}}", "title" : "{{title}}", "genre_ids" : "{{genres}}", "relesedate" : "{{release_date}}", "vote_average" : "{{vote_average}}", "overview" : "{{overview}}"'>Add to watched</button>
+              <button type="submit" name="addFavorite" id="{{id}}" class="button-queue" data-card='"id" : "{{id}}", "poster_path" : "{{poster_path}}", "title" : "{{title}}", "genre_ids" : "{{genres}}", "relesedate" : "{{release_date}}", "vote_average" : "{{vote_average}}", "overview" : "{{overview}}"'>Add to queue</button>
+            </div>  
+        {{!-- <div class="button__thumb">
+          <div class="rotating-button__wrapper">
+            <label>
+              <input type="checkbox" name="queue" class="rotating-button__checkbox js-queue" data-label="queue" data-value="{{id}}" />
+              <span type="button" class="rotating-button__button-on">Remove from queue</span>
+              <span type="button" class="rotating-button__button-off">Add to queue</span>
+            </label>
+          </div>
+          <div class="rotating-button__wrapper">
+            <label>
+              <input type="checkbox" name="watched" class="rotating-button__checkbox js-watched" data-label="watched" data-value="{{id}}" checked/>
+              <span type="button" class="rotating-button__button-on">Remove from watched</span>
+              <span type="button" class="rotating-button__button-off">Add to watched</span>
+            </label>
+          </div>  
+        </div> --}}
       </div>
-    </div>
 </section>
 {{!-- {{/each}} --}}

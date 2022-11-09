@@ -135,8 +135,7 @@ async function onCardClick(event) {
   //   console.log("Это постер");
   //   try {
   //     await filmApiTrendFetch.fetchTrailerMovie().then(data => {
-  //       // const markup = hbsContainer(data);
-  //       // console.log(data.overview);
+  //       // const markup = hbsTest(data);
   //       console.log("Это трейлер:", data);
 
   //       console.log(filmApiTrendFetch.movie_id);
@@ -160,15 +159,12 @@ async function onCardClick(event) {
   }
 
   async function closeModal() {
-    document.removeEventListener('keydown', closeOnEsc);
-    modalDialog.classList.add('modal-one-film--hidden');
-    html.classList.add('disable-scroll-all');
-  }
+      document.removeEventListener('keydown', closeOnEsc);
+      modalDialog.classList.add('modal-one-film--hidden');
+      html.classList.remove('disable-scroll-all');
 
-  async function closeModal() {
-    document.removeEventListener('keydown', closeOnEsc);
-    modalDialog.classList.add('modal-one-film--hidden');
-    html.classList.remove('disable-scroll-all');
+   
+
   }
 }
 
