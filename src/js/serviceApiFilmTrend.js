@@ -92,32 +92,19 @@ export default class FilmApiTrendFetch {
         film.genre_ids = film.genre_ids.slice(0, 3).join(', ');
       }
 
-      // function searchList(filmId, fav, watch) {
-      //   let list = '';
-      //   fav = favorite;
+      function searchList(filmId, fav, watch) {
+        let list;
+        fav = favorite;
+        watch = watched;
 
-      //   watch = watched
+        if (fav.includes(filmId.toString())) {
+          list = 'favorite';
+        } else if (watch.includes(filmId.toString())) {
+          list = 'watched';
+        }
 
-      //   if (fav.includes(filmId.toString())) {
-      //     list = "favorite";
-      //   }
-
-      //   else if (watch.includes(filmId.toString())) {
-      //     list = "watched";
-
-      //   watch = watched;
-
-      //   if (fav.includes(filmId.toString())) {
-      //     list = 'favorite';
-      //     console.log(list);
-      //   } else if (watch.includes(filmId.toString())) {
-      //     list = 'watched';
-      //     console.log(list);
-
-      //   }
-
-      //   return list;
-      // }
+        return list;
+      }
 
       function searchGenres(ids) {
         let genresNamesArr = [];

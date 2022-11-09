@@ -32,11 +32,11 @@ getUserId();
 authStatus();
 
 //---------------------------- Слушатели --------------------------------
-document.getElementById('header').addEventListener('submit', cabinetAction);
+// document.getElementById('header').addEventListener('submit', cabinetAction);
 console.log(uid);
 
 //---------------------------- Слушатели --------------------------------
-document.getElementById('header_btn').addEventListener('submit', cabinetAction);
+// document.getElementById('header_btn').addEventListener('submit', cabinetAction);
 document.getElementById('card-div').addEventListener('click', itemAction);
 document.querySelector('#exit').addEventListener('click', onSignOut);
 try {
