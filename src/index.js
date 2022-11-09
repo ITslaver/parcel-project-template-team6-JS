@@ -11,6 +11,7 @@ import SmoothScroll from 'smoothscroll-for-websites';
 import FilmApiTrendFetch from './js/serviceApiFilmTrend';
 import './js/goTop';
 import './js/footer-modal';
+import './js/notify-init';
 
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
