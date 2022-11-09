@@ -2,6 +2,7 @@ import renderCards from './render-cards';
 import Notiflix from 'notiflix';
 import { onErrorEN, onErrorUK } from './on-error';
 import { spinnerOff, spinnerOn } from './preloader';
+import noPosterInGalleryCards from './no-poster-in-gallery-cards';
 
 export default async function onSubmitQuery(evt, instance) {
   evt.preventDefault();
@@ -37,6 +38,13 @@ export default async function onSubmitQuery(evt, instance) {
     // console.log(data.films);
     spinnerOff();
     renderCards(data.films);
+    noPosterInGalleryCards();
+
+    // for (const film of data.films) {
+    //   if (film.poster_path === '') {
+    //     noPosterCard.classList.add('visually-hidden');
+    //   }
+    // }
     if (instance.currentLang === 'en-US') {
       return Notiflix.Notify.success(`We found ${data.total_results} films.`);
     } else {
