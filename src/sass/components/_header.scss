@@ -1,53 +1,23 @@
 .header {
   height: 240px;
   @include mobile {
-    background-image: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)
-      ),
-      url('./../images/backgraund-header/header320.jpg');
+    background-image: url('./../images/header-bg/header320.jpg');
     @include retina {
-      background-image: linear-gradient(
-          to right,
-          rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)
-        ),
-        url('./../images/backgraund-header/header320@2x.jpg');
+      background-image: url('./../images/header-bg/header320@2x.jpg');
     }
   }
 
   @include tablet {
-    background-image: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)
-      ),
-      url('./../images/backgraund-header/header768.jpg');
+    background-image: url('./../images/header-bg/header768.jpg');
     @include retina {
-      background-image: linear-gradient(
-          to right,
-          rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)
-        ),
-        url('./../images/backgraund-header/header768@2x.jpg');
+      background-image: url('./../images/header-bg/header768@2x.jpg');
     }
   }
 
   @include desktop {
-    background-image: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.56),
-        rgba(0, 0, 0, 0.56)
-      ),
-      url('./../images/backgraund-header/header1024.jpg');
+    background-image: url('./../images/header-bg/header1280.jpg');
     @include retina {
-      background-image: linear-gradient(
-          to right,
-          rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)
-        ),
-        url('./../images/backgraund-header/header1024@2x.jpg');
+      background-image: url('./../images/header-bg/header1280@2x.jpg');
     }
   }
 
@@ -93,8 +63,12 @@
 .nav__list {
   display: flex;
   @include tablet {
-    // display: inline;
   }
+}
+
+.nav__item :hover,
+:focus {
+  transform: scale(1.2);
 }
 
 .nav__item:not(:first-child) {

@@ -16,6 +16,8 @@ import './js/goTop';
 import './js/goTop';
 import './js/footer-modal';
 import './js/notify-init';
+import renderCards from './js/render-cards';
+import { onErrorEN, onErrorUK } from './js/on-error';
 
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
@@ -46,7 +48,7 @@ async function onEnClick() {
     filmApiTrendFetch.currentLang = 'en-US';
     await fetchApiFilms();
   } catch (error) {
-    console.log(error);
+    onErrorEN();
   }
 }
 
@@ -55,7 +57,7 @@ async function onUkClick() {
     filmApiTrendFetch.currentLang = 'uk-UA';
     await fetchApiFilms();
   } catch (error) {
-    console.log(error);
+    onErrorUK()
   }
 }
 
@@ -64,12 +66,10 @@ async function onUkClick() {
 async function fetchApiFilms() {
   try {
     await filmApiTrendFetch.filmsAndGenres().then(data => {
-      const makrup = card(data);
-      gallery.innerHTML = '';
-      gallery.insertAdjacentHTML('beforeend', makrup);
+      renderCards(data)
     });
   } catch (error) {
-    console.log(error);
+    onErrorEN()
   }
 }
 
@@ -109,8 +109,8 @@ async function onCardClick(event) {
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
-        
-          if (list === 'favorite') {
+
+        if (list === 'favorite') {
           document.querySelector('.button-queue').textContent = "DEL QUEYUE";
           document.querySelector('.button-queue').name = "delFavorite";
           document.querySelector('.button-queue').classList = "button-queue-del active";
@@ -128,25 +128,25 @@ async function onCardClick(event) {
   }
 
   const videoTrailer = document.querySelector('.movie-poster');
-  videoTrailer.addEventListener('click', onPosterClick);  
+  videoTrailer.addEventListener('click', onPosterClick);
   await filmApiTrendFetch.fetchTrailerMovie()
   // console.log(trailerCard);
   // await onPosterClick(); 
-    
+
 
   async function openModal() {
     console.log('это Модалка');
     document.addEventListener('keydown', closeOnEsc);
     modalDialog.classList.remove('modal-one-film--hidden');
-    html.classList.add('disable-scroll-all');    
+    html.classList.add('disable-scroll-all');
   }
 
   async function closeModal() {
 
-      document.removeEventListener('keydown', closeOnEsc);
-      modalDialog.classList.add('modal-one-film--hidden');
-      html.classList.remove('disable-scroll-all');
-      // trailerCard.innerHTML = '';   
+    document.removeEventListener('keydown', closeOnEsc);
+    modalDialog.classList.add('modal-one-film--hidden');
+    html.classList.remove('disable-scroll-all');
+    // trailerCard.innerHTML = '';   
   }
 
   async function onPosterClick() {
@@ -172,7 +172,7 @@ async function onCardClick(event) {
     console.log('Это data-film:', filmApiTrendFetch.idFilm);
     // await fetchModalCard();    
 
-  
+
 
   }
 
