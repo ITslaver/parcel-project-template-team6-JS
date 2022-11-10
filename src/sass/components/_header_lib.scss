@@ -82,6 +82,12 @@ color: #FFFFFF;
     }
 }
 
+.active {
+    background-color: #FF6B01;
+    border: 1px solid #000000;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+}
+
 .header__btn-style:hover,
 .header__btn-style:focus {
     background-color: #FF6B01;
