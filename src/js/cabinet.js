@@ -58,6 +58,8 @@ function itemAction(event) {
       document.getElementById('list' + event.target.id).textContent =
         'favorite';
       document.getElementById('list' + event.target.id).classList = 'favorite';
+      document.getElementById('list' + event.target.id).classList = 'favorite';
+      document.getElementById(event.target.id).dataset.list = 'favorite';
     }
     document.querySelector('.button-queue').textContent = 'DEL QUEYUE';
     document.querySelector('.button-queue').name = 'delFavorite';
@@ -77,6 +79,7 @@ function itemAction(event) {
     if (document.title === 'Filmoteka') {
       document.getElementById('list' + event.target.id).textContent = 'watched';
       document.getElementById('list' + event.target.id).classList = 'watched';
+      document.getElementById(event.target.id).dataset.list = 'watched';
     }
     document.querySelector('.button-watched').textContent = 'DEL WATCHED';
     document.querySelector('.button-watched').name = 'delWatched';
