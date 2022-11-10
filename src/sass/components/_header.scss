@@ -66,6 +66,11 @@
   }
 }
 
+.nav__item :hover,
+:focus {
+  transform: scale(1.2);
+}
+
 .nav__item:not(:first-child) {
   margin-left: 39px;
 }
