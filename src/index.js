@@ -79,7 +79,7 @@ async function fetchApiFilms() {
 gallery.addEventListener('click', onCardClick);
 const modalDialog = document.querySelector('.modal-one-film');
 const html = document.querySelector('html');
-trailerCard = document.querySelector('.modal-one-film__window');
+const trailerCard = document.querySelector('.modal-one-film__window');
 
 async function onCardClick(event) {
   if (event.target.classList.contains('card-list')) {
@@ -159,8 +159,9 @@ async function onCardClick(event) {
         console.log(filmApiTrendFetch.movie_id);
         result = data.results.map(item =>
           `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
+          console.log(result);
         // trailerCard.innerHTML = '';
-        trailerCard.insertAdjacentHTML('beforeend', result);
+        trailerCard.insertAdjacentHTML('beforebegin', result);
         // trailerCard.innerHTML = result;
       });
     } catch (error) {
