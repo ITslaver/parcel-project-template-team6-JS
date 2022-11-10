@@ -101,9 +101,8 @@ async function onCardClick(event) {
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
-
-        data.list = list
-        console.log("в лист "+list)
+        data.list = list;
+        console.log('в лист ' + list);
         const markup = hbsContainer(data);
         // console.log(data.overview);
         //console.log(data.list);
@@ -112,12 +111,14 @@ async function onCardClick(event) {
         modalCard.insertAdjacentHTML('beforeend', markup);
 
         if (list === 'favorite') {
-         // document.querySelector('.button-queue').hidden = true;
-          document.querySelector('.button-queue').textContent = "DEL QUEYUE";
-          document.querySelector('.button-queue').classList = "button-watched-del";
+          // document.querySelector('.button-queue').hidden = true;
+          document.querySelector('.button-queue').textContent = 'DEL QUEYUE';
+          document.querySelector('.button-queue').classList =
+            'button-watched-del';
         } else if (list === 'watched') {
-          document.querySelector('.button-watched').textContent = "DEL Watched";
-          document.querySelector('.button-watched').classList = "button-queue-del";
+          document.querySelector('.button-watched').textContent = 'DEL Watched';
+          document.querySelector('.button-watched').classList =
+            'button-queue-del';
         } else if (list === '') {
           document.querySelector('.button-watched-del').hidden = true;
           document.querySelector('.button-queue-del').hidden = true;
@@ -162,12 +163,9 @@ async function onCardClick(event) {
   }
 
   async function closeModal() {
-      document.removeEventListener('keydown', closeOnEsc);
-      modalDialog.classList.add('modal-one-film--hidden');
-      html.classList.remove('disable-scroll-all');
-
-   
-
+    document.removeEventListener('keydown', closeOnEsc);
+    modalDialog.classList.add('modal-one-film--hidden');
+    html.classList.remove('disable-scroll-all');
   }
 }
 
