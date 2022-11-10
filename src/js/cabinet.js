@@ -6,9 +6,12 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
 import { save, load, remove } from './storage';
 import Notiflix from 'notiflix';
+import { title } from 'process';
+import { async } from 'regenerator-runtime';
 // Import the functions you need from the SDKs you need
 
 const firebaseConfig = {
@@ -27,14 +30,12 @@ const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
 
-export let uid = '';
+export let uid;
 getUserId();
 authStatus();
-console.log(uid);
-
 
 //---------------------------- Слушатели --------------------------------
-// document.getElementById('header_btn').addEventListener('submit', cabinetAction);
+document.getElementById('header').addEventListener('submit', cabinetAction);
 document.getElementById('card-div').addEventListener('click', itemAction);
 document.querySelector('#exit').addEventListener('click', onSignOut);
 try {
@@ -46,24 +47,64 @@ try {
     .addEventListener('submit', onAuthrizationModalForm);
 } catch {}
 
-//---------------------------Функции кнопок в хедере---------------------------
+//---------------------------Функции кнопок в карточке---------------------------
 
 function itemAction(event) {
   event.preventDefault();
-  // console.log('нажато ' + event.target.name + event.target.id);
   if (event.target.name === 'addFavorite') {
-    // console.log('сработало ' + event.target.id, event.target.name);
     delItem(event.target.id, uid, 'watched');
     setList('favorite', uid, event.target.id, event.target.dataset.card);
+    if (document.title === 'Filmoteka') {
+      document.getElementById('list' + event.target.id).textContent =
+        'favorite';
+      document.getElementById('list' + event.target.id).classList = 'favorite';
+    }
+    document.querySelector('.button-queue').textContent = 'DEL QUEYUE';
+    document.querySelector('.button-queue').name = 'delFavorite';
+    document.querySelector('.button-queue').classList =
+      'button-queue-del active';
+
+    if (document.querySelector('.button-watched-del')) {
+      document.querySelector('.button-watched-del').textContent =
+        'ADD TO WATCHED';
+      document.querySelector('.button-watched-del').name = 'addWatched';
+      document.querySelector('.button-watched-del').classList =
+        'button-watched';
+    }
   } else if (event.target.name === 'addWatched') {
-    // console.log('сработало ' + event.target.id, event.target.name);
     delItem(event.target.id, uid, 'favorite');
     setList('watched', uid, event.target.id, event.target.dataset.card);
+    if (document.title === 'Filmoteka') {
+      document.getElementById('list' + event.target.id).textContent = 'watched';
+      document.getElementById('list' + event.target.id).classList = 'watched';
+    }
+    document.querySelector('.button-watched').textContent = 'DEL WATCHED';
+    document.querySelector('.button-watched').name = 'delWatched';
+    document.querySelector('.button-watched').classList =
+      'button-watched-del active';
+    if (document.querySelector('.button-queue-del')) {
+      document.querySelector('.button-queue-del').textContent = 'ADD TO QUEYUE';
+      document.querySelector('.button-queue-del').name = 'addFavorite';
+      document.querySelector('.button-queue-del').classList = 'button-queue';
+    }
   } else if (event.target.name === 'delFavorite') {
-    // console.log('сработало ' + event.target.name);
+    if (document.title === 'Filmoteka') {
+      document.getElementById('list' + event.target.id).textContent = '';
+      document.getElementById('list' + event.target.id).classList = '';
+    }
+    document.querySelector('.button-queue-del').textContent = 'ADD TO QUEYUE';
+    document.querySelector('.button-queue-del').name = 'addFavorite';
+    document.querySelector('.button-queue-del').classList = 'button-queue';
     delItem(event.target.id, uid, 'favorite');
   } else if (event.target.name === 'delWatched') {
-    // console.log('сработало ' + event.target.name);
+    if (document.title === 'Filmoteka') {
+      document.getElementById('list' + event.target.id).textContent = '';
+      document.getElementById('list' + event.target.id).classList = '';
+    }
+    document.querySelector('.button-watched-del').textContent =
+      'ADD TO WATCHED';
+    document.querySelector('.button-watched-del').name = 'addWatched';
+    document.querySelector('.button-watched-del').classList = 'button-watched';
     delItem(event.target.id, uid, 'watched');
   }
 }
@@ -121,22 +162,21 @@ function cabinetAction(event) {
 
 //---------------------------Получение фильмов с базы---------------------------
 
-export function getList(category, user) {
+export async function getList(category, user) {
   console.log(category, user);
   const requestOptions = {
     method: 'GET',
     redirect: 'follow',
   };
-return fetch(
-
+  return await fetch(
     `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}/${category}.json`,
     requestOptions
   )
     .then(response => response.json())
     .then(result => {
-      console.log(result);
+      console.log('отрисовка ' + category, result);
       document.getElementById('card-list').innerHTML = '';
-      document
+      return document
         .getElementById('card-list')
         .insertAdjacentHTML('beforeend', card(result));
     })
@@ -163,6 +203,11 @@ function setList(category, user, itemId, card) {
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
   console.log(itemId + ' успешно добавлено в ' + category);
+  if (document.title === 'Library') {
+    if (category === 'favorite') {
+      getList('watched', user);
+    } else getList('favorite', user);
+  }
 }
 
 //---------------------Запись страници на которой пользователь-----------------------
@@ -198,15 +243,16 @@ export function getPage(user) {
     requestOptions
   )
     .then(response => response.json())
-    .then(result =>  {console.log(result.keys())
-    return result
-})
+    .then(result => {
+      console.log(result.keys());
+      return result;
+    })
     .catch(error => console.log('error', error));
 }
 
 //---------------------------Удаление фильмов с базы---------------------------
 
-function delItem(itemId, user, category) {
+async function delItem(itemId, user, category) {
   const requestOptions = {
     method: 'DELETE',
     redirect: 'follow',
@@ -220,19 +266,25 @@ function delItem(itemId, user, category) {
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
   console.log(itemId + ' успешно удалено');
+
+  if (document.title === 'Library') {
+    getList(category, user);
+    console.log('оновлено ' + category);
+  }
 }
 
 //-------------------------Получение данных пользователя ---------------------------
 
 export function authStatus() {
   const auth = getAuth();
- return onAuthStateChanged(auth, user => {
+  return onAuthStateChanged(auth, user => {
     if (user) {
       uid = user.uid;
       document.querySelector('.username').textContent = user.name;
-      console.log('користувач ' + uid);
+      console.log('користувач ' + uid + user.displayName);
       return (
-        uid, (document.querySelector('.username').textContent = user.email)
+        uid,
+        (document.querySelector('.username').textContent = user.displayName)
       );
     } else {
       console.log('вхід не виконано');
@@ -266,14 +318,18 @@ function authFormSend(email, password) {
 
 //---------------------------Отправка запроса регистрации---------------------------
 
-function authFormReg(email, password) {
+async function authFormReg(email, password) {
   const auth = getAuth();
-  createUserWithEmailAndPassword(auth, email, password)
+  await createUserWithEmailAndPassword(auth, email, password, name)
     .then(userCredential => {
       // Signed in
-      const user = userCredential.user;
       console.log('User', userCredential.user);
-      console.log('Користувача успішно створено ' + userCredential.user.email);
+      console.log('User', userCredential.displayName);
+      console.log(
+        'Користувача успішно створено ' +
+          userCredential.user.email +
+          userCredential.user.displayName
+      );
       // document.querySelector('.username').textContent = user.email;
       save(KEY_ID, userCredential.user.uid);
       document.querySelector('[data-sign-in-modal]').classList.add('is-hidden');
@@ -285,6 +341,9 @@ function authFormReg(email, password) {
       Notiflix.Notify.failure(error.message);
       // ..
     });
+  await updateProfile(auth.currentUser, {
+    displayName: 'GoITstudents',
+  });
 }
 
 //------------------------------Выход------------------------------
@@ -318,9 +377,9 @@ function renderSingIn() {
     item.hidden = false;
   });
   if (document.querySelector('.header__authrization-button')) {
-    document.querySelector('.header__authrization-button').hidden = true;
+    document.querySelector('.header__authrization-button').remove();
   }
   if (document.querySelector('.header__sign-in-button')) {
-    document.querySelector('.header__sign-in-button').hidden = true;
+    document.querySelector('.header__sign-in-button').remove();
   }
 }

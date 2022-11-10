@@ -2,6 +2,8 @@ import Pagination from 'tui-pagination';
 import FilmApiTrendFetch from './serviceApiFilmTrend';
 import renderCards from './render-cards';
 
+const filmApiTrendFetch = new FilmApiTrendFetch();
+
 const pagination = new Pagination(document.getElementById('pagination'), {
   totalItems: 20000,
   itemsPerPage: 20,
@@ -9,16 +11,27 @@ const pagination = new Pagination(document.getElementById('pagination'), {
   centerAlign: true,
 });
 
-const filmApiTrendFetch = new FilmApiTrendFetch();
 const submitRef = document.querySelector('#search-form');
+const paginateSectionRef = document.querySelector('.pagination-section');
 
-submitRef.addEventListener('submit', onSubmit);
+submitRef.addEventListener('submit', onSubmitforPaginate);
 let searchQuery = '';
 
-function onSubmit(e) {
+async function onSubmitforPaginate(e) {
   e.preventDefault();
-  console.log(e.target.elements.searchQuery.value);
+  paginateSectionRef.classList.remove('visually-hidden');
+  pagination.reset();
   searchQuery = e.target.elements.searchQuery.value;
+  filmApiTrendFetch.query = searchQuery;
+  try {
+    filmApiTrendFetch.fetchSearchFilms().then(data => {
+      if (data.total_results <= 20) {
+        paginateSectionRef.classList.add('visually-hidden');
+      } else getTotalItems(data);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 pagination.on('afterMove', function (eventData) {
@@ -27,8 +40,8 @@ pagination.on('afterMove', function (eventData) {
     filmApiTrendFetch
       .filmsAndGenres()
       .then(data => {
-        console.log(data);
         renderCards(data);
+        console.log(data);
       })
       .catch(err => console.log(err));
   } else {
@@ -37,9 +50,14 @@ pagination.on('afterMove', function (eventData) {
     filmApiTrendFetch
       .searchFilmsAndGenres()
       .then(data => {
-        // console.log(data);
+        console.log(data.films);
         renderCards(data.films);
       })
       .catch(err => console.log(err));
   }
 });
+
+async function getTotalItems(datas) {
+  const taceResultbyFetch = await datas.total_results;
+  await pagination.setTotalItems(taceResultbyFetch);
+}

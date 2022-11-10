@@ -4,13 +4,18 @@ import './js/authorization';
 import card from './templates/card.hbs';
 import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
-import onLoadPreloaderHide from './js/preloader';
+import { onLoadPreloaderHide } from './js/preloader';
 import hbsContainer from './templates/modal-card.hbs';
 import './js/modal-film-card';
 import SmoothScroll from 'smoothscroll-for-websites';
 import FilmApiTrendFetch from './js/serviceApiFilmTrend';
+import { uid } from './js/cabinet';
+import { getList } from './js/cabinet';
+import './js/goTop';
 // import './js/footer-modal';
-
+import './js/goTop';
+import './js/footer-modal';
+import './js/notify-init';
 
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
@@ -28,7 +33,9 @@ searchForm.addEventListener('submit', function (evt) {
 
 // --------- При открытии сайта ---------------------
 
-fetchApiFilms();
+if (document.title === 'Filmoteka') {
+  fetchApiFilms();
+} else getList('favorite', uid);
 
 // ------------Переключение языка--------------
 btnEn.addEventListener('click', onEnClick);
@@ -70,7 +77,6 @@ async function fetchApiFilms() {
 
 // const listFilms = document.querySelector(".card-list")
 gallery.addEventListener('click', onCardClick);
-
 const modalDialog = document.querySelector('.modal-one-film');
 const html = document.querySelector('html');
 
@@ -79,7 +85,8 @@ async function onCardClick(event) {
     return;
   }
   filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
-  console.log('Это data-film:', filmApiTrendFetch.idFilm);
+  const list = document.getElementById(filmApiTrendFetch.idFilm).dataset.list;
+  console.log('Это data-film:', filmApiTrendFetch.idFilm, list);
   await fetchModalCard();
 
   const closeOnEsc = async e => {
@@ -93,12 +100,24 @@ async function onCardClick(event) {
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
+        data.list = list;
+        console.log('в лист ' + list);
         const markup = hbsContainer(data);
         // console.log(data.overview);
-        console.log(data);
+        //console.log(data.list);
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
+        
+          if (list === 'favorite') {
+          document.querySelector('.button-queue').textContent = "DEL QUEYUE";
+          document.querySelector('.button-queue').name = "delFavorite";
+          document.querySelector('.button-queue').classList = "button-queue-del active";
+        } else if (list === 'watched') {
+          document.querySelector('.button-watched').textContent = "DEL WATCHED";
+          document.querySelector('.button-watched').name = "delWatched";
+          document.querySelector('.button-watched').classList = "button-watched-del active";
+        }
       });
     } catch (error) {
       console.log(error);
@@ -115,12 +134,11 @@ async function onCardClick(event) {
   //   console.log("Это постер");
   //   try {
   //     await filmApiTrendFetch.fetchTrailerMovie().then(data => {
-  //       // const markup = hbsContainer(data);
-  //       // console.log(data.overview);
+  //       // const markup = hbsTest(data);
   //       console.log("Это трейлер:", data);
 
   //       console.log(filmApiTrendFetch.movie_id);
-  //       result = data.results.map(item => 
+  //       result = data.results.map(item =>
   //         `<li><iframe width="560" height="315" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
   //       // trailerCard.innerHTML = '';
   //       trailerCard.insertAdjacentHTML('beforeend', result);
@@ -132,25 +150,17 @@ async function onCardClick(event) {
   //   console.log('Это data-film:', filmApiTrendFetch.idFilm);
   //   await fetchModalCard();}
 
-
-
   async function openModal() {
     console.log('это Модалка');
     document.addEventListener('keydown', closeOnEsc);
     modalDialog.classList.remove('modal-one-film--hidden');
-    html.classList.add('disable-scroll-all');    
+    html.classList.add('disable-scroll-all');
   }
 
   async function closeModal() {
     document.removeEventListener('keydown', closeOnEsc);
     modalDialog.classList.add('modal-one-film--hidden');
-    html.classList.add('disable-scroll-all');
-  } 
-
-  async function closeModal() {
-      document.removeEventListener('keydown', closeOnEsc);
-      modalDialog.classList.add('modal-one-film--hidden');
-      html.classList.remove('disable-scroll-all');
+    html.classList.remove('disable-scroll-all');
   }
 }
 

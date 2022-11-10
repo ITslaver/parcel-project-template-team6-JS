@@ -58,8 +58,11 @@ export default class FilmApiTrendFetch {
     )
       .then(response => response.json())
       .then(result => {
-        this.result = Object.keys(result);
-        return result;
+        if (result === null) {
+          return 0;
+        }
+        else 
+        return result
       })
       .catch(error => console.log('error', error));
   }
@@ -74,10 +77,6 @@ export default class FilmApiTrendFetch {
       const favorite = Object.keys(await this.getListId('favorite', uid));
 
       for (let film of films) {
-        console.log(film);
-        console.log(favorite);
-        console.log(watched);
-
         film.genre_ids = searchGenres(film.genre_ids);
         film.list = searchList(film.id, 'favorite', 'watched');
 
@@ -86,7 +85,7 @@ export default class FilmApiTrendFetch {
         // форматуємо дату виходу фільму
         film.release_date = film.release_date.slice(0, 4);
         if (film.genre_ids.length === 0) {
-          film.genre_ids[0] = 'no movie genre';
+          film.genre_ids[0] = 'No movie genre';
         }
         if (film.genre_ids.length >= 3) {
           film.genre_ids[2] = 'Other';
@@ -95,19 +94,15 @@ export default class FilmApiTrendFetch {
       }
 
       function searchList(filmId, fav, watch) {
-        let categoryName;
-        let list = '';
-        fav = favorite;
-        watch = watched
-  
-        if (fav.includes(filmId.toString())) {
-          list = "favorite";
-          console.log(list)
-        }
+        let list
 
-        else if (watch.includes(filmId.toString())) {
-          list = "watched";
-          console.log(list)
+        fav = favorite;
+        watch = watched;
+
+        if (fav.includes(filmId.toString())) {
+          list = 'favorite';
+        } else if (watch.includes(filmId.toString())) {
+          list = 'watched';
         }
 
         return list;
@@ -160,26 +155,18 @@ export default class FilmApiTrendFetch {
         film.vote_average = film.vote_average.toFixed(1);
         // форматуємо дату виходу фільму
         if (!film.release_date) {
-          switch (this.currentLang) {
-            case 'uk-UA':
-              film.release_date = '-----';
-              break;
-
-            case 'en-US':
-              film.release_date = 'n/f ';
-              break;
-          }
+          film.release_date = '-----';
         }
         film.release_date = film.release_date.slice(0, 4);
         // форматуємо кількість жанрів фільму
         if (film.genre_ids.length === 0) {
           switch (this.currentLang) {
             case 'uk-UA':
-              film.genre_ids[0] = 'жанри не вказані';
+              film.genre_ids[0] = 'Жанри не вказані';
               break;
 
             case 'en-US':
-              film.genre_ids[0] = 'no movie genre';
+              film.genre_ids[0] = 'No movie genre';
               break;
           }
         }
@@ -255,7 +242,8 @@ export default class FilmApiTrendFetch {
       )
         .then(res => res.json())
         .then(data => {
-          console.log(data)
+          console.log(data);
+
           this.trailer = data;
           return data;
         });

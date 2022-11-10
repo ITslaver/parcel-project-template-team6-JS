@@ -1,16 +1,16 @@
-<header class="header">
+<header class="header" id="header">
   <div class="header__container container">
     <div class="header__wrap">
       <!-- ------------------------------------------------Логотип-------------- -->
       <a href="./index.html" class="logo-home__link link">
-        <svg class="header-home__logo" width="24" height="24">
-          <use href="./images/icons.svg#icon-film"></use>
+        <svg class="header-home__logo" width="32" height="32">
+          <use href="./images/icons.svg#icon-film-home"></use>
         </svg>
         <span class="logo-home__text"><h1>Filmoteka</h1></span>
       </a>
-      <!-- ------------------------------------------------Блок пользователя-->
+      <!-- ------------------------------------------------Блок користувача-->
       <div class="username"></div>
-      <!-- ------------------------------------------------Доп-конпки -->
+      <!-- ------------------------------------------------Додаткові-кнопки -->
       <!-- <form class="auth-form" id="header_btn">
         <label>Email</label>
         <input type="email" id="email" />
@@ -21,12 +21,13 @@
         <button id="exit">Вийти</button>
       </form> -->
       <!-- ------------------------------------------------------Кнопки авторицації та реєстрації -->
-      <button
+      <div class="authbtns">
+        <button
         data-authrization-modal-open
         type="button"
         class="header__authrization-button"
       >
-        Authorization
+        Log in
       </button>
       <div class="header__backdrop is-hidden" data-authrization-modal>
         <div class="authrization-modal">
@@ -199,6 +200,7 @@
           </form>
         </div>
       </div>
+      </div>
 
       <!-- ------------------------------------------------Навигация/Регистрация -->
 
@@ -225,7 +227,7 @@
           placeholder="Search films..."
         />
         <button type="submit" class="search__button">
-          <svg class="icon-search__logo" width="10" height="10">
+          <svg class="icon-search__logo" width="13" height="13">
             <use href="./images/icons.svg#icon-search-2"></use>
           </svg>
         </button>

@@ -108,3 +108,45 @@
   font-size: 14px;
   line-height: 1.17;
 }
+
+.favorite {
+  position: absolute;
+  top: 0;
+  left: 8px;
+  width: 0;
+  height: 0;
+  border-width: 20px 10px 5px;
+  border-style: solid;
+  border-color: var(--accent-color) var(--accent-color) transparent;
+  font-size: 0;
+  @include desktop {
+    border-width: 30px 15px 10px;
+  }
+}
+.watched {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  bottom: 15%;
+  width: 100px;
+  height: 30px;
+
+  text-align: center;
+  text-transform: capitalize;
+  background-color: var(--accent-color);
+  box-shadow: -4px 0px 16px 0px black;
+  border-radius: 28px 0px 0px 29px;
+  border: 2px solid #d0590a;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.17;
+  @include desktop {
+    bottom: 25%;
+    height: 40px;
+    width: 120px;
+    font-size: 18px;
+  }
+}

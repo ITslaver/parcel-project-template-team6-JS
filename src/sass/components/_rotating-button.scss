@@ -1,0 +1,131 @@
+// -----------rotating-button----------
+
+.button__thumb {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    @include mobile {
+      display: flex;
+      flex-direction: column;   
+      width: 120px; 
+    }
+    @include tablet {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  
+  
+  div.rotating-button__wrapper {
+    // set size of the button here
+    position: relative;
+  
+    min-width: 200px;
+    height: 50px;
+  
+    @include tablet {
+      min-width: 155px;
+      height: 50px;
+    }
+  
+    @include desktop {
+      min-width: 180px;
+    }
+  
+    .rotating-button__checkbox {
+      // hide the checkbox for production
+      position: absolute;
+      bottom: -30px;
+      left: -99999;
+      opacity: 0;
+      visibility: none;
+    }
+  
+    .rotating-button__button-on,
+    .rotating-button__button-off {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      position: absolute;
+      width: 100%;
+      height: 100%;
+  
+      border-radius: 5px; // set shadow and border for the button here
+  
+      transform-origin: center;
+      transition: transform $animation, box-shadow $animation, color $animation;
+    }
+  
+    // set background and colors for the button here
+    .rotating-button__button-on {
+      background-color: var(--accent-color);
+      text-transform: uppercase;
+      text-align: center;
+      @include font(inherit, 12, 1.33, 0.03em, var(--header-color-text));
+      transform: rotateX(-90deg) translateZ(25px);
+    }
+  
+    // set background and colors for the button here
+    .rotating-button__button-off {
+      background-color: var(--header-color-text);
+      border: 1px solid var(--card-title-text-color);
+      text-transform: uppercase;
+      text-align: center;
+      @include font(inherit, 12, 1.33, 0.03em, var(--card-title-text-color));
+      transform: rotateX(0deg) translateZ(25px);
+    }
+  
+    &:hover {
+      .rotating-button__button-off,
+      .rotating-button__button-on {
+        // -webkit-appearance: none;
+        -webkit-box-shadow:
+          2px 2px 2px rgba(0, 0, 0, 0.25),
+          2px 2px 4px 2px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow:
+          2px 2px 2px rgba(0, 0, 0, 0.25),
+          2px 2px 4px 2px rgba(0, 0, 0, 0.15);
+        box-shadow:
+          2px 2px 2px rgba(0, 0, 0, 0.25),
+          2px 2px 4px 2px rgba(0, 0, 0, 0.15);
+        // border-color: $color--accent-orange;
+      }
+      
+      .rotating-button__button-on {
+        transform: scale(1.05) rotateX(-90deg) translateZ(25px);
+      }
+  
+      .rotating-button__button-off {
+        color: var(--accent-color);
+        transform: scale(1.05) rotateX(0deg) translateZ(25px);
+      }
+  
+      & input:checked {
+        & ~ .rotating-button__button-off {
+          transform: scale(1.05) rotateX(90deg) translateZ(25px);
+        }
+  
+        & ~ .rotating-button__button-on {
+          transform: scale(1.05) rotateX(0deg) translateZ(25px);
+        }
+      }
+    }
+  
+    & input:checked {
+      & ~ .rotating-button__button-off {
+        transform: rotateX(90deg) translateZ(25px);
+      }
+      & ~ .rotating-button__button-on {
+        transform: rotateX(0deg) translateZ(25px);
+      }
+    }
+  }
+  
+  .rotating-button__wrapper:not(:last-child) {
+    margin-bottom: 8px;
+    @include tablet {
+      margin-bottom: 0;
+      margin-right: 8px;
+    }
+  }
