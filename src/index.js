@@ -109,8 +109,12 @@ async function onCardClick(event) {
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
+        if (uid === "guest") {
+          document.querySelector('.button-queue').style.display = "none";
+          document.querySelector('.button-watched').style.display = "none";
+        }
         
-          if (list === 'favorite') {
+          else if (list === 'favorite') {
           document.querySelector('.button-queue').textContent = "DEL QUEYUE";
           document.querySelector('.button-queue').name = "delFavorite";
           document.querySelector('.button-queue').classList = "button-queue-del active";

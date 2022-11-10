@@ -371,6 +371,7 @@ function getUserId() {
     uid = load(KEY_ID);
     renderSingIn();
   }
+  else uid = "guest"
 }
 
 function renderSingIn() {
