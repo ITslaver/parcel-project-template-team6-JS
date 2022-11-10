@@ -127,9 +127,9 @@ async function onCardClick(event) {
     // await onPosterClick();     
   }
 
-  const videoTrailer = document.querySelector('.movie-poster');
+  var videoTrailer = document.querySelector('.card-div');
   videoTrailer.addEventListener('click', onPosterClick);
-  const trailerCard = document.querySelector('.modal-one-film__window');
+  var trailerCard = document.querySelector('.modal-one-film__window');
   // await filmApiTrendFetch.fetchTrailerMovie()
   // console.log(trailerCard);
   // await onPosterClick(); 
