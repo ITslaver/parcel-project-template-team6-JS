@@ -1,5 +1,5 @@
 const goToTopOnPagination = event => {
-  if (event.target.localName !== 'a') {
+  if (event.target.localName !== 'a' && event.target.localName !== 'span') {
     return;
   } else {
     document.body.scrollIntoView({
