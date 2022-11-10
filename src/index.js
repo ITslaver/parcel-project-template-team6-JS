@@ -79,7 +79,7 @@ async function fetchApiFilms() {
 gallery.addEventListener('click', onCardClick);
 const modalDialog = document.querySelector('.modal-one-film');
 const html = document.querySelector('html');
-const trailerCard = document.querySelector('.modal-one-film__window');
+
 
 async function onCardClick(event) {
   if (event.target.classList.contains('card-list')) {
@@ -123,13 +123,14 @@ async function onCardClick(event) {
     } catch (error) {
       console.log(error);
     }
-    await filmApiTrendFetch.fetchTrailerMovie();
+    // await filmApiTrendFetch.fetchTrailerMovie();
     // await onPosterClick();     
   }
 
   const videoTrailer = document.querySelector('.movie-poster');
   videoTrailer.addEventListener('click', onPosterClick);
-  await filmApiTrendFetch.fetchTrailerMovie()
+  const trailerCard = document.querySelector('.modal-one-film__window');
+  // await filmApiTrendFetch.fetchTrailerMovie()
   // console.log(trailerCard);
   // await onPosterClick(); 
 
@@ -158,11 +159,11 @@ async function onCardClick(event) {
 
         console.log(filmApiTrendFetch.movie_id);
         result = data.results.map(item =>
-          `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/L8yPTJ3asO8" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
-          // `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
+          // `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/L8yPTJ3asO8" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
+          `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
           console.log(result);
         // trailerCard.innerHTML = '';
-        trailerCard.insertAdjacentHTML('beforebegin', result);
+         return trailerCard.insertAdjacentHTML('beforebegin', result);
         // trailerCard.innerHTML = result;
       });
     } catch (error) {
