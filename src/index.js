@@ -79,6 +79,7 @@ async function fetchApiFilms() {
 gallery.addEventListener('click', onCardClick);
 const modalDialog = document.querySelector('.modal-one-film');
 const html = document.querySelector('html');
+const trailerCard = document.querySelector('.modal-one-film__window');
 
 
 async function onCardClick(event) {
@@ -127,35 +128,19 @@ async function onCardClick(event) {
     // await onPosterClick();     
   }
 
-  var videoTrailer = document.querySelector('.card-div');
+  const videoTrailer = document.querySelector('.card-div');
   videoTrailer.addEventListener('click', onPosterClick);
-  var trailerCard = document.querySelector('.modal-one-film__window');
+  
   // await filmApiTrendFetch.fetchTrailerMovie()
   // console.log(trailerCard);
   // await onPosterClick(); 
-
-
-  async function openModal() {
-    console.log('это Модалка');
-    document.addEventListener('keydown', closeOnEsc);
-    modalDialog.classList.remove('modal-one-film--hidden');
-    html.classList.add('disable-scroll-all');
-  }
-
-  async function closeModal() {
-
-    document.removeEventListener('keydown', closeOnEsc);
-    modalDialog.classList.add('modal-one-film--hidden');
-    html.classList.remove('disable-scroll-all');
-    // trailerCard.innerHTML = '';   
-  }
 
   async function onPosterClick() {
     console.log("Это постер");
     try {
       await filmApiTrendFetch.fetchTrailerMovie().then(data => {
         // const markup = hbsTest(data);
-        console.log("Это трейлер:", data);
+        console.log("Это трейлер:", data.results);
 
         console.log(filmApiTrendFetch.movie_id);
         result = data.results.map(item =>
@@ -172,9 +157,26 @@ async function onCardClick(event) {
 
     // setTimeout(trailerCard.innerHTML = '', 10000);
     // filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
-    console.log('Это data-film:', filmApiTrendFetch.idFilm);
+    // console.log('Это data-film:', filmApiTrendFetch.idFilm);
     // await fetchModalCard();    
   }
+
+  async function openModal() {
+    console.log('это Модалка');
+    document.addEventListener('keydown', closeOnEsc);
+    modalDialog.classList.remove('modal-one-film--hidden');
+    html.classList.add('disable-scroll-all');
+  }
+
+  async function closeModal() {
+
+    document.removeEventListener('keydown', closeOnEsc);
+    modalDialog.classList.add('modal-one-film--hidden');
+    html.classList.remove('disable-scroll-all');
+    // trailerCard.innerHTML = '';   
+  }
+
+  
 
 }
 
