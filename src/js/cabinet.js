@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  updateProfile
 } from 'firebase/auth';
 import { save, load, remove } from './storage';
 import Notiflix from 'notiflix';
@@ -280,9 +281,9 @@ export function authStatus() {
     if (user) {
       uid = user.uid;
       document.querySelector('.username').textContent = user.name;
-      console.log('користувач ' + uid);
+      console.log('користувач ' + uid + user.displayName);
       return (
-        uid, (document.querySelector('.username').textContent = user.email)
+        uid, (document.querySelector('.username').textContent = user.displayName)
       );
     } else {
       console.log('вхід не виконано');
@@ -316,26 +317,30 @@ function authFormSend(email, password) {
 
 //---------------------------Отправка запроса регистрации---------------------------
 
-function authFormReg(email, password) {
-  const auth = getAuth();
-  createUserWithEmailAndPassword(auth, email, password)
+async function  authFormReg (email, password) {
+const auth = getAuth();
+ await createUserWithEmailAndPassword(auth, email, password, name) 
     .then(userCredential => {
       // Signed in
-      const user = userCredential.user;
       console.log('User', userCredential.user);
-      console.log('Користувача успішно створено ' + userCredential.user.email);
+      console.log('User', userCredential.displayName);
+      console.log('Користувача успішно створено ' + userCredential.user.email + userCredential.user.displayName);
       // document.querySelector('.username').textContent = user.email;
       save(KEY_ID, userCredential.user.uid);
       document.querySelector('[data-sign-in-modal]').classList.add('is-hidden');
       renderSingIn();
-    })
+    }) 
     .catch(error => {
       // const errorCode = error.code;
       // const errorMessage = error.message;
       Notiflix.Notify.failure(error.message);
       // ..
     });
+    await  updateProfile(auth.currentUser, {
+      displayName: "GoITstudents"
+    })
 }
+
 
 //------------------------------Выход------------------------------
 
