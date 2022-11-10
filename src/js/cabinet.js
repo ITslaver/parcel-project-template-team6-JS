@@ -58,7 +58,6 @@ function itemAction(event) {
       document.getElementById('list' + event.target.id).textContent =
         'favorite';
       document.getElementById('list' + event.target.id).classList = 'favorite';
-      document.getElementById('list' + event.target.id).classList = 'favorite';
       document.getElementById(event.target.id).dataset.list = 'favorite';
     }
     document.querySelector('.button-queue').textContent = 'DEL QUEYUE';
