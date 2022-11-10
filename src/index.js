@@ -77,7 +77,6 @@ async function fetchApiFilms() {
 
 // const listFilms = document.querySelector(".card-list")
 gallery.addEventListener('click', onCardClick);
-
 const modalDialog = document.querySelector('.modal-one-film');
 const html = document.querySelector('html');
 trailerCard = document.querySelector('.modal-one-film__window');
@@ -102,26 +101,23 @@ async function onCardClick(event) {
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
-
-        data.list = list
-        console.log("в лист "+list)
+        data.list = list;
+        console.log('в лист ' + list);
         const markup = hbsContainer(data);
         // console.log(data.overview);
         //console.log(data.list);
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
-
-        if (list === 'favorite') {
-         // document.querySelector('.button-queue').hidden = true;
+        
+          if (list === 'favorite') {
           document.querySelector('.button-queue').textContent = "DEL QUEYUE";
-          document.querySelector('.button-queue').classList = "button-watched-del";
+          document.querySelector('.button-queue').name = "delFavorite";
+          document.querySelector('.button-queue').classList = "button-queue-del active";
         } else if (list === 'watched') {
-          document.querySelector('.button-watched').textContent = "DEL Watched";
-          document.querySelector('.button-watched').classList = "button-queue-del";
-        } else if (list === '') {
-          document.querySelector('.button-watched-del').hidden = true;
-          document.querySelector('.button-queue-del').hidden = true;
+          document.querySelector('.button-watched').textContent = "DEL WATCHED";
+          document.querySelector('.button-watched').name = "delWatched";
+          document.querySelector('.button-watched').classList = "button-watched-del active";
         }
       });
     } catch (error) {
@@ -146,6 +142,7 @@ async function onCardClick(event) {
   }
 
   async function closeModal() {
+
       document.removeEventListener('keydown', closeOnEsc);
       modalDialog.classList.add('modal-one-film--hidden');
       html.classList.remove('disable-scroll-all');
@@ -174,6 +171,9 @@ async function onCardClick(event) {
     // filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
     console.log('Это data-film:', filmApiTrendFetch.idFilm);
     // await fetchModalCard();    
+
+  
+
   }
 
 }
