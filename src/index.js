@@ -158,7 +158,8 @@ async function onCardClick(event) {
 
         console.log(filmApiTrendFetch.movie_id);
         result = data.results.map(item =>
-          `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
+          `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/L8yPTJ3asO8" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
+          // `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
           console.log(result);
         // trailerCard.innerHTML = '';
         trailerCard.insertAdjacentHTML('beforebegin', result);
@@ -172,9 +173,6 @@ async function onCardClick(event) {
     // filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
     console.log('Это data-film:', filmApiTrendFetch.idFilm);
     // await fetchModalCard();    
-
-
-
   }
 
 }
