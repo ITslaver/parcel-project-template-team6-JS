@@ -100,9 +100,8 @@ async function onCardClick(event) {
   async function fetchModalCard() {
     try {
       await filmApiTrendFetch.extendFetchFilmCard().then(data => {
-
-        data.list = list
-        console.log("в лист "+list)
+        data.list = list;
+        console.log('в лист ' + list);
         const markup = hbsContainer(data);
         // console.log(data.overview);
         //console.log(data.list);
@@ -118,8 +117,6 @@ async function onCardClick(event) {
           document.querySelector('.button-watched').textContent = "DEL WATCHED";
           document.querySelector('.button-watched').name = "delWatched";
           document.querySelector('.button-watched').classList = "button-watched-del active";
-          
-
         }
       });
     } catch (error) {
@@ -161,12 +158,9 @@ async function onCardClick(event) {
   }
 
   async function closeModal() {
-      document.removeEventListener('keydown', closeOnEsc);
-      modalDialog.classList.add('modal-one-film--hidden');
-      html.classList.remove('disable-scroll-all');
-
-   
-
+    document.removeEventListener('keydown', closeOnEsc);
+    modalDialog.classList.add('modal-one-film--hidden');
+    html.classList.remove('disable-scroll-all');
   }
 }
 
