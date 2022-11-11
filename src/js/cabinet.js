@@ -363,9 +363,11 @@ async function delItem(itemId, user, category) {
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
-    console.log(itemId + ' успешно удалено');
+  console.log(itemId + ' успешно удалено');
   if (document.title === 'Library') {
-    document.querySelector(`[data-film="${itemId}"]`).style.display = "none";
+      if (document.querySelector(`[data-film="${itemId}"]`)) {
+      document.querySelector(`[data-film="${itemId}"]`).style.display = 'none';
+    }
     console.log('оновлено ' + category);
   }
 }
