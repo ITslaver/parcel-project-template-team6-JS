@@ -8,9 +8,9 @@ import { onLoadPreloaderHide } from './js/preloader';
 import hbsContainer from './templates/modal-card.hbs';
 import './js/modal-film-card';
 import SmoothScroll from 'smoothscroll-for-websites';
-import FilmApiTrendFetch from './js/serviceApiFilmTrend';
 import { uid } from './js/cabinet';
 import { getList } from './js/cabinet';
+import { getListById } from './js/cabinet';
 import './js/goTop';
 // import './js/footer-modal';
 import './js/goTop';
@@ -18,6 +18,7 @@ import './js/footer-modal';
 import './js/notify-init';
 import renderCards from './js/render-cards';
 import { onErrorEN, onErrorUK } from './js/on-error';
+
 
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
@@ -34,14 +35,11 @@ searchForm.addEventListener('submit', function (evt) {
 });
 
 // --------- При открытии сайта ---------------------
-
 if (document.title === 'Filmoteka') {
   fetchApiFilms();
-} else getList('favorite', uid);
 
-// ------------Переключение языка--------------
-btnEn.addEventListener('click', onEnClick);
-btnUk.addEventListener('click', onUkClick);
+} else getListById('favorite', uid);
+
 
 async function onEnClick() {
   try {
@@ -60,8 +58,6 @@ async function onUkClick() {
     onErrorUK()
   }
 }
-
-// ------------------------------------
 
 async function fetchApiFilms() {
   try {
@@ -111,15 +107,18 @@ async function onCardClick(event) {
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
-
-        if (list === 'favorite') {
+        if (uid === "guest") {
+          document.querySelector('.button-queue').style.display = "none";
+          document.querySelector('.button-watched').style.display = "none";
+        }
+          else if (list === 'favorite') {
           document.querySelector('.button-queue').textContent = "DEL QUEYUE";
           document.querySelector('.button-queue').name = "delFavorite";
-          document.querySelector('.button-queue').classList = "button-queue-del active";
+          document.querySelector('.button-queue').classList = "button-queue-del active-but";
         } else if (list === 'watched') {
           document.querySelector('.button-watched').textContent = "DEL WATCHED";
           document.querySelector('.button-watched').name = "delWatched";
-          document.querySelector('.button-watched').classList = "button-watched-del active";
+          document.querySelector('.button-watched').classList = "button-watched-del active-but";
         }
       });
     } catch (error) {
