@@ -32,8 +32,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
-currentLang ='en-US';
-
 
 export let uid;
 getUserId();
