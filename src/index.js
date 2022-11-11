@@ -16,6 +16,8 @@ import './js/goTop';
 import './js/goTop';
 import './js/footer-modal';
 import './js/notify-init';
+import renderCards from './js/render-cards';
+import { onErrorEN, onErrorUK } from './js/on-error';
 
 
 const modalCard = document.querySelector('.modal-one-film__content');
@@ -39,18 +41,31 @@ if (document.title === 'Filmoteka') {
 } else getListById('favorite', uid);
 
 
+async function onEnClick() {
+  try {
+    filmApiTrendFetch.currentLang = 'en-US';
+    await fetchApiFilms();
+  } catch (error) {
+    onErrorEN();
+  }
+}
 
-// ------------------------------------
+async function onUkClick() {
+  try {
+    filmApiTrendFetch.currentLang = 'uk-UA';
+    await fetchApiFilms();
+  } catch (error) {
+    onErrorUK()
+  }
+}
 
 async function fetchApiFilms() {
   try {
     await filmApiTrendFetch.filmsAndGenres().then(data => {
-      const makrup = card(data);
-      gallery.innerHTML = '';
-      gallery.insertAdjacentHTML('beforeend', makrup);
+      renderCards(data)
     });
   } catch (error) {
-    console.log(error);
+    onErrorEN()
   }
 }
 
@@ -60,7 +75,9 @@ async function fetchApiFilms() {
 gallery.addEventListener('click', onCardClick);
 const modalDialog = document.querySelector('.modal-one-film');
 const html = document.querySelector('html');
-trailerCard = document.querySelector('.modal-one-film__window');
+// const trailerCard = document.querySelector('.modal-one-film__window');
+const trailerCard = document.querySelector('.modal-one-film__content');
+
 
 async function onCardClick(event) {
   if (event.target.classList.contains('card-list')) {
@@ -106,59 +123,60 @@ async function onCardClick(event) {
       });
     } catch (error) {
       console.log(error);
-    }
-    await filmApiTrendFetch.fetchTrailerMovie();
-    // await onPosterClick();     
+    }   
   }
 
-  const videoTrailer = document.querySelector('.movie-poster');
-  videoTrailer.addEventListener('click', onPosterClick);  
-  await filmApiTrendFetch.fetchTrailerMovie()
-  // console.log(trailerCard);
-  // await onPosterClick(); 
-    
-
-  async function openModal() {
-    console.log('это Модалка');
-    document.addEventListener('keydown', closeOnEsc);
-    modalDialog.classList.remove('modal-one-film--hidden');
-    html.classList.add('disable-scroll-all');    
-  }
-
-  async function closeModal() {
-
-      document.removeEventListener('keydown', closeOnEsc);
-      modalDialog.classList.add('modal-one-film--hidden');
-      html.classList.remove('disable-scroll-all');
-      // trailerCard.innerHTML = '';   
-  }
+  const videoTrailer = document.querySelector('.card-div');
+  videoTrailer.addEventListener('click', onPosterClick);
 
   async function onPosterClick() {
     console.log("Это постер");
     try {
       await filmApiTrendFetch.fetchTrailerMovie().then(data => {
         // const markup = hbsTest(data);
-        console.log("Это трейлер:", data);
+        console.log("Это трейлер:", data.results);
 
         console.log(filmApiTrendFetch.movie_id);
-        result = data.results.map(item =>
-          `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
-        // trailerCard.innerHTML = '';
-        trailerCard.insertAdjacentHTML('beforeend', result);
+        const res = data.results;
+        console.log('Это res:', res[0].key);
+        // const mark = res.map(item =>          
+        //   `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
+
+        //   console.log(mark);
+          return trailerCard.innerHTML = `<iframe
+        id="player"
+        width="640"
+        height="360"
+        src="https://www.youtube.com/embed/${res[0].key}?autoplay=1"          
+        frameborder="0"
+        allow="autoplay"
+        allowfullscreen
+      ></iframe>`;
+        // src="https://www.youtube.com/embed/${res[0].key}?autoplay=1"
+        
+
+        //  return trailerCard.insertAdjacentHTML('beforebegin', mark);
         // trailerCard.innerHTML = result;
       });
     } catch (error) {
       console.log(error);
     }
 
-    // setTimeout(trailerCard.innerHTML = '', 10000);
-    // filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
-    console.log('Это data-film:', filmApiTrendFetch.idFilm);
-    // await fetchModalCard();    
-
-  
-
+    // setTimeout(trailerCard.innerHTML = '', 10000);  
   }
+
+  async function openModal() {
+    console.log('это Модалка');
+    document.addEventListener('keydown', closeOnEsc);
+    modalDialog.classList.remove('modal-one-film--hidden');
+    html.classList.add('disable-scroll-all');
+  }
+
+  async function closeModal() {      
+    document.removeEventListener('keydown', closeOnEsc);
+    modalDialog.classList.add('modal-one-film--hidden'); 
+    html.classList.remove('disable-scroll-all');   
+  } 
 
 }
 
