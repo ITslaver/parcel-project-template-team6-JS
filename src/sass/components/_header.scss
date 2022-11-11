@@ -100,6 +100,7 @@
   border-bottom: 0.5px solid var(--header-color-text);
   padding: 0 0 4px 1px;
   outline: none;
+
   @include mobile {
     width: 260px;
   }
