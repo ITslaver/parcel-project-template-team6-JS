@@ -14,6 +14,7 @@ import { title } from 'process';
 import { async } from 'regenerator-runtime';
 import {currentLang} from './serviceApiFilmTrend';
 import {FilmApiTrendFetch} from './serviceApiFilmTrend';
+import { onPagination } from './pagination';
 // Import the functions you need from the SDKs you need
 
 const firebaseConfig = {
@@ -157,7 +158,7 @@ function cabinetAction(event) {
     // event.submitter.disabled = true;
   } else if (event.submitter.id === 'favorite') {
     // console.log(uid);
-    getListById('favorite', uid);
+    getListById('favorite', uid, 0, 20);
     setPage('favorite', uid);
   } else if (event.submitter.id === 'watched') {
     // console.log(uid);
@@ -234,21 +235,22 @@ card.genre_ids = genre_ids.slice(0, 3).join(', ');
   }
 }
 
-export async function  getListById (category, user) {
+export async function  getListById (category, user, page1, page2) {
  const list = Object.keys( await getList(category, user))
  console.log(list.length)
  const listItems = []
  for (const item of list) {
-  console.log(item)
+  console.log(item.length)
   const film = await extendFetchFilmCard(item)
   film.list = category;
   listItems.push(film)
+  console.log("В списке "+listItems.length)
  }
- console.log(listItems)
+
  document.getElementById('card-list').innerHTML = '';
  return document
 .getElementById('card-list')
-.insertAdjacentHTML('beforeend', card(listItems));
+.insertAdjacentHTML('beforeend', card(listItems.slice(page1, page2)));
 }
 
 //---------------------------Получение фильмов с базы---------------------------
@@ -266,6 +268,7 @@ export async function getList(category, user) {
     .then(response => response.json())
     .then(result => {
       console.log('в ' + category, result);
+      if (result === "undefinite")
      // document.getElementById('card-list').innerHTML = '';
       return result
       //  .getElementById('card-list')
