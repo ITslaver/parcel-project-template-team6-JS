@@ -175,7 +175,7 @@ async function fetchFilmCard(id) {
       .then(data => {
         console.log(data)
         this.card = data;
-        return card;
+        return this.card;
       });
   } catch (error) {
     console.log(error);
