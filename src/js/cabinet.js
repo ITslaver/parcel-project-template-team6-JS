@@ -174,8 +174,7 @@ async function fetchFilmCard(id) {
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        this.card = data;
-        return this.card;
+        return data
       });
   } catch (error) {
     console.log(error);
@@ -185,8 +184,7 @@ async function fetchFilmCard(id) {
 
 async function extendFetchFilmCard(id) {
   try {
-    await fetchFilmCard(id);
-    const card = this.card;
+    const card = await fetchFilmCard(id);
     card.title = card.title.toUpperCase();
     card.vote_average = card.vote_average.toFixed(1);
     card.popularity = card.popularity.toFixed(1);
