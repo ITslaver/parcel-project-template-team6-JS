@@ -56,5 +56,6 @@
     &:focus {
         text-decoration: none;
         color: var(--accent-color);
+        transform: none;
     }
 }
