@@ -12,7 +12,6 @@ import { save, load, remove } from './storage';
 import Notiflix from 'notiflix';
 import { title } from 'process';
 import { async } from 'regenerator-runtime';
-import {currentLang} from './serviceApiFilmTrend';
 import {FilmApiTrendFetch} from './serviceApiFilmTrend';
 // Import the functions you need from the SDKs you need
 
@@ -31,7 +30,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
-currentLang ='en-US';
+const currentLang ='en-US';
 
 
 export let uid;
