@@ -31,6 +31,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
+currentLang ='en-US';
+
 
 export let uid;
 getUserId();
@@ -189,39 +191,43 @@ async function extendFetchFilmCard(id) {
     card.vote_average = card.vote_average.toFixed(1);
     card.popularity = card.popularity.toFixed(1);
     card.original_title = card.original_title.toUpperCase();
-    card.genre_ids = [];
-     if (card.genres.length === 0) {
+    
+    if (!card.release_date) {
+      card.release_date = '-----';
+    }
+    else card.release_date = card.release_date.slice(0, 4);
+
+    let genre_ids = [];
+    for (const item of card.genres) {
+    genre_ids.push(item.name)
+    }
+
+    // форматуємо кількість жанрів фільму
+    if (genre_ids.length === 0) {
       switch (currentLang) {
         case 'uk-UA':
-          card.genre_ids.push('Жанри не вказані');
+          genre_ids[0] = 'Жанри не вказані';
           break;
 
         case 'en-US':
-          card.genre_ids = 'No movie genre';
+          genre_ids[0] = 'No movie genre';
           break;
       }
     }
-    else if (card.genres.length === 1) {
-      card.genre_ids.push(card.genres[0].name)
+    if (genre_ids.length >= 3) {
+      switch (currentLang) {
+        case 'uk-UA':
+          genre_ids[2] = 'Інші';
+          break;
+
+        case 'en-US':
+          genre_ids[2] = 'Other';
+          break;
+      }
+          
     }
 
-    else if (card.genres.length === 2) {
-      card.genre_ids.push(`${card.genres[0].name}, 
-      ${card.genres[1].name}`)
-    }
-
-    else if (card.genres.length > 2) {
-      card.genre_ids.push(`${card.genres[0].name}, 
-      ${card.genres[1].name}`
-        )}
-
-
-
-//for (const genres of card.genres) {
-//   genre_ids.push(genres.name);
-//}
-//card.genre_ids = genre_ids.join(', ');
-
+card.genre_ids = genre_ids.slice(0, 3).join(', ');
     return card;
   } catch (error) {
     console.log(error);
