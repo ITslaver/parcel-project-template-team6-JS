@@ -252,7 +252,7 @@ export default class FilmApiTrendFetch {
     }
   }
 
-  get lang() {
+ get lang() {
     return this.currentLang;
   }
   set lang(value) {
