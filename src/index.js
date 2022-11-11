@@ -79,7 +79,8 @@ async function fetchApiFilms() {
 gallery.addEventListener('click', onCardClick);
 const modalDialog = document.querySelector('.modal-one-film');
 const html = document.querySelector('html');
-const trailerCard = document.querySelector('.modal-one-film__window');
+// const trailerCard = document.querySelector('.modal-one-film__window');
+const trailerCard = document.querySelector('.modal-one-film__content');
 
 
 async function onCardClick(event) {
@@ -123,17 +124,11 @@ async function onCardClick(event) {
       });
     } catch (error) {
       console.log(error);
-    }
-    // await filmApiTrendFetch.fetchTrailerMovie();
-    // await onPosterClick();     
+    }   
   }
 
   const videoTrailer = document.querySelector('.card-div');
   videoTrailer.addEventListener('click', onPosterClick);
-  
-  // await filmApiTrendFetch.fetchTrailerMovie()
-  // console.log(trailerCard);
-  // await onPosterClick(); 
 
   async function onPosterClick() {
     console.log("Это постер");
@@ -143,22 +138,32 @@ async function onCardClick(event) {
         console.log("Это трейлер:", data.results);
 
         console.log(filmApiTrendFetch.movie_id);
-        result = data.results.map(item =>
-          // `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/L8yPTJ3asO8" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
-          `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
-          console.log(result);
-        // trailerCard.innerHTML = '';
-         return trailerCard.insertAdjacentHTML('beforebegin', result);
+        const res = data.results;
+        console.log('Это res:', res[0].key);
+        // const mark = res.map(item =>          
+        //   `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
+
+        //   console.log(mark);
+          return trailerCard.innerHTML = `<iframe
+        id="player"
+        width="640"
+        height="360"
+        src="https://www.youtube.com/embed/${res[0].key}?autoplay=1"          
+        frameborder="0"
+        allow="autoplay"
+        allowfullscreen
+      ></iframe>`;
+        // src="https://www.youtube.com/embed/${res[0].key}?autoplay=1"
+        
+
+        //  return trailerCard.insertAdjacentHTML('beforebegin', mark);
         // trailerCard.innerHTML = result;
       });
     } catch (error) {
       console.log(error);
     }
 
-    // setTimeout(trailerCard.innerHTML = '', 10000);
-    // filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
-    // console.log('Это data-film:', filmApiTrendFetch.idFilm);
-    // await fetchModalCard();    
+    // setTimeout(trailerCard.innerHTML = '', 10000);  
   }
 
   async function openModal() {
@@ -168,15 +173,11 @@ async function onCardClick(event) {
     html.classList.add('disable-scroll-all');
   }
 
-  async function closeModal() {
-
+  async function closeModal() {      
     document.removeEventListener('keydown', closeOnEsc);
-    modalDialog.classList.add('modal-one-film--hidden');
-    html.classList.remove('disable-scroll-all');
-    // trailerCard.innerHTML = '';   
-  }
-
-  
+    modalDialog.classList.add('modal-one-film--hidden'); 
+    html.classList.remove('disable-scroll-all');   
+  } 
 
 }
 
