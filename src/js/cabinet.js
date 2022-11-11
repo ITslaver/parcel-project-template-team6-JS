@@ -463,10 +463,9 @@ function getUserId() {
 }
 
 function renderSingIn() {
-  const hidden = document.querySelectorAll('.nav__item');
-  const vissible = Array.prototype.map.call(hidden, item => {
-    item.hidden = false;
-  });
+  if (document.querySelector('.nav__list')) {
+    document.querySelector('.nav__list').style.display = 'flex';
+  }
   if (document.querySelector('.header__authrization-button')) {
     document.querySelector('.header__authrization-button').remove();
   }
