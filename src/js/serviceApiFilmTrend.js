@@ -19,7 +19,7 @@ export default class FilmApiTrendFetch {
     this.card;
   }
 
-  async fetchFilmsGenres() {
+ async fetchFilmsGenres() {
     return await fetch(
       `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}`
     )
