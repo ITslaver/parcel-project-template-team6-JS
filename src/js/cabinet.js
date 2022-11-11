@@ -158,13 +158,13 @@ function cabinetAction(event) {
   } else if (event.submitter.id === 'favorite') {
     // console.log(uid);
     getListById('favorite', uid);
-    setPage('favorite', uid);
   } else if (event.submitter.id === 'watched') {
     // console.log(uid);
     getListById('watched', uid);
-    setPage('watched', uid);
   }
 }
+
+
 //---------------------------Отрисовка фильмов с списка-------------------------
 async function fetchFilmCard(id) {
   try {
@@ -243,7 +243,7 @@ export async function  getListById (category, user) {
   listItems.push(film)
  }
  console.log(listItems)
- document.getElementById('card-list').innerHTML = '';
+ document.getElementById('card-list').length = 0;
  return document
 .getElementById('card-list')
 .insertAdjacentHTML('beforeend', card(listItems));
@@ -264,8 +264,19 @@ export async function getList(category, user) {
     .then(response => response.json())
     .then(result => {
       console.log('в ' + category, result);
-     // document.getElementById('card-list').innerHTML = '';
-      return result
+     document.getElementById('card-list').innerHTML = '';
+if (result === null && category === "watched") {
+  document.getElementById('card-list').innerHTML = '<li><p>Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду</p></li>';
+  console.log('Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду')
+  return 0
+}
+if (result === null && category === "favorite") {
+  document.getElementById('card-list').innerHTML = '<p>Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду</p>';
+  console.log('Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду')
+  return 0
+}
+
+ else return result
       //  .getElementById('card-list')
       //  .insertAdjacentHTML('beforeend', card(result));
     })
