@@ -174,7 +174,7 @@ async function fetchFilmCard(id) {
       .then(data => {
         console.log(data)
         this.card = data;
-        return data;
+        return card;
       });
   } catch (error) {
     console.log(error);
@@ -358,7 +358,7 @@ async function delItem(itemId, user, category) {
   console.log(itemId + ' успешно удалено');
 
   if (document.title === 'Library') {
-    getList(category, user);
+    getListById(category, user);
     console.log('оновлено ' + category);
   }
 }
