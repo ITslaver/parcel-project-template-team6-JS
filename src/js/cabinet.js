@@ -268,7 +268,6 @@ export async function getList(category, user) {
     .then(response => response.json())
     .then(result => {
       console.log('в ' + category, result);
-      if (result === "undefinite")
      // document.getElementById('card-list').innerHTML = '';
       return result
       //  .getElementById('card-list')
