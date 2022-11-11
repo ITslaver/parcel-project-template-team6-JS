@@ -12,6 +12,7 @@ import { save, load, remove } from './storage';
 import Notiflix from 'notiflix';
 import { title } from 'process';
 import { async } from 'regenerator-runtime';
+import {FilmApiTrendFetch} from './serviceApiFilmTrend';
 // Import the functions you need from the SDKs you need
 
 const firebaseConfig = {
@@ -29,6 +30,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
+const currentLang ='en-US';
+
 
 export let uid;
 getUserId();
@@ -153,13 +156,98 @@ function cabinetAction(event) {
     // event.submitter.disabled = true;
   } else if (event.submitter.id === 'favorite') {
     // console.log(uid);
-    getList('favorite', uid);
+    getListById('favorite', uid);
     setPage('favorite', uid);
   } else if (event.submitter.id === 'watched') {
     // console.log(uid);
-    getList('watched', uid);
+    getListById('watched', uid);
     setPage('watched', uid);
   }
+}
+//---------------------------Отрисовка фильмов с списка-------------------------
+async function fetchFilmCard(id) {
+  try {
+    return await fetch(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=2f44dbe234f7609a16da7327d83f3eb3&language=${currentLang}`
+    )
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.card = data;
+        return data;
+      });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+async function extendFetchFilmCard(id) {
+  try {
+    await fetchFilmCard(id);
+    const card = this.card;
+    card.title = card.title.toUpperCase();
+    card.vote_average = card.vote_average.toFixed(1);
+    card.popularity = card.popularity.toFixed(1);
+    card.original_title = card.original_title.toUpperCase();
+    
+    if (!card.release_date) {
+      card.release_date = '-----';
+    }
+    else card.release_date = card.release_date.slice(0, 4);
+
+    let genre_ids = [];
+    for (const item of card.genres) {
+    genre_ids.push(item.name)
+    }
+
+    // форматуємо кількість жанрів фільму
+    if (genre_ids.length === 0) {
+      switch (currentLang) {
+        case 'uk-UA':
+          genre_ids[0] = 'Жанри не вказані';
+          break;
+
+        case 'en-US':
+          genre_ids[0] = 'No movie genre';
+          break;
+      }
+    }
+    if (genre_ids.length >= 3) {
+      switch (currentLang) {
+        case 'uk-UA':
+          genre_ids[2] = 'Інші';
+          break;
+
+        case 'en-US':
+          genre_ids[2] = 'Other';
+          break;
+      }
+          
+    }
+
+card.genre_ids = genre_ids.slice(0, 3).join(', ');
+    return card;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function  getListById (category, user) {
+ const list = Object.keys( await getList(category, user))
+ console.log(list.length)
+ const listItems = []
+ for (const item of list) {
+  console.log(item)
+  const film = await extendFetchFilmCard(item)
+  film.list = category;
+  listItems.push(film)
+ }
+ console.log(listItems)
+ document.getElementById('card-list').innerHTML = '';
+ return document
+.getElementById('card-list')
+.insertAdjacentHTML('beforeend', card(listItems));
 }
 
 //---------------------------Получение фильмов с базы---------------------------
@@ -176,11 +264,11 @@ export async function getList(category, user) {
   )
     .then(response => response.json())
     .then(result => {
-      console.log('отрисовка ' + category, result);
-      document.getElementById('card-list').innerHTML = '';
-      return document
-        .getElementById('card-list')
-        .insertAdjacentHTML('beforeend', card(result));
+      console.log('в ' + category, result);
+     // document.getElementById('card-list').innerHTML = '';
+      return result
+      //  .getElementById('card-list')
+      //  .insertAdjacentHTML('beforeend', card(result));
     })
     .catch(error => console.log('error', error));
 }
@@ -371,13 +459,13 @@ function getUserId() {
     uid = load(KEY_ID);
     renderSingIn();
   }
+  else uid = "guest"
 }
 
 function renderSingIn() {
-  const hidden = document.querySelectorAll('.nav__item');
-  const vissible = Array.prototype.map.call(hidden, item => {
-    item.hidden = false;
-  });
+  if (document.querySelector('.nav__list')) {
+    document.querySelector('.nav__list').style.display = 'flex';
+  }
   if (document.querySelector('.header__authrization-button')) {
     document.querySelector('.header__authrization-button').remove();
   }

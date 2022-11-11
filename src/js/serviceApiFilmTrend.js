@@ -19,7 +19,7 @@ export default class FilmApiTrendFetch {
     this.card;
   }
 
-  async fetchFilmsGenres() {
+ async fetchFilmsGenres() {
     return await fetch(
       `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}`
     )
@@ -60,9 +60,7 @@ export default class FilmApiTrendFetch {
       .then(result => {
         if (result === null) {
           return 0;
-        }
-        else
-          return result
+        } else return result;
       })
       .catch(error => console.log('error', error));
   }
@@ -110,7 +108,7 @@ export default class FilmApiTrendFetch {
       }
 
       function searchList(filmId, fav, watch) {
-        let list
+        let list;
 
         fav = favorite;
         watch = watched;
@@ -266,9 +264,10 @@ export default class FilmApiTrendFetch {
     } catch (error) {
       console.log(error);
     }
+
   }
 
-  get lang() {
+ get lang() {
     return this.currentLang;
   }
   set lang(value) {
