@@ -23,6 +23,7 @@ const gallery = document.querySelector('.card-list');
 const btnEn = document.querySelector('#en');
 const btnUk = document.querySelector('#uk');
 const searchForm = document.querySelector('#search-form');
+let currentLang = "en-US"
 
 window.addEventListener('load', onLoadPreloaderHide);
 
@@ -101,7 +102,7 @@ async function onCardClick(event) {
                 break;
         
               case 'en-US':
-                document.querySelector('.button-queue').textContent = 'DEL QUEYUE';
+                document.querySelector('.button-queue').textContent = 'REMOVE FROM QUEUE';
                 break;
             }
           document.querySelector('.button-queue').name = "delFavorite";
@@ -113,7 +114,7 @@ async function onCardClick(event) {
               break;
       
             case 'en-US':
-              document.querySelector('.button-watched').textContent = "DEL WATCHED";
+              document.querySelector('.button-watched').textContent = "REMOVE FROM WATCHED";
               break;
           }
 

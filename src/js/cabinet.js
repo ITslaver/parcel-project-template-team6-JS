@@ -78,7 +78,7 @@ function itemAction(event) {
         break;
 
       case 'en-US':
-        document.querySelector('.button-queue').textContent = 'DEL QUEUE';
+        document.querySelector('.button-queue').textContent = 'REMOVE FROM QUEUE';
         break;
     }
     document.querySelector('.button-queue').name = 'delFavorite';
@@ -122,7 +122,7 @@ function itemAction(event) {
         break;
 
       case 'en-US':
-        document.querySelector('.button-watched').textContent = 'DEL WATCHED';
+        document.querySelector('.button-watched').textContent = 'REMOVE FROM WATCHED';
         break;
     }
 
@@ -174,7 +174,7 @@ function itemAction(event) {
         break;
 
       case 'en-US':
-        Notiflix.Notify.success('success del to QUEUE');
+        Notiflix.Notify.success('success remove from QUEUE');
         break;
     }
   } else if (event.target.name === 'delWatched') {
@@ -202,7 +202,7 @@ function itemAction(event) {
         break;
 
       case 'en-US':
-        Notiflix.Notify.success('success del to Watched');
+        Notiflix.Notify.success('success remove from Watched');
         break;
     }
   }
@@ -365,7 +365,7 @@ export async function getList(category, user) {
           case 'en-US':
             document.getElementById(
               'card-list'
-            ).innerHTML = `<li><p>Oops! It looks like you haven't selected anything yet! Add more movies to your queue and enjoy :)</p></li>`;
+            ).innerHTML = `<li><p>Oops! It looks like you haven't watched anything yet.</p></li>`;
             break;
         }
 
@@ -385,7 +385,7 @@ export async function getList(category, user) {
           case 'en-US':
             document.getElementById(
               'card-list'
-            ).innerHTML = `<li><p>Oops! It looks like you haven't watched anything yet.</p></li>`;
+            ).innerHTML = `<li><p>Oops! It looks like you haven't selected anything yet! Add more movies to your queue and enjoy :)</p></li>`;
             break;
         }
         console.log(
