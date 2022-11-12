@@ -101,11 +101,11 @@ function itemAction(event) {
     }
     switch (currentLang) {
       case 'uk-UA':
-        Notiflix.Notify.success('успішно додано до QUEUE');
+        Notiflix.Notify.success('успішно додано до Черги перегляду');
         break;
 
       case 'en-US':
-        Notiflix.Notify.success('success added to Черги перегляду');
+        Notiflix.Notify.success('success added to QUEUE');
         break;
     }
   } else if (event.target.name === 'addWatched') {
