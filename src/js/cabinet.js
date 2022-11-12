@@ -13,6 +13,7 @@ import Notiflix from 'notiflix';
 import { title } from 'process';
 import { async } from 'regenerator-runtime';
 import './serviceApiFilmTrend';
+import { spinnerOff, spinnerOn } from './preloader';
 // Import the functions you need from the SDKs you need
 
 const firebaseConfig = {
@@ -38,9 +39,8 @@ const KEY_ID = 'userId';
 //} else if (document.querySelector('#ua').classList.contains('active-btn')) {
 //  currentLang = document.querySelector('#ua').dataset.lang;
 //}
-//else 
-let currentLang = "en-US"
-
+//else
+let currentLang = 'en-US';
 
 export let uid;
 getUserId();
@@ -74,7 +74,8 @@ function itemAction(event) {
     }
     switch (currentLang) {
       case 'uk-UA':
-        document.querySelector('.button-queue').textContent = 'ВИДАЛИТИ З ЧЕРГИ';
+        document.querySelector('.button-queue').textContent =
+          'ВИДАЛИТИ З ЧЕРГИ';
         break;
 
       case 'en-US':
@@ -89,11 +90,13 @@ function itemAction(event) {
       switch (currentLang) {
         case 'uk-UA':
           document.querySelector('.button-watched-del').textContent =
-          'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';          break;
-  
+            'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';
+          break;
+
         case 'en-US':
           document.querySelector('.button-watched-del').textContent =
-          'ADD TO WATCHED';          break;
+            'ADD TO WATCHED';
+          break;
       }
       document.querySelector('.button-watched-del').name = 'addWatched';
       document.querySelector('.button-watched-del').classList =
@@ -118,7 +121,8 @@ function itemAction(event) {
     }
     switch (currentLang) {
       case 'uk-UA':
-        document.querySelector('.button-watched').textContent = 'ВИДАЛИТИ З ПЕРЕГЛЯНУТОГО';
+        document.querySelector('.button-watched').textContent =
+          'ВИДАЛИТИ З ПЕРЕГЛЯНУТОГО';
         break;
 
       case 'en-US':
@@ -132,11 +136,13 @@ function itemAction(event) {
     if (document.querySelector('.button-queue-del')) {
       switch (currentLang) {
         case 'uk-UA':
-          document.querySelector('.button-queue-del').textContent = 'ДОДАТИ ДО ЧЕРГИ';
+          document.querySelector('.button-queue-del').textContent =
+            'ДОДАТИ ДО ЧЕРГИ';
           break;
-  
+
         case 'en-US':
-          document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
+          document.querySelector('.button-queue-del').textContent =
+            'ADD TO QUEUE';
           break;
       }
       document.querySelector('.button-queue-del').name = 'addFavorite';
@@ -158,11 +164,13 @@ function itemAction(event) {
     }
     switch (currentLang) {
       case 'uk-UA':
-        document.querySelector('.button-queue-del').textContent = 'ДОДАТИ ДО ЧЕРГИ';
+        document.querySelector('.button-queue-del').textContent =
+          'ДОДАТИ ДО ЧЕРГИ';
         break;
 
       case 'en-US':
-        document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
+        document.querySelector('.button-queue-del').textContent =
+          'ADD TO QUEUE';
         break;
     }
     document.querySelector('.button-queue-del').name = 'addFavorite';
@@ -184,12 +192,13 @@ function itemAction(event) {
     }
     switch (currentLang) {
       case 'uk-UA':
-        document.querySelector('.button-watched-del').textContent = 'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';
+        document.querySelector('.button-watched-del').textContent =
+          'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';
         break;
 
       case 'en-US':
         document.querySelector('.button-watched-del').textContent =
-        'ADD TO WATCHED';
+          'ADD TO WATCHED';
         break;
     }
 
@@ -325,12 +334,14 @@ export async function getListById(category, user) {
   const list = Object.keys(await getList(category, user));
   console.log(list.length);
   const listItems = [];
+  spinnerOn();
   for (const item of list) {
     console.log(item);
     const film = await extendFetchFilmCard(item);
     film.list = category;
     listItems.push(film);
   }
+  spinnerOff();
   console.log(listItems);
   document.getElementById('card-list').length = 0;
   return document
