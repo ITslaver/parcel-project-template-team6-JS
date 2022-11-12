@@ -91,6 +91,7 @@
 .search-form__wrap {
   display: flex;
   padding-top: 40px;
+  align-items: baseline;
 }
 
 .search-form__input {
@@ -105,6 +106,7 @@
   outline: none;
   resize: none;
   overflow: hidden;
+  transform: none;
 
   @include mobile {
     width: 260px;
