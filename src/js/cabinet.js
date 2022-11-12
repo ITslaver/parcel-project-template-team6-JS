@@ -268,8 +268,18 @@ export async function getList(category, user) {
       console.log('в ' + category, result);
       document.getElementById('card-list').innerHTML = '';
       if (result === null && category === 'watched') {
-        document.getElementById('card-list').innerHTML =
-          '<li><p>Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду</p></li>';
+        switch (currentLang) {
+          case 'uk-UA':
+            document.getElementById('card-list').innerHTML =
+            `<li><p>Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду</p></li>`;
+            break;
+  
+          case 'en-US':
+            document.getElementById('card-list').innerHTML =
+            `<li><p>Oops! It looks like you haven't selected anything yet! Add more movies to your queue and enjoy :)</p></li>`;
+            break;
+        }
+       
         console.log(
           'Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду'
         );
