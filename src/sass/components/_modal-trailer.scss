@@ -31,8 +31,13 @@
     // width: 80vw;
     // height: 70vh;
   }
+
+  button,input {
+    overflow: visible;
+  }
   
   .trailer__close-btn {
+    
     cursor: pointer;
     position: absolute;
     border: none;
