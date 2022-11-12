@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 Notiflix.Notify.init({
   position: 'center-top',
   timeout: 3000,
-  distance: '250px',
+  distance: '10px',
 
   width: '300px',
   fontSize: '16px',
