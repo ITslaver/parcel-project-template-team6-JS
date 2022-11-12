@@ -43,19 +43,38 @@
 }
 
 .tui-pagination .tui-page-btn:hover {
-  background-color: var(--accent-color);
+  // background-color: var(--accent-color);
+  background: rgb(179, 84, 60);
+  background: linear-gradient(
+    25deg,
+    rgba(179, 84, 60, 1) 0%,
+    rgba(255, 105, 5, 1) 100%
+  );
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tui-pagination .tui-is-selected,
 .tui-pagination strong {
   color: #fff;
-  background: var(--accent-color);
-  border-color: var(--accent-color);
+  // background: var(--accent-color);
+  background: rgb(179, 84, 60);
+  background: linear-gradient(
+    25deg,
+    rgba(179, 84, 60, 1) 0%,
+    rgba(255, 105, 5, 1) 100%
+  );
+  // border-color: var(--accent-color);
   cursor: default;
 }
 
 .tui-pagination .tui-is-selected:hover {
-  background-color: var(--accent-color);
+  // background-color: var(--accent-color);
+  background: rgb(179, 84, 60);
+  background: linear-gradient(
+    25deg,
+    rgba(179, 84, 60, 1) 0%,
+    rgba(255, 105, 5, 1) 100%
+  );
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
