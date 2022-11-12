@@ -3,10 +3,10 @@
     <div class="header__wrap">
       <!-- ------------------------------------------------Логотип-------------- -->
       <a href="./index.html" class="logo-home__link link">
-        <svg class="header-home__logo" width="32" height="32">
+        <svg class="header-home__logo" width="30" height="30">
           <use href="./images/icons.svg#icon-film-home"></use>
         </svg>
-        <p class="logo-home__text"><h1>Filmoteka</h1></p>
+        <p class="logo-home__text">Filmoteka</p>
       </a>
       <!-- ------------------------------------------------Блок користувача-->
       <div class="username"></div>
@@ -225,22 +225,31 @@
       </ul>
     </div>
     <!---------------------------------------------------------Форма поиска-------- -->
-    <div class="search-form__wrap">
-      <form class="search-form" id="search-form">
-        <input
-          class="search-form__input nav__item-log-out button"
-          type="text"
-          autocomplete="off"
-          name="searchQuery"
-          autocomplete="on"
-          placeholder="Search films..."
-        />
-        <button type="submit" class="search__button">
-          <svg class="icon-search__logo" width="13" height="13">
-            <use href="./images/icons.svg#icon-search-2"></use>
-          </svg>
-        </button>
-      </form>
+    <div class="search-form__container">
+      <div class="search-form__wrap">
+        <form class="search-form" id="search-form">
+          <input
+            class="search-form__input nav__item-log-out button"
+            type="text"
+            autocomplete="off"
+            name="searchQuery"
+            placeholder="Search films..."
+          />
+          <button type="submit" class="search__button">
+            <svg class="icon-search__logo" width="13" height="13">
+              <use href="./images/icons.svg#icon-search-2"></use>
+            </svg>
+          </button>
+        </form>
+        <ul class="language-btn__list">
+          <li class="language-btn__item">
+            <button class="language-btn language" id="en">EN</button>
+          </li>
+          <li class="language-btn__item">
+            <button class="language-btn language" id="uk">UK</button>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </header>

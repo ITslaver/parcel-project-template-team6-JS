@@ -28,7 +28,9 @@
 }
 // -------------------------------------------------Контейнер-------
 .header__container {
-  text-align: center;
+  // text-align: center;
+  // justify-content: space-between;
+  // align-items: center;
 }
 
 .header__wrap {
@@ -53,7 +55,7 @@
 }
 
 .logo-home__text {
-  font-size: 20px;
+  font-size: 34px;
   display: none;
   @include tablet {
     display: block;
@@ -86,7 +88,15 @@
   color: var(--header-color-text);
 }
 // ----------------------------------------------форма поиска------------------------
+.search-form__container {
+  text-align: center;
+  justify-content: center;
+}
+
 .search-form__wrap {
+  display: flex;
+  align-items: center;
+  // text-align: center;
   padding-top: 40px;
 }
 
@@ -100,6 +110,8 @@
   border-bottom: 0.5px solid var(--header-color-text);
   padding: 0 0 4px 1px;
   outline: none;
+  resize: none;
+  overflow: hidden;
 
   @include mobile {
     width: 260px;
@@ -135,5 +147,42 @@
   &:focus {
     stroke: var(--card-genres-year-text-color);
     transform: scale(1.2);
+  }
+}
+
+.language-btn__list {
+  display: flex;
+  margin-left: 10px;
+}
+
+.language-btn__item:not(:first-child) {
+  margin-left: 4px;
+}
+
+.language-btn {
+  padding: 4px;
+  max-width: 75px;
+  display: inline-block;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background-color: transparent;
+  color: var(--header-color-text);
+  cursor: pointer;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  transition-property: background-color, border;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    background-color: var(--accent-color);
+  }
+
+  @include tablet {
+    margin-top: 5px;
   }
 }
