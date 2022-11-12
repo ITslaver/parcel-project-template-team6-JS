@@ -74,6 +74,8 @@ function itemAction(event) {
       document.querySelector('.button-watched-del').classList =
         'button-watched';
     }
+    Notiflix.Notify.success('успішно додано до QUEUE');
+
   } else if (event.target.name === 'addWatched') {
     delItem(event.target.id, uid, 'favorite');
     setList('watched', uid, event.target.id, event.target.dataset.card);
@@ -91,6 +93,9 @@ function itemAction(event) {
       document.querySelector('.button-queue-del').name = 'addFavorite';
       document.querySelector('.button-queue-del').classList = 'button-queue';
     }
+    Notiflix.Notify.success('успішно додано до Watched');
+
+    
   } else if (event.target.name === 'delFavorite') {
     if (document.title === 'Filmoteka') {
       document.getElementById('list' + event.target.id).textContent = '';
@@ -100,7 +105,9 @@ function itemAction(event) {
     document.querySelector('.button-queue-del').name = 'addFavorite';
     document.querySelector('.button-queue-del').classList = 'button-queue';
     delItem(event.target.id, uid, 'favorite');
+    Notiflix.Notify.success('успішно видалено з QUEUE');
   } else if (event.target.name === 'delWatched') {
+    
     if (document.title === 'Filmoteka') {
       document.getElementById('list' + event.target.id).textContent = '';
       document.getElementById('list' + event.target.id).classList = '';
@@ -110,6 +117,7 @@ function itemAction(event) {
     document.querySelector('.button-watched-del').name = 'addWatched';
     document.querySelector('.button-watched-del').classList = 'button-watched';
     delItem(event.target.id, uid, 'watched');
+    Notiflix.Notify.success('успішно видалено з Watched');
   }
 }
 
@@ -363,8 +371,7 @@ async function delItem(itemId, user, category) {
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
-  console.log(itemId + ' успешно удалено');
-  if (document.title === 'Library') {
+     if (document.title === 'Library') {
       if (document.querySelector(`[data-film="${itemId}"]`)) {
       document.querySelector(`[data-film="${itemId}"]`).style.display = 'none';
     }
@@ -400,7 +407,7 @@ function authFormSend(email, password) {
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
-      console.log('Вхід успішний ' + userCredential.user.email);
+      Notiflix.Notify.success('Вхід успішний ' + userCredential.user.displayName);
       // document.querySelector('.username').textContent = user.email;
       save(KEY_ID, userCredential.user.uid);
       document
@@ -424,7 +431,7 @@ async function authFormReg(email, password) {
       // Signed in
       console.log('User', userCredential.user);
       console.log('User', userCredential.displayName);
-      console.log(
+      Notiflix.Notify.success(
         'Користувача успішно створено ' +
           userCredential.user.email +
           userCredential.user.displayName
