@@ -39,7 +39,7 @@ const KEY_ID = 'userId';
 //  currentLang = document.querySelector('#ua').dataset.lang;
 //}
 //else 
-currentLang = "en-US"
+let currentLang = "en-US"
 
 console.log(currentLang);
 
