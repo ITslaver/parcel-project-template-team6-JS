@@ -1,11 +1,11 @@
 import { uid } from './cabinet';
 
-const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
+export const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
 const TRENDING_URL = 'https://api.themoviedb.org/3/trending/movie/day';
 const SEARCH_FILMS_URL = 'https://api.themoviedb.org/3/search/movie';
 const CARD_MOVIE = 'https://api.themoviedb.org/3/movie/';
 const TRAILER_MOVIE = 'https://api.themoviedb.org/3/movie/';
-const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
+export const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
 const LOCAL_KEY_GENRES = 'genres';
 
 export default class FilmApiTrendFetch {

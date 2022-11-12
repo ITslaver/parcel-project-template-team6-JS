@@ -18,6 +18,7 @@ import './js/footer-modal';
 import './js/notify-init';
 import renderCards from './js/render-cards';
 import { onErrorEN, onErrorUK } from './js/on-error';
+import { GENRES_URL, API_KEY } from './js/serviceApiFilmTrend';
 
 
 const modalCard = document.querySelector('.modal-one-film__content');
@@ -68,7 +69,26 @@ async function fetchApiFilms() {
     onErrorEN()
   }
 }
+//---------------Sort Ganres---------------
+fetchFilmsGenres() 
 
+async function fetchFilmsGenres() {
+  return await fetch(
+    `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}`
+  )
+    .then(res => res.json())
+    .then(data => {  
+     let genres = data.genres
+     console.log(genres.flatMap(genres =>  `<option value="${genres.id}">${genres.name}</option>`))
+     return document.getElementById('genres').insertAdjacentHTML('beforeend', genres.flatMap(genres => `<option value="${genres.id}">${genres.name}</option>`).join(''))
+   //   genres.map((genres) => { `<option value="${genres.id}">${genres.name}</option>`})
+    })
+    .catch(err => console.log(err));
+}
+
+
+  
+      
 // ------------Модальное окно----------------
 
 // const listFilms = document.querySelector(".card-list")
