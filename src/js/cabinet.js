@@ -294,7 +294,7 @@ export async function getList(category, user) {
   
           case 'en-US':
             document.getElementById('card-list').innerHTML =
-            `<li><p>Oops! It looks like you haven't selected anything yet! Add more movies to your queue and enjoy :)</p></li>`;
+            `<li><p>Oops! It looks like you haven't watched anything yet.</p></li>`;
             break;
         }
         console.log(
