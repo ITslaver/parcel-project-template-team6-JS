@@ -17,10 +17,10 @@ const closeOnEsc = e => {
 //   html.classList.add('disable-scroll');
 // }
 
-async function closeModal() {
+async function closeModal() {  
     document.removeEventListener('keydown', closeOnEsc);
     modalDialog.classList.add('modal-one-film--hidden');
-    html.classList.remove('disable-scroll-all');
+    html.classList.remove('disable-scroll-all');   
 }
 
 closeButton.addEventListener('click', e => {
