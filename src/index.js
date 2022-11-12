@@ -95,11 +95,28 @@ async function onCardClick(event) {
           document.querySelector('.button-watched').style.display = "none";
         }
           else if (list === 'favorite') {
-          document.querySelector('.button-queue').textContent = "DEL QUEYUE";
+            switch (currentLang) {
+              case 'uk-UA':
+                document.querySelector('.button-queue').textContent = 'ВИДАЛИТИ З ЧЕРГИ';
+                break;
+        
+              case 'en-US':
+                document.querySelector('.button-queue').textContent = 'DEL QUEYUE';
+                break;
+            }
           document.querySelector('.button-queue').name = "delFavorite";
           document.querySelector('.button-queue').classList = "button-queue-del active-but";
         } else if (list === 'watched') {
-          document.querySelector('.button-watched').textContent = "DEL WATCHED";
+          switch (currentLang) {
+            case 'uk-UA':
+              document.querySelector('.button-watched').textContent = "ВИДАЛИТИ З ПЕРЕГЛЯНУТОГО";
+              break;
+      
+            case 'en-US':
+              document.querySelector('.button-watched').textContent = "DEL WATCHED";
+              break;
+          }
+
           document.querySelector('.button-watched').name = "delWatched";
           document.querySelector('.button-watched').classList = "button-watched-del active-but";
         }

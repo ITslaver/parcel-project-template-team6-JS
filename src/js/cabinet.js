@@ -41,7 +41,6 @@ const KEY_ID = 'userId';
 //else 
 let currentLang = "en-US"
 
-console.log(currentLang);
 
 export let uid;
 getUserId();
@@ -73,14 +72,29 @@ function itemAction(event) {
       document.getElementById('list' + event.target.id).classList = 'favorite';
       document.getElementById(event.target.id).dataset.list = 'favorite';
     }
-    document.querySelector('.button-queue').textContent = 'DEL QUEYUE';
+    switch (currentLang) {
+      case 'uk-UA':
+        document.querySelector('.button-queue').textContent = 'ВИДАЛИТИ З ЧЕРГИ';
+        break;
+
+      case 'en-US':
+        document.querySelector('.button-queue').textContent = 'DEL QUEUE';
+        break;
+    }
     document.querySelector('.button-queue').name = 'delFavorite';
     document.querySelector('.button-queue').classList =
       'button-queue-del active';
 
     if (document.querySelector('.button-watched-del')) {
-      document.querySelector('.button-watched-del').textContent =
-        'ADD TO WATCHED';
+      switch (currentLang) {
+        case 'uk-UA':
+          document.querySelector('.button-watched-del').textContent =
+          'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';          break;
+  
+        case 'en-US':
+          document.querySelector('.button-watched-del').textContent =
+          'ADD TO WATCHED';          break;
+      }
       document.querySelector('.button-watched-del').name = 'addWatched';
       document.querySelector('.button-watched-del').classList =
         'button-watched';
@@ -102,12 +116,29 @@ function itemAction(event) {
       document.getElementById('list' + event.target.id).classList = 'watched';
       document.getElementById(event.target.id).dataset.list = 'watched';
     }
-    document.querySelector('.button-watched').textContent = 'DEL WATCHED';
+    switch (currentLang) {
+      case 'uk-UA':
+        document.querySelector('.button-watched').textContent = 'ВИДАЛИТИ З ПЕРЕГЛЯНУТОГО';
+        break;
+
+      case 'en-US':
+        document.querySelector('.button-watched').textContent = 'DEL WATCHED';
+        break;
+    }
+
     document.querySelector('.button-watched').name = 'delWatched';
     document.querySelector('.button-watched').classList =
       'button-watched-del active';
     if (document.querySelector('.button-queue-del')) {
-      document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
+      switch (currentLang) {
+        case 'uk-UA':
+          document.querySelector('.button-queue-del').textContent = 'ДОДАТИ ДО ЧЕРГИ';
+          break;
+  
+        case 'en-US':
+          document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
+          break;
+      }
       document.querySelector('.button-queue-del').name = 'addFavorite';
       document.querySelector('.button-queue-del').classList = 'button-queue';
     }
@@ -125,7 +156,15 @@ function itemAction(event) {
       document.getElementById('list' + event.target.id).textContent = '';
       document.getElementById('list' + event.target.id).classList = '';
     }
-    document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
+    switch (currentLang) {
+      case 'uk-UA':
+        document.querySelector('.button-queue-del').textContent = 'ДОДАТИ ДО ЧЕРГИ';
+        break;
+
+      case 'en-US':
+        document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
+        break;
+    }
     document.querySelector('.button-queue-del').name = 'addFavorite';
     document.querySelector('.button-queue-del').classList = 'button-queue';
     delItem(event.target.id, uid, 'favorite');
@@ -143,8 +182,17 @@ function itemAction(event) {
       document.getElementById('list' + event.target.id).textContent = '';
       document.getElementById('list' + event.target.id).classList = '';
     }
-    document.querySelector('.button-watched-del').textContent =
-      'ADD TO WATCHED';
+    switch (currentLang) {
+      case 'uk-UA':
+        document.querySelector('.button-watched-del').textContent = 'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';
+        break;
+
+      case 'en-US':
+        document.querySelector('.button-watched-del').textContent =
+        'ADD TO WATCHED';
+        break;
+    }
+
     document.querySelector('.button-watched-del').name = 'addWatched';
     document.querySelector('.button-watched-del').classList = 'button-watched';
     delItem(event.target.id, uid, 'watched');
