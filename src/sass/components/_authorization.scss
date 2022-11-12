@@ -300,10 +300,23 @@
         fill:  var(--accent-color);
         }
     
+    @include mobile{
+        &:focus {
+        margin-right: 19px;
+        margin-left: 19px;
+        padding-left: 35px;
+        outline: none;
+        border-color: var(--accent-color);
+        max-height: 40px;
+        display: block;
+        font-weight: 400;
+        font-size: 16px;}
+    }
+    @include tablet{
     &:focus {
-        margin-right: 40px;
-        margin-left: 40px;
-        padding-left: 33px;
+        margin-right: 30px;
+        margin-left: 30px;
+        padding-left: 36px;
         
         outline: none;
         border-color: var(--accent-color);
@@ -312,6 +325,14 @@
         max-width: 402px;
         font-weight: 400;
         font-size: 16px;
+    }
+}
+    @include desktop{
+    &:focus {
+        margin-right: 40px;
+        margin-left: 40px;
+        padding-left: 35px;
+        }
     }
 
 };

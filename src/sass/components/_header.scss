@@ -27,9 +27,6 @@
   padding-top: 40px;
 }
 // -------------------------------------------------Контейнер-------
-.header__container {
-  text-align: center;
-}
 
 .header__wrap {
   display: flex;
@@ -53,7 +50,7 @@
 }
 
 .logo-home__text {
-  font-size: 20px;
+  font-size: 34px;
   display: none;
   @include tablet {
     display: block;
@@ -61,7 +58,7 @@
 }
 // ------------------------------------------------навигация------
 .nav__list {
-  display: flex;
+  display: none;
   @include tablet {
   }
 }
@@ -76,18 +73,40 @@
 }
 
 .nav__link {
+  @include mobile {
+    font-size: 10px;
+  }
+  @include tablet {
+    font-size: 12px;
+  }
   text-decoration: none;
   font-family: 'Roboto';
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.16;
   display: flex;
   text-transform: uppercase;
   color: var(--header-color-text);
 }
 // ----------------------------------------------форма поиска------------------------
+.search-form__container {
+  display: flex;
+  justify-content: center;
+}
+
 .search-form__wrap {
-  padding-top: 40px;
+  @include mobile {
+    padding-top: 70px;
+  }
+
+  @include tablet {
+    padding-top: 50px;
+  }
+  @include desktop {
+    padding-top: 40px;
+  }
+  display: flex;
+  align-items: baseline;
 }
 
 .search-form__input {
@@ -100,8 +119,12 @@
   border-bottom: 0.5px solid var(--header-color-text);
   padding: 0 0 4px 1px;
   outline: none;
+  resize: none;
+  overflow: hidden;
+  transform: none;
+
   @include mobile {
-    width: 260px;
+    width: 200px;
   }
   @include tablet {
     width: 350px;
@@ -135,4 +158,56 @@
     stroke: var(--card-genres-year-text-color);
     transform: scale(1.2);
   }
+}
+
+// <!---------------------------------------------------Кнопки вибору мови-------- -->
+
+.language-btn__list {
+  display: flex;
+  margin-left: 10px;
+}
+
+.language-btn__item:not(:first-child) {
+  margin-left: 4px;
+}
+
+.language-btn {
+  padding: 4px;
+  max-width: 75px;
+  display: inline-block;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background-color: transparent;
+  color: var(--header-color-text);
+  cursor: pointer;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  transition-property: background-color, border;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    background-color: var(--accent-color);
+  }
+
+  @include tablet {
+    margin-top: 5px;
+  }
+}
+// <!-- ------------------------------------------------Блок користувача-->
+.username {
+  display: block;
+  position: absolute;
+  top: 80px;
+  right: 215px;
+  margin-top: 5px;
+  padding: 3px 3px;
+  font-family: inherit;
+  color: var(--accent-color);
+  border: 3px solid #ff001b;
+  border-radius: 5px;
 }
