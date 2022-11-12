@@ -73,10 +73,16 @@
 }
 
 .nav__link {
+  @include mobile {
+    font-size: 10px;
+  }
+  @include tablet {
+    font-size: 12px;
+  }
   text-decoration: none;
   font-family: 'Roboto';
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.16;
   display: flex;
   text-transform: uppercase;
@@ -89,8 +95,17 @@
 }
 
 .search-form__wrap {
+  @include mobile {
+    padding-top: 70px;
+  }
+
+  @include tablet {
+    padding-top: 50px;
+  }
+  @include desktop {
+    padding-top: 40px;
+  }
   display: flex;
-  padding-top: 40px;
   align-items: baseline;
 }
 
@@ -109,7 +124,7 @@
   transform: none;
 
   @include mobile {
-    width: 260px;
+    width: 200px;
   }
   @include tablet {
     width: 350px;
@@ -144,6 +159,8 @@
     transform: scale(1.2);
   }
 }
+
+// <!---------------------------------------------------Кнопки вибору мови-------- -->
 
 .language-btn__list {
   display: flex;
@@ -180,4 +197,17 @@
   @include tablet {
     margin-top: 5px;
   }
+}
+// <!-- ------------------------------------------------Блок користувача-->
+.username {
+  display: block;
+  position: absolute;
+  top: 80px;
+  right: 215px;
+  margin-top: 5px;
+  padding: 3px 3px;
+  font-family: inherit;
+  color: var(--accent-color);
+  border: 3px solid #ff001b;
+  border-radius: 5px;
 }
