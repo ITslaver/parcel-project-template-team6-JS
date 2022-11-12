@@ -1,11 +1,11 @@
 import { uid } from './cabinet';
 
-const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
+export const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
 const TRENDING_URL = 'https://api.themoviedb.org/3/trending/movie/day';
 const SEARCH_FILMS_URL = 'https://api.themoviedb.org/3/search/movie';
 const CARD_MOVIE = 'https://api.themoviedb.org/3/movie/';
 const TRAILER_MOVIE = 'https://api.themoviedb.org/3/movie/';
-const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
+export const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
 const LOCAL_KEY_GENRES = 'genres';
 
 export default class FilmApiTrendFetch {
@@ -60,9 +60,7 @@ export default class FilmApiTrendFetch {
       .then(result => {
         if (result === null) {
           return 0;
-        }
-        else 
-        return result
+        } else return result;
       })
       .catch(error => console.log('error', error));
   }
@@ -85,16 +83,32 @@ export default class FilmApiTrendFetch {
         // форматуємо дату виходу фільму
         film.release_date = film.release_date.slice(0, 4);
         if (film.genre_ids.length === 0) {
-          film.genre_ids[0] = 'No movie genre';
+          switch (this.currentLang) {
+            case 'uk-UA':
+              film.genre_ids[0] = 'Жанри не вказані';
+              break;
+
+            case 'en-US':
+              film.genre_ids[0] = 'No movie genre';
+              break;
+          }
         }
         if (film.genre_ids.length >= 3) {
-          film.genre_ids[2] = 'Other';
+          switch (this.currentLang) {
+            case 'uk-UA':
+              film.genre_ids[2] = 'Інші';
+              break;
+
+            case 'en-US':
+              film.genre_ids[2] = 'Other';
+              break;
+          }
         }
         film.genre_ids = film.genre_ids.slice(0, 3).join(', ');
       }
 
       function searchList(filmId, fav, watch) {
-        let list
+        let list;
 
         fav = favorite;
         watch = watched;
@@ -250,6 +264,7 @@ export default class FilmApiTrendFetch {
     } catch (error) {
       console.log(error);
     }
+
   }
 
  get lang() {
