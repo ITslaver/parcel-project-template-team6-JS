@@ -12,7 +12,7 @@ import { save, load, remove } from './storage';
 import Notiflix from 'notiflix';
 import { title } from 'process';
 import { async } from 'regenerator-runtime';
-import {FilmApiTrendFetch} from './serviceApiFilmTrend';
+import { FilmApiTrendFetch } from './serviceApiFilmTrend';
 // Import the functions you need from the SDKs you need
 
 const firebaseConfig = {
@@ -30,8 +30,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
-const currentLang ='en-US';
-
+const currentLang = 'en-US';
 
 export let uid;
 getUserId();
@@ -157,13 +156,12 @@ function cabinetAction(event) {
   } else if (event.submitter.id === 'favorite') {
     // console.log(uid);
     getListById('favorite', uid);
-    setPage('favorite', uid);
   } else if (event.submitter.id === 'watched') {
     // console.log(uid);
     getListById('watched', uid);
-    setPage('watched', uid);
   }
 }
+
 //---------------------------Отрисовка фильмов с списка-------------------------
 async function fetchFilmCard(id) {
   try {
@@ -172,8 +170,7 @@ async function fetchFilmCard(id) {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data)
-        this.card = data;
+        console.log(data);
         return data;
       });
   } catch (error) {
@@ -181,24 +178,21 @@ async function fetchFilmCard(id) {
   }
 }
 
-
 async function extendFetchFilmCard(id) {
   try {
-    await fetchFilmCard(id);
-    const card = this.card;
+    const card = await fetchFilmCard(id);
     card.title = card.title.toUpperCase();
     card.vote_average = card.vote_average.toFixed(1);
     card.popularity = card.popularity.toFixed(1);
     card.original_title = card.original_title.toUpperCase();
-    
+
     if (!card.release_date) {
       card.release_date = '-----';
-    }
-    else card.release_date = card.release_date.slice(0, 4);
+    } else card.release_date = card.release_date.slice(0, 4);
 
     let genre_ids = [];
     for (const item of card.genres) {
-    genre_ids.push(item.name)
+      genre_ids.push(item.name);
     }
 
     // форматуємо кількість жанрів фільму
@@ -223,31 +217,30 @@ async function extendFetchFilmCard(id) {
           genre_ids[2] = 'Other';
           break;
       }
-          
     }
 
-card.genre_ids = genre_ids.slice(0, 3).join(', ');
+    card.genre_ids = genre_ids.slice(0, 3).join(', ');
     return card;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function  getListById (category, user) {
- const list = Object.keys( await getList(category, user))
- console.log(list.length)
- const listItems = []
- for (const item of list) {
-  console.log(item)
-  const film = await extendFetchFilmCard(item)
-  film.list = category;
-  listItems.push(film)
- }
- console.log(listItems)
- document.getElementById('card-list').innerHTML = '';
- return document
-.getElementById('card-list')
-.insertAdjacentHTML('beforeend', card(listItems));
+export async function getListById(category, user) {
+  const list = Object.keys(await getList(category, user));
+  console.log(list.length);
+  const listItems = [];
+  for (const item of list) {
+    console.log(item);
+    const film = await extendFetchFilmCard(item);
+    film.list = category;
+    listItems.push(film);
+  }
+  console.log(listItems);
+  document.getElementById('card-list').length = 0;
+  return document
+    .getElementById('card-list')
+    .insertAdjacentHTML('beforeend', card(listItems));
 }
 
 //---------------------------Получение фильмов с базы---------------------------
@@ -265,8 +258,23 @@ export async function getList(category, user) {
     .then(response => response.json())
     .then(result => {
       console.log('в ' + category, result);
-     // document.getElementById('card-list').innerHTML = '';
-      return result
+      document.getElementById('card-list').innerHTML = '';
+      if (result === null && category === 'watched') {
+        document.getElementById('card-list').innerHTML =
+          '<li><p>Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду</p></li>';
+        console.log(
+          'Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду'
+        );
+        return 0;
+      }
+      if (result === null && category === 'favorite') {
+        document.getElementById('card-list').innerHTML =
+          '<p>Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду</p>';
+        console.log(
+          'Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду'
+        );
+        return 0;
+      } else return result;
       //  .getElementById('card-list')
       //  .insertAdjacentHTML('beforeend', card(result));
     })
@@ -356,9 +364,10 @@ async function delItem(itemId, user, category) {
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
   console.log(itemId + ' успешно удалено');
-
   if (document.title === 'Library') {
-    getList(category, user);
+      if (document.querySelector(`[data-film="${itemId}"]`)) {
+      document.querySelector(`[data-film="${itemId}"]`).style.display = 'none';
+    }
     console.log('оновлено ' + category);
   }
 }
@@ -458,8 +467,7 @@ function getUserId() {
   if (load(KEY_ID)) {
     uid = load(KEY_ID);
     renderSingIn();
-  }
-  else uid = "guest"
+  } else uid = 'guest';
 }
 
 function renderSingIn() {
