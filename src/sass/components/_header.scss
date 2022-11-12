@@ -27,11 +27,6 @@
   padding-top: 40px;
 }
 // -------------------------------------------------Контейнер-------
-.header__container {
-  // text-align: center;
-  // justify-content: space-between;
-  // align-items: center;
-}
 
 .header__wrap {
   display: flex;
@@ -89,14 +84,12 @@
 }
 // ----------------------------------------------форма поиска------------------------
 .search-form__container {
-  text-align: center;
+  display: flex;
   justify-content: center;
 }
 
 .search-form__wrap {
   display: flex;
-  align-items: center;
-  // text-align: center;
   padding-top: 40px;
 }
 
