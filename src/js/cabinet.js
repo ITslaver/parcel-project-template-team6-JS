@@ -12,7 +12,7 @@ import { save, load, remove } from './storage';
 import Notiflix from 'notiflix';
 import { title } from 'process';
 import { async } from 'regenerator-runtime';
-import { FilmApiTrendFetch } from './serviceApiFilmTrend';
+import './serviceApiFilmTrend';
 // Import the functions you need from the SDKs you need
 
 const firebaseConfig = {
@@ -30,7 +30,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
-const currentLang = 'en-US';
+
+//let currentLang;
+
+//if (document.querySelectorAll('#en').classList.contains('active-btn')) {
+//  currentLang = document.querySelector('#en').dataset.lang;
+//} else if (document.querySelector('#ua').classList.contains('active-btn')) {
+//  currentLang = document.querySelector('#ua').dataset.lang;
+//}
+//else 
+let currentLang = "en-US"
+
 
 export let uid;
 getUserId();
@@ -62,20 +72,42 @@ function itemAction(event) {
       document.getElementById('list' + event.target.id).classList = 'favorite';
       document.getElementById(event.target.id).dataset.list = 'favorite';
     }
-    document.querySelector('.button-queue').textContent = 'DEL QUEYUE';
+    switch (currentLang) {
+      case 'uk-UA':
+        document.querySelector('.button-queue').textContent = 'ВИДАЛИТИ З ЧЕРГИ';
+        break;
+
+      case 'en-US':
+        document.querySelector('.button-queue').textContent = 'DEL QUEUE';
+        break;
+    }
     document.querySelector('.button-queue').name = 'delFavorite';
     document.querySelector('.button-queue').classList =
       'button-queue-del active';
 
     if (document.querySelector('.button-watched-del')) {
-      document.querySelector('.button-watched-del').textContent =
-        'ADD TO WATCHED';
+      switch (currentLang) {
+        case 'uk-UA':
+          document.querySelector('.button-watched-del').textContent =
+          'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';          break;
+  
+        case 'en-US':
+          document.querySelector('.button-watched-del').textContent =
+          'ADD TO WATCHED';          break;
+      }
       document.querySelector('.button-watched-del').name = 'addWatched';
       document.querySelector('.button-watched-del').classList =
         'button-watched';
     }
-    Notiflix.Notify.success('успішно додано до QUEUE');
+    switch (currentLang) {
+      case 'uk-UA':
+        Notiflix.Notify.success('успішно додано до QUEUE');
+        break;
 
+      case 'en-US':
+        Notiflix.Notify.success('success added to Черги перегляду');
+        break;
+    }
   } else if (event.target.name === 'addWatched') {
     delItem(event.target.id, uid, 'favorite');
     setList('watched', uid, event.target.id, event.target.dataset.card);
@@ -84,40 +116,95 @@ function itemAction(event) {
       document.getElementById('list' + event.target.id).classList = 'watched';
       document.getElementById(event.target.id).dataset.list = 'watched';
     }
-    document.querySelector('.button-watched').textContent = 'DEL WATCHED';
+    switch (currentLang) {
+      case 'uk-UA':
+        document.querySelector('.button-watched').textContent = 'ВИДАЛИТИ З ПЕРЕГЛЯНУТОГО';
+        break;
+
+      case 'en-US':
+        document.querySelector('.button-watched').textContent = 'DEL WATCHED';
+        break;
+    }
+
     document.querySelector('.button-watched').name = 'delWatched';
     document.querySelector('.button-watched').classList =
       'button-watched-del active';
     if (document.querySelector('.button-queue-del')) {
-      document.querySelector('.button-queue-del').textContent = 'ADD TO QUEYUE';
+      switch (currentLang) {
+        case 'uk-UA':
+          document.querySelector('.button-queue-del').textContent = 'ДОДАТИ ДО ЧЕРГИ';
+          break;
+  
+        case 'en-US':
+          document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
+          break;
+      }
       document.querySelector('.button-queue-del').name = 'addFavorite';
       document.querySelector('.button-queue-del').classList = 'button-queue';
     }
-    Notiflix.Notify.success('успішно додано до Watched');
+    switch (currentLang) {
+      case 'uk-UA':
+        Notiflix.Notify.success('успішно додано до Переглянутого');
+        break;
 
-    
+      case 'en-US':
+        Notiflix.Notify.success('success added to Watched');
+        break;
+    }
   } else if (event.target.name === 'delFavorite') {
     if (document.title === 'Filmoteka') {
       document.getElementById('list' + event.target.id).textContent = '';
       document.getElementById('list' + event.target.id).classList = '';
     }
-    document.querySelector('.button-queue-del').textContent = 'ADD TO QUEYUE';
+    switch (currentLang) {
+      case 'uk-UA':
+        document.querySelector('.button-queue-del').textContent = 'ДОДАТИ ДО ЧЕРГИ';
+        break;
+
+      case 'en-US':
+        document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
+        break;
+    }
     document.querySelector('.button-queue-del').name = 'addFavorite';
     document.querySelector('.button-queue-del').classList = 'button-queue';
     delItem(event.target.id, uid, 'favorite');
-    Notiflix.Notify.success('успішно видалено з QUEUE');
+    switch (currentLang) {
+      case 'uk-UA':
+        Notiflix.Notify.success('успішно видалено з Черги перегляду');
+        break;
+
+      case 'en-US':
+        Notiflix.Notify.success('success del to QUEUE');
+        break;
+    }
   } else if (event.target.name === 'delWatched') {
-    
     if (document.title === 'Filmoteka') {
       document.getElementById('list' + event.target.id).textContent = '';
       document.getElementById('list' + event.target.id).classList = '';
     }
-    document.querySelector('.button-watched-del').textContent =
-      'ADD TO WATCHED';
+    switch (currentLang) {
+      case 'uk-UA':
+        document.querySelector('.button-watched-del').textContent = 'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';
+        break;
+
+      case 'en-US':
+        document.querySelector('.button-watched-del').textContent =
+        'ADD TO WATCHED';
+        break;
+    }
+
     document.querySelector('.button-watched-del').name = 'addWatched';
     document.querySelector('.button-watched-del').classList = 'button-watched';
     delItem(event.target.id, uid, 'watched');
-    Notiflix.Notify.success('успішно видалено з Watched');
+    switch (currentLang) {
+      case 'uk-UA':
+        Notiflix.Notify.success('успішно видалено з Переглянутого');
+        break;
+
+      case 'en-US':
+        Notiflix.Notify.success('success del to Watched');
+        break;
+    }
   }
 }
 
@@ -268,16 +355,39 @@ export async function getList(category, user) {
       console.log('в ' + category, result);
       document.getElementById('card-list').innerHTML = '';
       if (result === null && category === 'watched') {
-        document.getElementById('card-list').innerHTML =
-          '<li><p>Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду</p></li>';
+        switch (currentLang) {
+          case 'uk-UA':
+            document.getElementById(
+              'card-list'
+            ).innerHTML = `<li><p>Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду</p></li>`;
+            break;
+
+          case 'en-US':
+            document.getElementById(
+              'card-list'
+            ).innerHTML = `<li><p>Oops! It looks like you haven't selected anything yet! Add more movies to your queue and enjoy :)</p></li>`;
+            break;
+        }
+
         console.log(
           'Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду'
         );
         return 0;
       }
       if (result === null && category === 'favorite') {
-        document.getElementById('card-list').innerHTML =
-          '<p>Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду</p>';
+        switch (currentLang) {
+          case 'uk-UA':
+            document.getElementById(
+              'card-list'
+            ).innerHTML = `<li><p>Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду</p></li>`;
+            break;
+
+          case 'en-US':
+            document.getElementById(
+              'card-list'
+            ).innerHTML = `<li><p>Oops! It looks like you haven't watched anything yet.</p></li>`;
+            break;
+        }
         console.log(
           'Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду'
         );
@@ -371,8 +481,8 @@ async function delItem(itemId, user, category) {
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
-     if (document.title === 'Library') {
-      if (document.querySelector(`[data-film="${itemId}"]`)) {
+  if (document.title === 'Library') {
+    if (document.querySelector(`[data-film="${itemId}"]`)) {
       document.querySelector(`[data-film="${itemId}"]`).style.display = 'none';
     }
     console.log('оновлено ' + category);
@@ -407,7 +517,20 @@ function authFormSend(email, password) {
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
-      Notiflix.Notify.success('Вхід успішний ' + userCredential.user.displayName);
+      switch (currentLang) {
+        case 'uk-UA':
+          Notiflix.Notify.success(
+            'Вхід успішний ' + userCredential.user.displayName
+          );
+          break;
+
+        case 'en-US':
+          Notiflix.Notify.success(
+            'Login success ' + userCredential.user.displayName
+          );
+          break;
+      }
+
       // document.querySelector('.username').textContent = user.email;
       save(KEY_ID, userCredential.user.uid);
       document
@@ -431,11 +554,23 @@ async function authFormReg(email, password) {
       // Signed in
       console.log('User', userCredential.user);
       console.log('User', userCredential.displayName);
-      Notiflix.Notify.success(
-        'Користувача успішно створено ' +
-          userCredential.user.email +
-          userCredential.user.displayName
-      );
+      switch (currentLang) {
+        case 'uk-UA':
+          Notiflix.Notify.success(
+            'Користувача успішно створено ' +
+              userCredential.user.email +
+              userCredential.user.displayName
+          );
+          break;
+
+        case 'en-US':
+          Notiflix.Notify.success(
+            'User success create ' +
+              userCredential.user.email +
+              userCredential.user.displayName
+          );
+          break;
+      }
       // document.querySelector('.username').textContent = user.email;
       save(KEY_ID, userCredential.user.uid);
       document.querySelector('[data-sign-in-modal]').classList.add('is-hidden');
