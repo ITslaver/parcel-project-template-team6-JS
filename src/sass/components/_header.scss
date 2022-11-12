@@ -27,14 +27,20 @@
   padding-top: 40px;
 }
 // -------------------------------------------------Контейнер-------
+.header {
+  position: relative;
+}
 
 .header__wrap {
   display: flex;
-  position: relative;
   align-items: center;
   justify-content: space-between;
 }
 // --------------------------------------------------Логотип---------------
+.logo__wrap {
+  position: relative;
+}
+
 .logo-home__link {
   display: flex;
   font-weight: 500;
@@ -95,6 +101,8 @@
 }
 
 .search-form__wrap {
+  display: flex;
+  align-items: baseline;
   @include mobile {
     padding-top: 70px;
   }
@@ -105,8 +113,6 @@
   @include desktop {
     padding-top: 40px;
   }
-  display: flex;
-  align-items: baseline;
 }
 
 .search-form__input {
@@ -200,14 +206,23 @@
 }
 // <!-- ------------------------------------------------Блок користувача-->
 .username {
+  @include mobile {
+    // display: none;
+  }
   display: block;
   position: absolute;
-  top: 80px;
-  right: 215px;
-  margin-top: 5px;
+  font-family: inherit;
+  font-weight: bold;
+  // text-transform: uppercase;
+  // top: 90px;
+  left: 63px;
+  // margin-top: 5px;
   padding: 3px 3px;
   font-family: inherit;
   color: var(--accent-color);
-  border: 3px solid #ff001b;
-  border-radius: 5px;
+  // color: #ff001b;
+  // color: #ffffff;
+  // border: 3px solid #ff001b;
+  // border-radius: 5px;
+  font-size: 16px;
 }
