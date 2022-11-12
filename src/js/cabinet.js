@@ -89,7 +89,7 @@ function itemAction(event) {
     document.querySelector('.button-watched').classList =
       'button-watched-del active';
     if (document.querySelector('.button-queue-del')) {
-      document.querySelector('.button-queue-del').textContent = 'ADD TO QUEYUE';
+      document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
       document.querySelector('.button-queue-del').name = 'addFavorite';
       document.querySelector('.button-queue-del').classList = 'button-queue';
     }
@@ -101,7 +101,7 @@ function itemAction(event) {
       document.getElementById('list' + event.target.id).textContent = '';
       document.getElementById('list' + event.target.id).classList = '';
     }
-    document.querySelector('.button-queue-del').textContent = 'ADD TO QUEYUE';
+    document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
     document.querySelector('.button-queue-del').name = 'addFavorite';
     document.querySelector('.button-queue-del').classList = 'button-queue';
     delItem(event.target.id, uid, 'favorite');
@@ -286,8 +286,17 @@ export async function getList(category, user) {
         return 0;
       }
       if (result === null && category === 'favorite') {
-        document.getElementById('card-list').innerHTML =
-          '<p>Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду</p>';
+        switch (currentLang) {
+          case 'uk-UA':
+            document.getElementById('card-list').innerHTML =
+            `<li><p>Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду</p></li>`;
+            break;
+  
+          case 'en-US':
+            document.getElementById('card-list').innerHTML =
+            `<li><p>Oops! It looks like you haven't selected anything yet! Add more movies to your queue and enjoy :)</p></li>`;
+            break;
+        }
         console.log(
           'Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду'
         );
