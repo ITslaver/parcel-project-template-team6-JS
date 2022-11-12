@@ -85,8 +85,13 @@ async function fetchFilmsGenres() {
     })
     .catch(err => console.log(err));
 }
-
-
+const genres = document.getElementById('genres');
+genres.addEventListener(
+  'change',
+  (event = () => {
+    console.log(genres.value)
+  })
+);
   
       
 // ------------Модальное окно----------------
