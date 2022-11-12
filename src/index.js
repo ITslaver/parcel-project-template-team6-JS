@@ -7,6 +7,7 @@ import onSubmitQuery from './js/on-submit-query';
 import { onLoadPreloaderHide } from './js/preloader';
 import hbsContainer from './templates/modal-card.hbs';
 import './js/modal-film-card';
+// import './js/modal-trailer-card';
 import SmoothScroll from 'smoothscroll-for-websites';
 import { uid } from './js/cabinet';
 import { getList } from './js/cabinet';
@@ -103,7 +104,7 @@ async function onCardClick(event) {
         console.log('в лист ' + list);
         const markup = hbsContainer(data);
         // console.log(data.overview);
-        //console.log(data.list);
+        console.log(data);
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
@@ -146,8 +147,26 @@ async function onCardClick(event) {
   const videoTrailer = document.querySelector('.card-div');
   videoTrailer.addEventListener('click', onPosterClick);
 
-  async function onPosterClick() {
+  const trailerBox = document.querySelector('.trailer__box');
+  const trailerWindow = document.querySelector('.trailer__window');
+  const closeTrailerBtn = document.querySelector('.trailer__close-btn');
+
+
+
+function closeTrailerModal() {
+    trailerWindow.innerHTML = '';
+    trailerBox.classList.add('trailer__box--hidden');
+    html.classList.remove('disable-scroll-all');
+  }
+
+async function onPosterClick() {
     console.log("Это постер");
+
+    closeTrailerBtn.addEventListener('click', evt =>{
+      evt.preventDefault();
+      closeTrailerModal();
+  })
+
     try {
       await filmApiTrendFetch.fetchTrailerMovie().then(data => {
         // const markup = hbsTest(data);
@@ -157,30 +176,42 @@ async function onCardClick(event) {
         const res = data.results;
         console.log('Это res:', res[0].key);
         // const mark = res.map(item =>          
-        //   `<li><iframe width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
+        //   `<li><iframe id="player" width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
 
         //   console.log(mark);
-          return trailerCard.innerHTML = `<iframe
+        trailerWindow.innerHTML = `<iframe
         id="player"
-        width="640"
-        height="360"
+        width="100%"
+        height="100%"
         src="https://www.youtube.com/embed/${res[0].key}?autoplay=1"          
         frameborder="0"
         allow="autoplay"
         allowfullscreen
       ></iframe>`;
-        // src="https://www.youtube.com/embed/${res[0].key}?autoplay=1"
         
+      const player = document.querySelector('#player');
 
-        //  return trailerCard.insertAdjacentHTML('beforebegin', mark);
-        // trailerCard.innerHTML = result;
+      trailerBox.addEventListener('click', evt => {
+        if (evt.target !== trailerBox) {
+          return;
+        }
+        closeTrailerModal();
+      });
+      trailerBox.classList.remove('trailer__box--hidden');
+      html.classList.add('disable-scroll-all');
+
+        //  return trailerWindow.insertAdjacentHTML('beforebegin', mark);
+        // trailerWindow.innerHTML = result;
+        return trailerWindow.innerHTML;
       });
     } catch (error) {
+      Notiflix.Notify.failure('Sorry, trailer not found 😢');
       console.log(error);
     }
 
-    // setTimeout(trailerCard.innerHTML = '', 10000);  
-  }
+    // trailerBox.classList.remove('.trailer__box--hidden');
+  } 
+ 
 
   async function openModal() {
     console.log('это Модалка');
