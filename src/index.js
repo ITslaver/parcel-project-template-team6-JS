@@ -252,12 +252,12 @@ if (document.getElementById('genres')) {
 }
 
 async function renderGenre(genre) {
-  films = await fetchWithGenres(genre);
+ // films = await fetchWithGenres(genre);
   renderCards(await filmsAndGenres(await fetchWithGenres(genre)));
 }
 
 async function renderYear(year) {
-  films = await fetchWithYers(year);
+ // films = await fetchWithYers(year);
   renderCards(await filmsAndGenres(await fetchWithYers(year)));
 }
 
