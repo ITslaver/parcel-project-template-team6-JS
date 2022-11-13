@@ -462,5 +462,4 @@ SmoothScroll({
 // -------- dancing Gif --------- //
 
 
-// import './js/switch';
 import './js/theme';
