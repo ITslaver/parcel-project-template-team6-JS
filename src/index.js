@@ -33,7 +33,7 @@ const btnEn = document.querySelector('#en');
 const btnUk = document.querySelector('#uk');
 const searchForm = document.querySelector('#search-form');
 const upcomingList = document.querySelector('.coming-soon-list');
-let currentLang = 'en-US';
+let currentLang;
 
 window.addEventListener('load', onLoadPreloaderHide);
 
@@ -52,6 +52,33 @@ if (document.title === 'Filmoteka') {
   selectYears()
 
 } else getListById('favorite', uid);
+
+// ------------Переключение языка--------------
+btnEn.addEventListener('click', onEnClick);
+btnUk.addEventListener('click', onUkClick);
+
+async function onEnClick() {
+  try {
+    filmApiTrendFetch.currentLang = 'en-US';
+    await fetchApiFilms();
+  } catch (error) {
+    onErrorEN();
+  }
+}
+
+async function onUkClick() {
+  try {
+    filmApiTrendFetch.currentLang = 'uk-UA';
+    await fetchApiFilms();
+  } catch (error) {
+    onErrorUK()
+  }
+}
+
+// ------------------------------------
+
+
+
 
 function selectYears() {
   for (let i = new Date().getFullYear(); i >= 1900; i -= 1) {
@@ -356,6 +383,8 @@ async function onCardClick(event) {
     }
   }
 
+  // ------------- videoTrailer ------------------
+
   const videoTrailer = document.querySelector('.card-div');
   videoTrailer.addEventListener('click', onPosterClick);
 
@@ -402,35 +431,33 @@ async function onPosterClick() {
       ></iframe>`;
 
       spinnerOff();
-      
-        
+              
       const player = document.querySelector('#player');
 
       trailerBox.addEventListener('click', evt => {
-        if (evt.target !== trailerBox) {
-          spinnerOff();
-          // Notiflix.Notify.failure('Sorry, trailer not found 😢');
-          return;
-        }
-        spinnerOff();
+        // if (evt.target !== trailerBox) {
+        //   // Notiflix.Notify.failure('Sorry, trailer not found 😢');
+        //   return;
+        // }
         closeTrailerModal();
       });
       trailerBox.classList.remove('trailer__box--hidden');
       html.classList.add('disable-scroll-all');
-   
-
 
         //  return trailerWindow.insertAdjacentHTML('beforebegin', mark);
         // trailerWindow.innerHTML = result;
         return trailerWindow.innerHTML;
       });
     } catch (error) {
+      spinnerOff();
       Notiflix.Notify.failure('Sorry, trailer not found 😢');
       console.log(error);
     }
 
     // trailerBox.classList.remove('.trailer__box--hidden');
   }
+
+   // ------------- 
 
   async function openModal() {
     console.log('это Модалка');
@@ -457,10 +484,7 @@ SmoothScroll({
   arrowScroll: 100,
 });
 
-// console.log(query);
-
-// -------- dancing Gif --------- //
+// ------------------- 
 
 
-// import './js/switch';
 import './js/theme';

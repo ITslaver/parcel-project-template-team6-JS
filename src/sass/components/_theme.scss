@@ -4,7 +4,7 @@
 }
 
 .dark-theme { 
-    background-color: #000;
+    background-color: rgb(74, 72, 72);
     }
 
 .dark-theme .header__change-color{
@@ -20,9 +20,75 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
     border: 1px solid #000000;
 }
 
+.dark-theme .tui-pagination .tui-page-btn {
+    color: #000;
+    background: #ffffff;
+    cursor: default;
+    box-shadow: inset 0 0 7px 4px #62453733;
+}
+
+.dark-theme .tui-pagination .tui-is-selected, .tui-pagination strong {
+    background: var(--accent-color);
+    cursor: default;
+    box-shadow: inset 0 0 7px 4px #22201f33;
+}
 
 
+.dark-theme .active-but {
+    background-color: #ab1a1a;
+    border: 1px solid #000000;
+    box-shadow: 0px 8px 43px rgba(255, 0, 0, 0.6);
+}
 
+
+.dark-theme .logo__text {
+    text-shadow: 0px 8px 43px rgba(255, 0, 0, 1);
+
+  }
+
+
+  .dark-theme .header__logo-svg {
+    color: rgba(255, 0, 0, 0.6);
+    box-shadow: 0px 8px 43px rgba(255, 0, 0, 1);
+    background-color: inherit;
+  }
+
+  .dark-theme .header__btn-style:hover,
+  .dark-theme .header__btn-style:focus {
+  background-color:  #ab1a1a;
+  border: 1px solid #000000;
+  box-shadow: 0px 8px 43px  rgba(255, 0, 0, 1);
+
+  
+}
+
+
+//////header////
+
+.dark-theme .header{
+    background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 0.56));
+    height: 240px;
+    @include mobile {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 0.56)), url('./../images/header-bg/header320.jpg');
+      @include retina {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 0.56)), url('./../images/header-bg/header320@2x.jpg');
+      }
+    }
+  
+    @include tablet {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 0.56)), url('./../images/header-bg/header768.jpg');
+      @include retina {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 0.56)), url('./../images/header-bg/header768@2x.jpg');
+      }
+    }
+  
+    @include desktop {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 0.56)), url('./../images/header-bg/header1280.jpg');
+      @include retina {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 0.56)), url('./../images/header-bg/header1280@2x.jpg');
+      }
+    }
+}
 
 
 /////////////SWITCH-BTN//////////////////
@@ -45,12 +111,12 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
 .theme-switch {
     display: flex;
     z-index: 0;
-    position: absolute;
-    margin-right: 5px;
-        margin-top: -40px;
+    // position: absolute;
+    // margin-right: 5px;
+        // margin-top: 140px;
     
-        @media screen and (max-width: 479px) {
-            margin-right: -55px;
+        @media screen and (max-width: 768px) {
+            margin-right: -130px;
             }
 }
 .theme-switch-icon {
@@ -125,3 +191,15 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
 .theme-switch-toggle:active+.theme-switch-track {
     box-shadow: 0 0 0 3px #ff6b01;
 }
+
+.dark-theme .theme-switch-toggle:hover+.theme-switch-track,
+.dark-theme .theme-switch-toggle:active+.theme-switch-track {
+    box-shadow: 0 0 0 3px var(--dark-mode-shadow);
+
+}
+
+.dark-theme .theme-switch-icon {
+    fill: var(--dark-mode-shadow);
+}
+
+

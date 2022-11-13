@@ -103,6 +103,7 @@
 }
 
 .search-form__wrap {
+  position: relative;
   display: flex;
   align-items: baseline;
   @include mobile {
@@ -192,7 +193,7 @@
   background-color: transparent;
   color: var(--header-color-text);
   cursor: pointer;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--header-color-text);
   border-radius: 5px;
   transition-property: background-color, border;
   transition-duration: 250ms;
@@ -201,30 +202,59 @@
   &:focus {
     background-color: var(--accent-color);
   }
-
-  @include tablet {
-    margin-top: 5px;
-  }
 }
 // <!-- ------------------------------------------------Блок користувача-->
 .username {
   @include mobile {
-    // display: none;
+    top: 35px;
+    left: 0px;
   }
+
+  @include tablet {
+    left: 60px;
+  }
+  @include desktop {
+    left: 60px;
+  }
+  // left: 60px;
   display: block;
   position: absolute;
   font-family: inherit;
   font-weight: bold;
-  // text-transform: uppercase;
-  // top: 90px;
-  left: 63px;
-  // margin-top: 5px;
+
   padding: 3px 3px;
   font-family: inherit;
   color: var(--accent-color);
-  // color: #ff001b;
-  // color: #ffffff;
-  // border: 3px solid #ff001b;
-  // border-radius: 5px;
   font-size: 16px;
+}
+
+// ----------------------------------------Вибір жанру та року----
+.choice-genre__wrap {
+  @include mobile {
+    top: 190px;
+  }
+
+  @include tablet {
+    top: 180px;
+  }
+  @include desktop {
+    top: 175px;
+  }
+  position: absolute;
+  // top: 180px;
+}
+
+.choice-genre {
+}
+
+.choice-select {
+  font-family: inherit;
+  color: var(--accent-color);
+  background-color: transparent;
+  border: 1px solid var(--header-color-text);
+  border-radius: 5px;
+  transform: none;
+}
+.choice-select option {
+  // background-color: rgba(21, 197, 35, 0.767);
 }
