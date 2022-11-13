@@ -1,7 +1,7 @@
 import './js/cabinet';
 import FilmApiTrendFetch from './js/serviceApiFilmTrend';
 import './js/authorization';
-import card from './templates/card.hbs';
+import card from './templates/upcoming-film-card.hbs';
 import './js/pagination';
 import onSubmitQuery from './js/on-submit-query';
 import { onLoadPreloaderHide } from './js/preloader';
@@ -19,6 +19,7 @@ import './js/footer-modal';
 import './js/notify-init';
 import renderCards from './js/render-cards';
 import { onErrorEN, onErrorUK } from './js/on-error';
+import { async } from 'regenerator-runtime';
 
 
 const modalCard = document.querySelector('.modal-one-film__content');
@@ -26,6 +27,7 @@ const gallery = document.querySelector('.card-list');
 const btnEn = document.querySelector('#en');
 const btnUk = document.querySelector('#uk');
 const searchForm = document.querySelector('#search-form');
+const upcomingList = document.querySelector('.coming-soon-list')
 let currentLang = "en-US"
 
 window.addEventListener('load', onLoadPreloaderHide);
@@ -37,7 +39,10 @@ searchForm.addEventListener('submit', function (evt) {
 });
 
 // --------- При открытии сайта ---------------------
+
+
 if (document.title === 'Filmoteka') {
+  fetchUpcomingFilms();
   fetchApiFilms();
 
 } else getListById('favorite', uid);
@@ -71,6 +76,19 @@ async function fetchApiFilms() {
   }
 }
 
+
+async function fetchUpcomingFilms() {
+ try {
+   await filmApiTrendFetch.fetchUpcomingFilms()
+     .then(data => {
+       const makrup = data;
+       upcomingList.innerHTML = '';
+       upcomingList.insertAdjacentHTML('beforeend', card(makrup))
+     })
+ } catch (error) {
+   onErrorEN()
+ }
+}
 // ------------Модальное окно----------------
 
 // const listFilms = document.querySelector(".card-list")
