@@ -25,6 +25,7 @@
   @include desktop {
     width: 394px;
     height: 672px;
+    cursor: pointer;
   }
   &:hover {
     transform: scale(1.05);
