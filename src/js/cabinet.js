@@ -34,7 +34,6 @@ const KEY_ID = 'userId';
 let currentLang = 'en-US';
 export let uid;
 
-
 getUserId();
 authStatus();
 
@@ -71,7 +70,8 @@ function itemAction(event) {
         break;
 
       case 'en-US':
-        document.querySelector('.button-queue').textContent = 'REMOVE FROM QUEUE';
+        document.querySelector('.button-queue').textContent =
+          'REMOVE FROM QUEUE';
         break;
     }
     document.querySelector('.button-queue').name = 'delFavorite';
@@ -118,7 +118,8 @@ function itemAction(event) {
         break;
 
       case 'en-US':
-        document.querySelector('.button-watched').textContent = 'REMOVE FROM WATCHED';
+        document.querySelector('.button-watched').textContent =
+          'REMOVE FROM WATCHED';
         break;
     }
 
@@ -215,14 +216,15 @@ function onSignInModalForm(e) {
   e.preventDefault();
   const email = e.target.querySelector('#email-to-sign-in').value;
   const password = e.target.querySelector('#password-to-sign-in').value;
-  authFormReg(email, password);
+  const name = e.target.querySelector('#name').value;
+  authFormReg(email, password, name);
 }
 
 function onAuthrizationModalForm(e) {
   e.preventDefault();
-
   const email = e.target.querySelector('#email-to-authorize').value;
   const password = e.target.querySelector('#password-to-authorize').value;
+
   authFormSend(email, password);
 }
 
@@ -230,7 +232,6 @@ function onSignOut(e) {
   authOut();
   window.location.href = '../index.html';
 }
-
 
 //------------------------Функции кнопок в кабинете ---------------------------
 
@@ -240,20 +241,17 @@ function cabinetAction(event) {
   if (event.submitter.id === 'exit') {
     authOut();
   } else if (event.submitter.id === 'favorite') {
-    console.log(event.submitter.classList)
-    document.getElementById('watched').classList.toggle('active-but')
+    console.log(event.submitter.classList);
+    document.getElementById('watched').classList.toggle('active-but');
     getListById('favorite', uid);
-    event.submitter.classList.toggle('active-but')
-    
+    event.submitter.classList.toggle('active-but');
   } else if (event.submitter.id === 'watched') {
-    console.log(event.submitter.classList)
-    document.getElementById('favorite').classList.toggle('active-but')
+    console.log(event.submitter.classList);
+    document.getElementById('favorite').classList.toggle('active-but');
     getListById('watched', uid);
-    event.submitter.classList.toggle('active-but')
-
+    event.submitter.classList.toggle('active-but');
   }
 }
-
 
 //---------------------------Отрисовка фильмов с списка-------------------------
 async function fetchFilmCard(id) {
@@ -547,7 +545,7 @@ function authFormSend(email, password) {
 
 //---------------------------Отправка запроса регистрации---------------------------
 
-async function authFormReg(email, password) {
+async function authFormReg(email, password, name) {
   const auth = getAuth();
   await createUserWithEmailAndPassword(auth, email, password, name)
     .then(userCredential => {
@@ -583,7 +581,7 @@ async function authFormReg(email, password) {
       // ..
     });
   await updateProfile(auth.currentUser, {
-    displayName: 'GoITstudents',
+    displayName: name,
   });
 }
 
