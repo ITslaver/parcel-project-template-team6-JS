@@ -1,0 +1,48 @@
+.gallery-coming-soon-title {
+  display: none;
+  @include desktop {
+    display: block;
+    margin-bottom: 6px;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.17;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--card-title-text-color);
+  }
+}
+
+.coming-soon-list {
+  display: none;
+  @include desktop {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 60px;
+    // background-color: tomato;
+  }
+}
+
+.coming-soon-list-item {
+  display: none;
+  @include desktop {
+    display: block;
+    width: 145px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 2px solid var(--accent-color);
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      background-image: url(../images/card-noposter.jpg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+  }
+  &:hover {
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.75);
+    transform: scale(1.1);
+  }
+}

@@ -2,12 +2,23 @@
   <div class="header__container container">
     <div class="header__wrap">
       <!-- ------------------------------------------------Логотип-------------- -->
-      <a href="./index.html" class="logo-home__link link">
-        <svg class="header-home__logo" width="30" height="30">
-          <use href="./images/icons.svg#icon-film-home"></use>
-        </svg>
-        <p class="logo-home__text">Filmoteka</p>
-      </a>
+      <div class="logo__wrap">
+        <a href="./index.html" class="logo-home__link link">
+          <svg class="header-home__logo" width="28" height="30">
+            <use href="./images/icons.svg#icon-film-home"></use>
+          </svg>
+          <p class="logo-home__text">Filmoteka</p>
+        </a>
+        <div class="username"></div>
+      </div>
+      <!-- ------------------------------------------------Блок користувача-->
+      <div class="username"></div>
+      <div class="select-genre">
+        <form>
+          <select id="genres"></select>
+          <select id="years"></select>
+        </form>
+      </div>
 
       <!--------------------------------------------------Кнопки авторицації та реєстрації -->
       <div class="authbtns">
@@ -123,7 +134,6 @@
             <b class="sign-in-modal__header"
               >Please enter your sign-in information
             </b>
-
             <form class="sign-in-modal-form js-speaker-form" autocomplete="on">
               <div class="sign-in-modal-form__field">
                 <label class="sign-in-modal-form__label" for="name">Name</label>
@@ -143,7 +153,6 @@
                   </svg>
                 </div>
               </div>
-
               <div class="sign-in-modal-form__field">
                 <label class="sign-in-modal-form__label" for="email-to-sign-in"
                   >E-mail</label
@@ -214,7 +223,7 @@
       </ul>
     </div>
     <!-- ------------------------------------------------Блок користувача-->
-    <div class="username"></div>
+    <!-- <div class="username"></div> -->
     <!---------------------------------------------------------Форма поиска-------- -->
     <div class="search-form__container">
       <div class="search-form__wrap">

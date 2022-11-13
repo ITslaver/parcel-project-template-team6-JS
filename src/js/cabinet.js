@@ -13,6 +13,7 @@ import Notiflix from 'notiflix';
 import { title } from 'process';
 import { async } from 'regenerator-runtime';
 import './serviceApiFilmTrend';
+import { spinnerOff, spinnerOn } from './preloader';
 // Import the functions you need from the SDKs you need
 
 const firebaseConfig = {
@@ -30,19 +31,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
-
-//let currentLang;
-
-//if (document.querySelectorAll('#en').classList.contains('active-btn')) {
-//  currentLang = document.querySelector('#en').dataset.lang;
-//} else if (document.querySelector('#ua').classList.contains('active-btn')) {
-//  currentLang = document.querySelector('#ua').dataset.lang;
-//}
-//else 
-let currentLang = "en-US"
-
-
+let currentLang = 'en-US';
 export let uid;
+
+
 getUserId();
 authStatus();
 
@@ -74,11 +66,12 @@ function itemAction(event) {
     }
     switch (currentLang) {
       case 'uk-UA':
-        document.querySelector('.button-queue').textContent = 'ВИДАЛИТИ З ЧЕРГИ';
+        document.querySelector('.button-queue').textContent =
+          'ВИДАЛИТИ З ЧЕРГИ';
         break;
 
       case 'en-US':
-        document.querySelector('.button-queue').textContent = 'DEL QUEUE';
+        document.querySelector('.button-queue').textContent = 'REMOVE FROM QUEUE';
         break;
     }
     document.querySelector('.button-queue').name = 'delFavorite';
@@ -89,11 +82,13 @@ function itemAction(event) {
       switch (currentLang) {
         case 'uk-UA':
           document.querySelector('.button-watched-del').textContent =
-          'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';          break;
-  
+            'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';
+          break;
+
         case 'en-US':
           document.querySelector('.button-watched-del').textContent =
-          'ADD TO WATCHED';          break;
+            'ADD TO WATCHED';
+          break;
       }
       document.querySelector('.button-watched-del').name = 'addWatched';
       document.querySelector('.button-watched-del').classList =
@@ -101,11 +96,11 @@ function itemAction(event) {
     }
     switch (currentLang) {
       case 'uk-UA':
-        Notiflix.Notify.success('успішно додано до QUEUE');
+        Notiflix.Notify.success('успішно додано до Черги перегляду');
         break;
 
       case 'en-US':
-        Notiflix.Notify.success('success added to Черги перегляду');
+        Notiflix.Notify.success('success added to QUEUE');
         break;
     }
   } else if (event.target.name === 'addWatched') {
@@ -118,11 +113,12 @@ function itemAction(event) {
     }
     switch (currentLang) {
       case 'uk-UA':
-        document.querySelector('.button-watched').textContent = 'ВИДАЛИТИ З ПЕРЕГЛЯНУТОГО';
+        document.querySelector('.button-watched').textContent =
+          'ВИДАЛИТИ З ПЕРЕГЛЯНУТОГО';
         break;
 
       case 'en-US':
-        document.querySelector('.button-watched').textContent = 'DEL WATCHED';
+        document.querySelector('.button-watched').textContent = 'REMOVE FROM WATCHED';
         break;
     }
 
@@ -132,11 +128,13 @@ function itemAction(event) {
     if (document.querySelector('.button-queue-del')) {
       switch (currentLang) {
         case 'uk-UA':
-          document.querySelector('.button-queue-del').textContent = 'ДОДАТИ ДО ЧЕРГИ';
+          document.querySelector('.button-queue-del').textContent =
+            'ДОДАТИ ДО ЧЕРГИ';
           break;
-  
+
         case 'en-US':
-          document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
+          document.querySelector('.button-queue-del').textContent =
+            'ADD TO QUEUE';
           break;
       }
       document.querySelector('.button-queue-del').name = 'addFavorite';
@@ -158,11 +156,13 @@ function itemAction(event) {
     }
     switch (currentLang) {
       case 'uk-UA':
-        document.querySelector('.button-queue-del').textContent = 'ДОДАТИ ДО ЧЕРГИ';
+        document.querySelector('.button-queue-del').textContent =
+          'ДОДАТИ ДО ЧЕРГИ';
         break;
 
       case 'en-US':
-        document.querySelector('.button-queue-del').textContent = 'ADD TO QUEUE';
+        document.querySelector('.button-queue-del').textContent =
+          'ADD TO QUEUE';
         break;
     }
     document.querySelector('.button-queue-del').name = 'addFavorite';
@@ -174,7 +174,7 @@ function itemAction(event) {
         break;
 
       case 'en-US':
-        Notiflix.Notify.success('success del to QUEUE');
+        Notiflix.Notify.success('success remove from QUEUE');
         break;
     }
   } else if (event.target.name === 'delWatched') {
@@ -184,12 +184,13 @@ function itemAction(event) {
     }
     switch (currentLang) {
       case 'uk-UA':
-        document.querySelector('.button-watched-del').textContent = 'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';
+        document.querySelector('.button-watched-del').textContent =
+          'ДОДАТИ ДО ПЕРЕГЛЯНУТОГО';
         break;
 
       case 'en-US':
         document.querySelector('.button-watched-del').textContent =
-        'ADD TO WATCHED';
+          'ADD TO WATCHED';
         break;
     }
 
@@ -202,13 +203,13 @@ function itemAction(event) {
         break;
 
       case 'en-US':
-        Notiflix.Notify.success('success del to Watched');
+        Notiflix.Notify.success('success remove from Watched');
         break;
     }
   }
 }
 
-//------------------------Функции кнопок в модальном окне---------------------------
+//------------------------Функции кнопок в модальном окне ---------------------------
 
 function onSignInModalForm(e) {
   e.preventDefault();
@@ -230,32 +231,29 @@ function onSignOut(e) {
   window.location.href = '../index.html';
 }
 
+
+//------------------------Функции кнопок в кабинете ---------------------------
+
 function cabinetAction(event) {
   event.preventDefault();
-  // console.log(event.target.name);
 
-  // if (event.submitter.id === 'sign') {
-  //   const email = event.target.querySelector('#email').value;
-  //   const password = event.target.querySelector('#password').value;
-  //   authFormSend(email, password);
-  //   // event.submitter.disabled = true;
-  // } else if (event.submitter.id === 'register') {
-  //   const email = event.target.querySelector('#email').value;
-  //   const password = event.target.querySelector('#password').value;
-  //   authFormReg(email, password);
-  //   // event.submitter.disabled = true;
-  // } else
   if (event.submitter.id === 'exit') {
     authOut();
-    // event.submitter.disabled = true;
   } else if (event.submitter.id === 'favorite') {
-    // console.log(uid);
+    console.log(event.submitter.classList)
+    document.getElementById('watched').classList.toggle('active-but')
     getListById('favorite', uid);
+    event.submitter.classList.toggle('active-but')
+    
   } else if (event.submitter.id === 'watched') {
-    // console.log(uid);
+    console.log(event.submitter.classList)
+    document.getElementById('favorite').classList.toggle('active-but')
     getListById('watched', uid);
+    event.submitter.classList.toggle('active-but')
+
   }
 }
+
 
 //---------------------------Отрисовка фильмов с списка-------------------------
 async function fetchFilmCard(id) {
@@ -325,12 +323,14 @@ export async function getListById(category, user) {
   const list = Object.keys(await getList(category, user));
   console.log(list.length);
   const listItems = [];
+  spinnerOn();
   for (const item of list) {
     console.log(item);
     const film = await extendFetchFilmCard(item);
     film.list = category;
     listItems.push(film);
   }
+  spinnerOff();
   console.log(listItems);
   document.getElementById('card-list').length = 0;
   return document
@@ -365,7 +365,7 @@ export async function getList(category, user) {
           case 'en-US':
             document.getElementById(
               'card-list'
-            ).innerHTML = `<li><p>Oops! It looks like you haven't selected anything yet! Add more movies to your queue and enjoy :)</p></li>`;
+            ).innerHTML = `<li><p>Oops! It looks like you haven't watched anything yet.</p></li>`;
             break;
         }
 
@@ -385,7 +385,7 @@ export async function getList(category, user) {
           case 'en-US':
             document.getElementById(
               'card-list'
-            ).innerHTML = `<li><p>Oops! It looks like you haven't watched anything yet.</p></li>`;
+            ).innerHTML = `<li><p>Oops! It looks like you haven't selected anything yet! Add more movies to your queue and enjoy :)</p></li>`;
             break;
         }
         console.log(

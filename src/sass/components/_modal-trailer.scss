@@ -23,16 +23,22 @@
     left: 0;
     // justify-content: center;
     // align-items: center;
-    margin-left: 117px;
+    // margin-left: 117px;
     // body {
     //   margin: 0;
     //   margin-left: 117px;
     // }
-    // width: 80vw;
-    // height: 70vh;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+  }
+
+  button,input {
+    overflow: visible;
   }
   
   .trailer__close-btn {
+    
     cursor: pointer;
     position: absolute;
     border: none;
@@ -68,7 +74,7 @@
       margin-left: 10px; 
     
     @include mobile {
-      max-width: 280px;
+      max-width: 100vw;
       width: 80%;
       height: 45%;          
     }

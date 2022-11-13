@@ -1,12 +1,15 @@
 import { uid } from './cabinet';
 
-const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
+export const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
 const TRENDING_URL = 'https://api.themoviedb.org/3/trending/movie/day';
 const SEARCH_FILMS_URL = 'https://api.themoviedb.org/3/search/movie';
 const CARD_MOVIE = 'https://api.themoviedb.org/3/movie/';
 const TRAILER_MOVIE = 'https://api.themoviedb.org/3/movie/';
-const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
+export const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
+const UPCOMING_URL = 'https://api.themoviedb.org/3/movie/upcoming';
+
 const LOCAL_KEY_GENRES = 'genres';
+export const GENRES_ID_URL = 'https://api.themoviedb.org/3/discover/movie';
 
 export default class FilmApiTrendFetch {
   constructor() {
@@ -19,7 +22,7 @@ export default class FilmApiTrendFetch {
     this.card;
   }
 
- async fetchFilmsGenres() {
+  async fetchFilmsGenres() {
     return await fetch(
       `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}`
     )
@@ -46,7 +49,6 @@ export default class FilmApiTrendFetch {
   }
 
   async getListId(category, user) {
-    console.log(category, user);
     const requestOptions = {
       method: 'GET',
       redirect: 'follow',
@@ -264,10 +266,27 @@ export default class FilmApiTrendFetch {
     } catch (error) {
       console.log(error);
     }
-
   }
 
- get lang() {
+  async fetchUpcomingFilms() {
+    try {
+      return await fetch(
+        `${UPCOMING_URL}?api_key=${API_KEY}&language=${this.currentLang}`
+      )
+        .then(res => res.json())
+        .then(data => {
+          let currentPosters = [];
+          for (let i = 0; i <= 7; i += 1) {
+            currentPosters.push(data.results[i]);
+          }
+          return currentPosters;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  get lang() {
     return this.currentLang;
   }
   set lang(value) {
