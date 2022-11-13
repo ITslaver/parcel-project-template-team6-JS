@@ -31,18 +31,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
-
-//let currentLang;
-
-//if (document.querySelectorAll('#en').classList.contains('active-btn')) {
-//  currentLang = document.querySelector('#en').dataset.lang;
-//} else if (document.querySelector('#ua').classList.contains('active-btn')) {
-//  currentLang = document.querySelector('#ua').dataset.lang;
-//}
-//else
 let currentLang = 'en-US';
-
 export let uid;
+
+
 getUserId();
 authStatus();
 
@@ -217,7 +209,7 @@ function itemAction(event) {
   }
 }
 
-//------------------------Функции кнопок в модальном окне---------------------------
+//------------------------Функции кнопок в модальном окне ---------------------------
 
 function onSignInModalForm(e) {
   e.preventDefault();
@@ -239,19 +231,29 @@ function onSignOut(e) {
   window.location.href = '../index.html';
 }
 
+
+//------------------------Функции кнопок в кабинете ---------------------------
+
 function cabinetAction(event) {
   event.preventDefault();
+
   if (event.submitter.id === 'exit') {
     authOut();
-    // event.submitter.disabled = true;
   } else if (event.submitter.id === 'favorite') {
+    console.log(event.submitter.classList)
     document.getElementById('watched').classList.toggle('active-but')
     getListById('favorite', uid);
+    event.submitter.classList.toggle('active-but')
+    
   } else if (event.submitter.id === 'watched') {
+    console.log(event.submitter.classList)
     document.getElementById('favorite').classList.toggle('active-but')
     getListById('watched', uid);
+    event.submitter.classList.toggle('active-but')
+
   }
 }
+
 
 //---------------------------Отрисовка фильмов с списка-------------------------
 async function fetchFilmCard(id) {
