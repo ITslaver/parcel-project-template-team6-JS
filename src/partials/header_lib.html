@@ -23,11 +23,43 @@
         <div class="header__pages">
           <ul class="header__pages-list">
             <li class="header__pages-item">
-              <button class="btn__icon-lib">
-                <svg class="header__change-color" width="25" height="25">
-                  <use href="./images/icons.svg#icon-star-half"></use>
-                </svg>
-              </button>
+              <div class="toolbar">
+                <div class="theme-switch">
+                  <svg
+                    class="theme-switch-icon"
+                    width="20px"
+                    height="20px"
+                    role="img"
+                    aria-label="Іконка сонця"
+                  >
+                    <use href="./images/icons.svg#icon-star-half"></use>
+                  </svg>
+          
+                  <div class="theme-switch-control">
+                    <input
+                      class="theme-switch-toggle"
+                      type="checkbox"
+                      name="theme"
+                      id="theme-switch-toggle"
+                      aria-label="Перемикач теми"
+                    />
+                    <label
+                      aria-hidden="true"
+                      class="theme-switch-track"
+                      for="theme-switch-toggle"
+                    ></label>
+                    <div aria-hidden="true" class="theme-switch-marker"></div>
+                  </div>
+          
+                  <svg
+                    class="theme-switch-icon"
+                    width="20px"
+                    height="20px"
+                    aria-label="Іконка місяця"
+                  >
+                    <use href="./images/icons.svg#icon-star-half"></use>
+                  </svg>
+                </div>
             </li>
             <li class="header__pages-item">
               <a class="header__pages-link" href="./index.html">home</a>

@@ -26,6 +26,7 @@ import { async } from 'regenerator-runtime';
 import './js/backButton.js';
 
 
+
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
 const btnEn = document.querySelector('#en');
@@ -459,3 +460,7 @@ SmoothScroll({
 // console.log(query);
 
 // -------- dancing Gif --------- //
+
+
+// import './js/switch';
+import './js/theme';
