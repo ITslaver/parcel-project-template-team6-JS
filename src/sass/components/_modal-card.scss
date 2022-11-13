@@ -3,10 +3,10 @@
   touch-action: none; 
   margin: 0;
   @include tablet {
-    margin-right: 17px;
+    margin-right: 23px;
   }
   @include desktop {
-    margin-right: 17px;
+    margin-right: 23px;
   }
 }
 
@@ -22,7 +22,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  z-index: 99;
+  z-index: 9;
 
   transition: visibility 0.3s linear, opacity 0.3s linear;
 
@@ -49,13 +49,14 @@
   font-size: 12px;
   line-height: 16px;
 
+  // margin-left: 15px;
   margin-bottom: 30px;
   background: var(--header-color-text);
   position: relative;
 
   @include tablet {
     width: 704px;
-    margin: 0;
+    margin-right: 27px;
   }
 
   @include desktop {
@@ -78,7 +79,7 @@
   top: 8px;
   right: 8px;
   border-radius: 50%;
-  z-index: 10;
+  z-index: 7;
 
   stroke: black;
   // cubic-bezier(0.4, -0.16, 0.09, 1.51) rgba(55, 126, 240, 0.747);
@@ -297,6 +298,7 @@
 
 .buttons {
   display: flex;
+  justify-content: center;
   gap: 15px;
 
   button {

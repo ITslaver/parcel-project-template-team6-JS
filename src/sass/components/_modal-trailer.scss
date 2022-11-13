@@ -1,0 +1,99 @@
+.trailer__box {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: -10px;
+    overflow: auto;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    z-index: 20;
+  
+    transition: visibility 0.3s linear, opacity 0.3s linear;
+  
+    &--hidden {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+  .trailer__window {
+    display: flex;
+    left: 0;
+    // justify-content: center;
+    // align-items: center;
+    margin-left: 117px;
+    // body {
+    //   margin: 0;
+    //   margin-left: 117px;
+    // }
+    // width: 80vw;
+    // height: 70vh;
+  }
+
+  button,input {
+    overflow: visible;
+  }
+  
+  .trailer__close-btn {
+    
+    cursor: pointer;
+    position: absolute;
+    border: none;
+    background: none;
+    padding: 0;
+    top: 48px;
+    right: 48px;
+    z-index: 100;
+    fill: var(--accent-color);
+    scale: 1.0;
+    transition: 250ms ease-in;
+      
+      &:hover {
+        transform: scale(1.3);
+      }
+  }
+  
+  .trailer__player {
+    z-index: 21;
+    margin-right: 7px;
+    @include tablet {
+      margin: 0;
+    }
+  }
+  
+  #player {   
+    display: block;
+    
+    @include centeringXY();
+      width: 100%;
+      height: 60%;
+      z-index: 22;
+      margin-left: 10px; 
+    
+    @include mobile {
+      max-width: 280px;
+      width: 80%;
+      height: 45%;          
+    }
+  
+    @include tablet {
+      max-width: 640px;
+      width: 80%;
+      height: 45%; 
+      margin: 0;  
+    }
+  
+    @media screen and (min-width: 640px) and (max-width: 1024px){
+      // max-width: 640px;
+      width: 80%;
+      height: 45%; 
+    }
+
+    @include desktop {
+        max-width: 1024px;   
+        width: 90%;
+        height: 80%; 
+      }
+  }

@@ -27,16 +27,24 @@
   padding-top: 40px;
 }
 // -------------------------------------------------Контейнер-------
+.header {
+  position: relative;
+}
 
 .header__wrap {
   display: flex;
-  position: relative;
   align-items: center;
   justify-content: space-between;
 }
 // --------------------------------------------------Логотип---------------
+.logo__wrap {
+  position: relative;
+  // align-items: center;
+}
+
 .logo-home__link {
   display: flex;
+  align-items: center;
   font-weight: 500;
   align-items: center;
   color: var(--header-color-text);
@@ -73,10 +81,16 @@
 }
 
 .nav__link {
+  @include mobile {
+    font-size: 10px;
+  }
+  @include tablet {
+    font-size: 12px;
+  }
   text-decoration: none;
   font-family: 'Roboto';
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.16;
   display: flex;
   text-transform: uppercase;
@@ -90,7 +104,17 @@
 
 .search-form__wrap {
   display: flex;
-  padding-top: 40px;
+  align-items: baseline;
+  @include mobile {
+    padding-top: 70px;
+  }
+
+  @include tablet {
+    padding-top: 50px;
+  }
+  @include desktop {
+    padding-top: 40px;
+  }
 }
 
 .search-form__input {
@@ -105,9 +129,10 @@
   outline: none;
   resize: none;
   overflow: hidden;
+  transform: none;
 
   @include mobile {
-    width: 260px;
+    width: 200px;
   }
   @include tablet {
     width: 350px;
@@ -142,6 +167,8 @@
     transform: scale(1.2);
   }
 }
+
+// <!---------------------------------------------------Кнопки вибору мови-------- -->
 
 .language-btn__list {
   display: flex;
@@ -178,4 +205,26 @@
   @include tablet {
     margin-top: 5px;
   }
+}
+// <!-- ------------------------------------------------Блок користувача-->
+.username {
+  @include mobile {
+    // display: none;
+  }
+  display: block;
+  position: absolute;
+  font-family: inherit;
+  font-weight: bold;
+  // text-transform: uppercase;
+  // top: 90px;
+  left: 63px;
+  // margin-top: 5px;
+  padding: 3px 3px;
+  font-family: inherit;
+  color: var(--accent-color);
+  // color: #ff001b;
+  // color: #ffffff;
+  // border: 3px solid #ff001b;
+  // border-radius: 5px;
+  font-size: 16px;
 }
