@@ -14,12 +14,13 @@ import { getList } from './js/cabinet';
 import { getListById } from './js/cabinet';
 import './js/goTop';
 // import './js/footer-modal';
-import './js/goTop';
 import './js/footer-modal';
 import './js/notify-init';
 import renderCards from './js/render-cards';
 import { onErrorEN, onErrorUK } from './js/on-error';
 import './js/backButton.js'
+import Notiflix from 'notiflix';
+import { spinnerOff, spinnerOn } from './js/preloader.js';
 
 
 const modalCard = document.querySelector('.modal-one-film__content');
@@ -83,7 +84,9 @@ const trailerCard = document.querySelector('.modal-one-film__content');
 
 
 async function onCardClick(event) {
+  spinnerOn();
   if (event.target.classList.contains('card-list')) {
+    spinnerOff();
     return;
   }
   filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
@@ -110,6 +113,7 @@ async function onCardClick(event) {
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
+        spinnerOff();
         if (uid === "guest") {
           document.querySelector('.button-queue').style.display = "none";
           document.querySelector('.button-watched').style.display = "none";
@@ -161,7 +165,7 @@ function closeTrailerModal() {
     html.classList.remove('disable-scroll-all');
   }
 
-async function onPosterClick() {
+async function onPosterClick() { 
     console.log("Это постер");
 
     closeTrailerBtn.addEventListener('click', evt =>{
@@ -169,17 +173,19 @@ async function onPosterClick() {
       closeTrailerModal();
   })
 
-    try {
+    try {  spinnerOn();
       await filmApiTrendFetch.fetchTrailerMovie().then(data => {
         // const markup = hbsTest(data);
         console.log("Это трейлер:", data.results);
 
+        
         console.log(filmApiTrendFetch.movie_id);
         const res = data.results;
         console.log('Это res:', res[0].key);
         // const mark = res.map(item =>          
         //   `<li><iframe id="player" width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
 
+        
         //   console.log(mark);
         trailerWindow.innerHTML = `<iframe
         id="player"
@@ -190,14 +196,18 @@ async function onPosterClick() {
         allow="autoplay"
         allowfullscreen
       ></iframe>`;
+      spinnerOff();
+      
         
       const player = document.querySelector('#player');
 
       trailerBox.addEventListener('click', evt => {
         if (evt.target !== trailerBox) {
-          Notiflix.Notify.failure('Sorry, trailer not found 😢');
+          spinnerOff();
+          // Notiflix.Notify.failure('Sorry, trailer not found 😢');
           return;
         }
+        spinnerOff();
         closeTrailerModal();
       });
       trailerBox.classList.remove('trailer__box--hidden');
@@ -208,7 +218,7 @@ async function onPosterClick() {
         return trailerWindow.innerHTML;
       });
     } catch (error) {
-      // Notiflix.Notify.failure('Sorry, trailer not found 😢');
+      Notiflix.Notify.failure('Sorry, trailer not found 😢');
       console.log(error);
     }
 
