@@ -28,6 +28,10 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
             transform 500ms $time-function,
             visibility 500ms $time-function;
     }
+
+    .dark-theme & {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 }
 
 .footer-modal {
@@ -41,7 +45,7 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
 
     padding: 40px;
 
-    background: #FFFFFF;
+    background-color: #FFFFFF;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
 
     @media screen and (max-height: 610px) and (orientation: landscape) {
@@ -57,6 +61,11 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
         top: 50%;
         transform: translate(-50%, -50%);
         max-width: 1200px;
+    }
+
+    .dark-theme & {
+        background-color: #353535;
+        box-shadow: 0px 1px 3px rgba(255, 255, 255, 0.12), 0px 1px 1px rgba(255, 255, 255, 0.12), 0px 2px 1px rgba(255, 255, 255, 0.2);
     }
 }
 
@@ -91,6 +100,15 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     .footer-modal__close-btn:focus & {
         stroke: var(--accent-color);
     }
+
+    .dark-theme & {
+        stroke: var(--header-color-text);  
+    }
+
+    .dark-theme .footer-modal__close-btn:hover &, 
+    .dark-theme .footer-modal__close-btn:focus & {
+        stroke: var(--dark-mode-shadow);
+    }
 }
 
 .footer-modal__team-list {
@@ -113,7 +131,11 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     &:hover {
         transform: scale(1.05);
         box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.75);
-      }
+    }
+
+    .dark-theme &:hover {
+        box-shadow: 0px 4px 8px 0px var(--dark-mode-shadow);
+    }
 
     @include tablet {
         width: calc((100% - 40px)/3);
@@ -171,6 +193,10 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
         font-size: 14px;
         line-height: 1.2;
     }
+
+    .dark-theme & {
+        color: var(--header-color-text);
+    }
 }
 
 .footer-modal__member-role {
@@ -194,6 +220,10 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
         font-size: 12px;
         line-height: 1.2;
     }
+
+    .dark-theme & {
+        color: var(--header-color-text);
+    }
 }
 
 .footer-modal__card-genres {
@@ -208,6 +238,10 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     @include desktop {
       font-size: 14px;
       line-height: 1.2;
+    }
+
+    .dark-theme & {
+        color: var(--dark-mode-shadow);
     }
 }
 
@@ -230,6 +264,11 @@ $time-function: cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 500;
     font-size: 14px;
     line-height: 1.17;
+
+    .dark-theme & {
+        background-color: var(--dark-mode-background-color);
+        color: var(--header-color-text);
+    }
 }
 
 .footer-modal-opened {
