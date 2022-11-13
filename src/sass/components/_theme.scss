@@ -4,7 +4,7 @@
 }
 
 .dark-theme { 
-    background-color: #000;
+    background-color: rgb(74, 72, 72);
     }
 
 .dark-theme .header__change-color{
@@ -19,6 +19,23 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
 .dark-theme .header__btn-style{
     border: 1px solid #000000;
 }
+
+.dark-theme .tui-pagination .tui-page-btn {
+    color: #000;
+    background: #ffffff;
+    cursor: default;
+    box-shadow: inset 0 0 7px 4px #62453733;
+}
+
+.dark-theme .tui-pagination .tui-is-selected, .tui-pagination strong {
+    background: var(--accent-color);
+    cursor: default;
+    box-shadow: inset 0 0 7px 4px #22201f33;
+}
+
+
+
+
 
 
 
@@ -45,12 +62,12 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
 .theme-switch {
     display: flex;
     z-index: 0;
-    position: absolute;
-    margin-right: 5px;
-        margin-top: -40px;
+    // position: absolute;
+    // margin-right: 5px;
+        // margin-top: 140px;
     
-        @media screen and (max-width: 479px) {
-            margin-right: -55px;
+        @media screen and (max-width: 768px) {
+            margin-right: -130px;
             }
 }
 .theme-switch-icon {
