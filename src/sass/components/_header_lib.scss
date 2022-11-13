@@ -180,6 +180,7 @@
 .input-style {
   background-color: transparent;
   border: none;
+  transform: none;
   // border-bottom: 1px solid #FF6B01;
   @include tablet {
     width: 140px;
