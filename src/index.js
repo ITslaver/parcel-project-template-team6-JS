@@ -42,7 +42,7 @@ searchForm.addEventListener('submit', function (evt) {
 // --------- При открытии сайта ---------------------
 if (document.title === 'Filmoteka') {
   fetchApiFilms();
-
+  selectFilmsGenres() 
 } else getListById('favorite', uid);
 
 
@@ -74,7 +74,8 @@ async function fetchApiFilms() {
   }
 }
 //---------------Selected---------------
-selectFilmsGenres() 
+
+
 
 async function getListId(category, user) {
   const requestOptions = {
@@ -196,13 +197,17 @@ async function fetchWithGenres(id) {
        .catch(err => console.log(err));
 }
 
-const genre = document.getElementById('genres');
-genres.addEventListener(
-  'change',
-  (event = () => {
-    renderGenre (genres.value)
-  })
-);
+if (document.getElementById('genres')) {
+  const genre = document.getElementById('genres');
+  genres.addEventListener(
+    'change',
+    (event = () => {
+      renderGenre (genres.value)
+    })
+  );
+}
+
+
   
 async function renderGenre (genre) {
   films = await fetchWithGenres(genre)
@@ -248,8 +253,8 @@ async function onCardClick(event) {
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
         if (uid === "guest") {
-          document.querySelector('.button-queue').style.display = "none";
-          document.querySelector('.button-watched').style.display = "none";
+          document.querySelector('.button-queue').disabled = "true";
+          document.querySelector('.button-watched').disabled = "true";
         }
           else if (list === 'favorite') {
             switch (currentLang) {
