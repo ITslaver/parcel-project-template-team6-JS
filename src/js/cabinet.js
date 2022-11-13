@@ -241,27 +241,14 @@ function onSignOut(e) {
 
 function cabinetAction(event) {
   event.preventDefault();
-  // console.log(event.target.name);
-
-  // if (event.submitter.id === 'sign') {
-  //   const email = event.target.querySelector('#email').value;
-  //   const password = event.target.querySelector('#password').value;
-  //   authFormSend(email, password);
-  //   // event.submitter.disabled = true;
-  // } else if (event.submitter.id === 'register') {
-  //   const email = event.target.querySelector('#email').value;
-  //   const password = event.target.querySelector('#password').value;
-  //   authFormReg(email, password);
-  //   // event.submitter.disabled = true;
-  // } else
   if (event.submitter.id === 'exit') {
     authOut();
     // event.submitter.disabled = true;
   } else if (event.submitter.id === 'favorite') {
-    // console.log(uid);
+    document.getElementById('watched').classList.toggle('active-but')
     getListById('favorite', uid);
   } else if (event.submitter.id === 'watched') {
-    // console.log(uid);
+    document.getElementById('favorite').classList.toggle('active-but')
     getListById('watched', uid);
   }
 }

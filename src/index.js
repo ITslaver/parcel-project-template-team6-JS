@@ -48,7 +48,18 @@ if (document.title === 'Filmoteka') {
   fetchUpcomingFilms();
   fetchApiFilms();
   selectFilmsGenres();
+  selectYears()
+
 } else getListById('favorite', uid);
+
+function selectYears() {
+  for (let i = new Date().getFullYear(); i >= 1900; i -= 1) {
+    if (document.getElementById('year')) {
+    document.getElementById('year').insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`)
+    }
+    }
+  }
+  
 
 async function onEnClick() {
   try {
@@ -200,7 +211,7 @@ async function fetchWithGenres(id) {
   )
     .then(response => response.json())
     .then(results => {
-      data = results.results;
+      let data = results.results;
       return data;
     })
     .catch(err => console.log(err));
