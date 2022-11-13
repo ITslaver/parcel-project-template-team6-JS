@@ -33,7 +33,7 @@ const btnEn = document.querySelector('#en');
 const btnUk = document.querySelector('#uk');
 const searchForm = document.querySelector('#search-form');
 const upcomingList = document.querySelector('.coming-soon-list');
-let currentLang = 'en-US';
+let currentLang;
 
 window.addEventListener('load', onLoadPreloaderHide);
 
@@ -383,6 +383,8 @@ async function onCardClick(event) {
     }
   }
 
+  // ------------- videoTrailer ------------------
+
   const videoTrailer = document.querySelector('.card-div');
   videoTrailer.addEventListener('click', onPosterClick);
 
@@ -429,23 +431,18 @@ async function onPosterClick() {
       ></iframe>`;
 
       spinnerOff();
-      
-        
+              
       const player = document.querySelector('#player');
 
       trailerBox.addEventListener('click', evt => {
-        if (evt.target !== trailerBox) {
-          spinnerOff();
-          // Notiflix.Notify.failure('Sorry, trailer not found 😢');
-          return;
-        }
-        spinnerOff();
+        // if (evt.target !== trailerBox) {
+        //   // Notiflix.Notify.failure('Sorry, trailer not found 😢');
+        //   return;
+        // }
         closeTrailerModal();
       });
       trailerBox.classList.remove('trailer__box--hidden');
       html.classList.add('disable-scroll-all');
-   
-
 
         //  return trailerWindow.insertAdjacentHTML('beforebegin', mark);
         // trailerWindow.innerHTML = result;
@@ -459,6 +456,8 @@ async function onPosterClick() {
 
     // trailerBox.classList.remove('.trailer__box--hidden');
   }
+
+   // ------------- 
 
   async function openModal() {
     console.log('это Модалка');
@@ -485,9 +484,7 @@ SmoothScroll({
   arrowScroll: 100,
 });
 
-// console.log(query);
-
-// -------- dancing Gif --------- //
+// ------------------- 
 
 
 import './js/theme';
