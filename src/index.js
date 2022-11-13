@@ -24,6 +24,7 @@ import { spinnerOff, spinnerOn } from './js/preloader.js';
 import { GENRES_URL, API_KEY, GENRES_ID_URL } from './js/serviceApiFilmTrend';
 import { async } from 'regenerator-runtime';
 import './js/backButton.js';
+import './js/theme';
 
 
 
@@ -485,6 +486,3 @@ SmoothScroll({
 });
 
 // ------------------- 
-
-
-import './js/theme';
