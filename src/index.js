@@ -54,8 +54,8 @@ if (document.title === 'Filmoteka') {
 
 function selectYears() {
   for (let i = new Date().getFullYear(); i >= 1900; i -= 1) {
-    if (document.getElementById('year')) {
-    document.getElementById('year').insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`)
+    if (document.getElementById('years')) {
+    document.getElementById('years').insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`)
     }
     }
   }
@@ -217,6 +217,30 @@ async function fetchWithGenres(id) {
     .catch(err => console.log(err));
 }
 
+async function fetchWithYers(year) {
+  return await fetch(
+    `${GENRES_ID_URL}?api_key=${API_KEY}&language=${currentLang}&&primary_release_date.gte=${year}-01-01&primary_release_date.lte=${year}-12-31`
+  )
+    .then(response => response.json())
+    .then(results => {
+      console.log(results)
+      let data = results.results;
+      return data;
+    })
+    .catch(err => console.log(err));
+}
+
+if (document.getElementById('years')) {
+  const year = document.getElementById('years');
+    year.addEventListener(
+    'change',
+    (event = () => {
+      console.log(year.value)
+      renderYear(year.value);
+    })
+  );
+}
+
 if (document.getElementById('genres')) {
   const genre = document.getElementById('genres');
   genres.addEventListener(
@@ -230,6 +254,11 @@ if (document.getElementById('genres')) {
 async function renderGenre(genre) {
   films = await fetchWithGenres(genre);
   renderCards(await filmsAndGenres(await fetchWithGenres(genre)));
+}
+
+async function renderYear(year) {
+  films = await fetchWithYers(year);
+  renderCards(await filmsAndGenres(await fetchWithYers(year)));
 }
 
 async function fetchUpcomingFilms() {
