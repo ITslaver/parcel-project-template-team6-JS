@@ -53,6 +53,33 @@ if (document.title === 'Filmoteka') {
 
 } else getListById('favorite', uid);
 
+// ------------Переключение языка--------------
+btnEn.addEventListener('click', onEnClick);
+btnUk.addEventListener('click', onUkClick);
+
+async function onEnClick() {
+  try {
+    filmApiTrendFetch.currentLang = 'en-US';
+    await fetchApiFilms();
+  } catch (error) {
+    onErrorEN();
+  }
+}
+
+async function onUkClick() {
+  try {
+    filmApiTrendFetch.currentLang = 'uk-UA';
+    await fetchApiFilms();
+  } catch (error) {
+    onErrorUK()
+  }
+}
+
+// ------------------------------------
+
+
+
+
 function selectYears() {
   for (let i = new Date().getFullYear(); i >= 1900; i -= 1) {
     if (document.getElementById('years')) {
@@ -425,6 +452,7 @@ async function onPosterClick() {
         return trailerWindow.innerHTML;
       });
     } catch (error) {
+      spinnerOff();
       Notiflix.Notify.failure('Sorry, trailer not found 😢');
       console.log(error);
     }
