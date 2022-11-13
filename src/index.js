@@ -20,6 +20,8 @@ import './js/notify-init';
 import renderCards from './js/render-cards';
 import { onErrorEN, onErrorUK } from './js/on-error';
 import { async } from 'regenerator-runtime';
+import './js/backButton.js'
+
 
 
 const modalCard = document.querySelector('.modal-one-film__content');
@@ -212,6 +214,7 @@ async function onPosterClick() {
 
       trailerBox.addEventListener('click', evt => {
         if (evt.target !== trailerBox) {
+          Notiflix.Notify.failure('Sorry, trailer not found 😢');
           return;
         }
         closeTrailerModal();
@@ -224,7 +227,7 @@ async function onPosterClick() {
         return trailerWindow.innerHTML;
       });
     } catch (error) {
-      Notiflix.Notify.failure('Sorry, trailer not found 😢');
+      // Notiflix.Notify.failure('Sorry, trailer not found 😢');
       console.log(error);
     }
 
