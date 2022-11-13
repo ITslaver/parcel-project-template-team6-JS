@@ -211,6 +211,45 @@
       <!-- ------------------------------------------------Навигация/Регистрация -->
 
       <ul class="nav__list nav__list-library">
+        <li class="header__pages-item">
+          <div class="toolbar">
+            <div class="theme-switch">
+              <svg
+                class="theme-switch-icon"
+                width="20px"
+                height="20px"
+                role="img"
+                aria-label="Іконка сонця"
+              >
+                <use href="./images/icons.svg#icon-sun"></use>
+              </svg>
+      
+              <div class="theme-switch-control">
+                <input
+                  class="theme-switch-toggle"
+                  type="checkbox"
+                  name="theme"
+                  id="theme-switch-toggle"
+                  aria-label="Перемикач теми"
+                />
+                <label
+                  aria-hidden="true"
+                  class="theme-switch-track"
+                  for="theme-switch-toggle"
+                ></label>
+                <div aria-hidden="true" class="theme-switch-marker"></div>
+              </div>
+      
+              <svg
+                class="theme-switch-icon"
+                width="20px"
+                height="20px"
+                aria-label="Іконка місяця"
+              >
+                <use href="./images/icons.svg#icon-IcoMoon"></use>
+              </svg>
+            </div>
+        </li>
         <li class="nav__item">
           <a class="nav__link current" href="index.html">Home</a>
         </li>
