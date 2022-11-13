@@ -18,7 +18,8 @@ import './js/footer-modal';
 import './js/notify-init';
 import renderCards from './js/render-cards';
 import { onErrorEN, onErrorUK } from './js/on-error';
-import { GENRES_URL, API_KEY } from './js/serviceApiFilmTrend';
+import { GENRES_URL, API_KEY, GENRES_ID_URL } from './js/serviceApiFilmTrend';
+import { async } from 'regenerator-runtime';
 
 
 const modalCard = document.querySelector('.modal-one-film__content');
@@ -70,30 +71,141 @@ async function fetchApiFilms() {
     onErrorEN()
   }
 }
-//---------------Sort Ganres---------------
-fetchFilmsGenres() 
+//---------------Selected---------------
+selectFilmsGenres() 
 
-async function fetchFilmsGenres() {
+async function getListId(category, user) {
+  const requestOptions = {
+    method: 'GET',
+    redirect: 'follow',
+  };
+
+  return await fetch(
+    `https://my-project-1521664687668-default-rtdb.europe-west1.firebasedatabase.app/usersid/${user}/${category}.json`,
+    requestOptions
+  )
+    .then(response => response.json())
+    .then(result => {
+      if (result === null) {
+        return 0;
+      } else return result;
+    })
+    .catch(error => console.log('error', error));
+}
+
+async function selectFilmsGenres () {
+await fetchFilmsGenres ().then(genres => {
+  document.getElementById('genres').insertAdjacentHTML('beforeend', genres.flatMap(genres => `<option value="${genres.id}">${genres.name}</option>`).join(''))
+})}
+
+
+async function fetchFilmsGenres () {
   return await fetch(
     `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}`
   )
     .then(res => res.json())
     .then(data => {  
      let genres = data.genres
-     console.log(genres.flatMap(genres =>  `<option value="${genres.id}">${genres.name}</option>`))
-     return document.getElementById('genres').insertAdjacentHTML('beforeend', genres.flatMap(genres => `<option value="${genres.id}">${genres.name}</option>`).join(''))
-   //   genres.map((genres) => { `<option value="${genres.id}">${genres.name}</option>`})
+     return genres
     })
     .catch(err => console.log(err));
 }
-const genres = document.getElementById('genres');
+
+
+
+async function filmsAndGenres(data) {
+  try {
+
+    const films = data
+    const watched = Object.keys(await getListId('watched', uid));
+    const favorite = Object.keys(await getListId('favorite', uid));
+    for (let film of films) {
+      film.genre_ids = await searchGenres(film.genre_ids);
+      film.list = searchList(film.id, 'favorite', 'watched');
+
+      // форматуємо рейтинг
+      film.vote_average = film.vote_average.toFixed(1);
+      // форматуємо дату виходу фільму
+      film.release_date = film.release_date.slice(0, 4);
+      if (film.genre_ids.length === 0) {
+        switch (this.currentLang) {
+          case 'uk-UA':
+            film.genre_ids[0] = 'Жанри не вказані';
+            break;
+
+          case 'en-US':
+            film.genre_ids[0] = 'No movie genre';
+            break;
+        }
+      }
+      if (film.genre_ids.length >= 3) {
+        switch (this.currentLang) {
+          case 'uk-UA':
+            film.genre_ids[2] = 'Інші';
+            break;
+
+          case 'en-US':
+            film.genre_ids[2] = 'Other';
+            break;
+        }
+      }
+      film.genre_ids = film.genre_ids.slice(0, 3).join(', ');
+    }
+
+    function searchList(filmId, fav, watch) {
+      let list;
+
+      fav = favorite;
+      watch = watched;
+
+      if (fav.includes(filmId.toString())) {
+        list = 'favorite';
+      } else if (watch.includes(filmId.toString())) {
+        list = 'watched';
+      }
+
+      return list;
+    }
+
+    async function searchGenres(ids) {
+      let genresNamesArr = [];
+      let searchId = ids;
+      let genreName;
+      let genres = await fetchFilmsGenres()
+
+      for (let i = 0; i < searchId.length; i += 1) {
+        genreName = genres.find(list => list.id === searchId[i]).name;
+        genresNamesArr.push(genreName);
+      }
+      return genresNamesArr;
+    }
+    return films;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function fetchWithGenres(id) {
+  return await fetch(
+    `${GENRES_ID_URL}?api_key=${API_KEY}&language=${currentLang}&with_genres=${id}`
+  ).then(response => response.json()).then(results => {
+    data = results.results
+    return data})
+       .catch(err => console.log(err));
+}
+
+const genre = document.getElementById('genres');
 genres.addEventListener(
   'change',
   (event = () => {
-    console.log(genres.value)
+    renderGenre (genres.value)
   })
 );
   
+async function renderGenre (genre) {
+  films = await fetchWithGenres(genre)
+  renderCards(await filmsAndGenres(await fetchWithGenres(genre)))
+}
       
 // ------------Модальное окно----------------
 

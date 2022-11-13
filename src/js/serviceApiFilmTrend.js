@@ -7,6 +7,7 @@ const CARD_MOVIE = 'https://api.themoviedb.org/3/movie/';
 const TRAILER_MOVIE = 'https://api.themoviedb.org/3/movie/';
 export const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
 const LOCAL_KEY_GENRES = 'genres';
+export const GENRES_ID_URL = 'https://api.themoviedb.org/3/discover/movie'
 
 export default class FilmApiTrendFetch {
   constructor() {
@@ -46,7 +47,6 @@ export default class FilmApiTrendFetch {
   }
 
   async getListId(category, user) {
-    console.log(category, user);
     const requestOptions = {
       method: 'GET',
       redirect: 'follow',
