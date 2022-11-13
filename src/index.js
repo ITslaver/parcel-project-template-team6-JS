@@ -314,8 +314,8 @@ async function onCardClick(event) {
         modalCard.insertAdjacentHTML('beforeend', markup);
         spinnerOff();
         if (uid === "guest") {
-          document.querySelector('.button-queue').style.display = "none";
-          document.querySelector('.button-watched').style.display = "none";
+          document.querySelector('.button-queue').disabled = "true";
+          document.querySelector('.button-watched').disabled = "true";
         }
           else if (list === 'favorite') {
             switch (currentLang) {
