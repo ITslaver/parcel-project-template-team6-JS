@@ -148,7 +148,7 @@ async function filmsAndGenres(data) {
       // форматуємо дату виходу фільму
       film.release_date = film.release_date.slice(0, 4);
       if (film.genre_ids.length === 0) {
-        switch (this.currentLang) {
+        switch (currentLang) {
           case 'uk-UA':
             film.genre_ids[0] = 'Жанри не вказані';
             break;
@@ -159,7 +159,7 @@ async function filmsAndGenres(data) {
         }
       }
       if (film.genre_ids.length >= 3) {
-        switch (this.currentLang) {
+        switch (currentLang) {
           case 'uk-UA':
             film.genre_ids[2] = 'Інші';
             break;
