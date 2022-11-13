@@ -7,9 +7,9 @@ const CARD_MOVIE = 'https://api.themoviedb.org/3/movie/';
 const TRAILER_MOVIE = 'https://api.themoviedb.org/3/movie/';
 export const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
 const UPCOMING_URL = 'https://api.themoviedb.org/3/movie/upcoming';
-const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
+
 const LOCAL_KEY_GENRES = 'genres';
-export const GENRES_ID_URL = 'https://api.themoviedb.org/3/discover/movie'
+export const GENRES_ID_URL = 'https://api.themoviedb.org/3/discover/movie';
 
 export default class FilmApiTrendFetch {
   constructor() {
@@ -22,7 +22,7 @@ export default class FilmApiTrendFetch {
     this.card;
   }
 
- async fetchFilmsGenres() {
+  async fetchFilmsGenres() {
     return await fetch(
       `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}`
     )
@@ -267,24 +267,26 @@ export default class FilmApiTrendFetch {
       console.log(error);
     }
   }
- 
+
   async fetchUpcomingFilms() {
- try {
-   return await fetch(`${UPCOMING_URL}?api_key=${API_KEY}&language=${this.currentLang}`)
-     .then(res => res.json())
-     .then(data => {
-       let currentPosters = [];
-       for (let i = 0; i <=7; i += 1) {
-         currentPosters.push(data.results[i])
-       }
-       return currentPosters;
-     })
- } catch (error) {
-  console.log(error);
- }
+    try {
+      return await fetch(
+        `${UPCOMING_URL}?api_key=${API_KEY}&language=${this.currentLang}`
+      )
+        .then(res => res.json())
+        .then(data => {
+          let currentPosters = [];
+          for (let i = 0; i <= 7; i += 1) {
+            currentPosters.push(data.results[i]);
+          }
+          return currentPosters;
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
- get lang() {
+  get lang() {
     return this.currentLang;
   }
   set lang(value) {
