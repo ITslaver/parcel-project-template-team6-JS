@@ -18,6 +18,12 @@
     @media screen and (min-width: 480px) {
         gap: 4px;
     }
+
+    &.drop-down {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
 }
 
 .footer__icon {

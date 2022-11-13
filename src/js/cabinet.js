@@ -358,12 +358,14 @@ export async function getList(category, user) {
             document.getElementById(
               'card-list'
             ).innerHTML = `<li><p>Нажаль ви не ще не передивилися жодного фільму, тож мерщій хапайте попкорн та переходьте до списку запланованого перегляду</p></li>`;
+            document.querySelector('.footer').classList.add('drop-down');
             break;
 
           case 'en-US':
             document.getElementById(
               'card-list'
             ).innerHTML = `<li><p>Oops! It looks like you haven't watched anything yet.</p></li>`;
+            document.querySelector('.footer').classList.add('drop-down');
             break;
         }
 
@@ -378,19 +380,23 @@ export async function getList(category, user) {
             document.getElementById(
               'card-list'
             ).innerHTML = `<li><p>Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду</p></li>`;
+            document.querySelector('.footer').classList.add('drop-down');
             break;
 
           case 'en-US':
             document.getElementById(
               'card-list'
             ).innerHTML = `<li><p>Oops! It looks like you haven't selected anything yet! Add more movies to your queue and enjoy :)</p></li>`;
+            document.querySelector('.footer').classList.add('drop-down');
             break;
         }
         console.log(
           'Нажаль ви не ще не обрали жодного фільму, тож мерщій переходьте до списку популярних фільмів та додавайте їх до списку запланованого перегляду'
         );
         return 0;
-      } else return result;
+      } else 
+      document.querySelector('.footer').classList.remove('drop-down');
+      return result;
       //  .getElementById('card-list')
       //  .insertAdjacentHTML('beforeend', card(result));
     })
