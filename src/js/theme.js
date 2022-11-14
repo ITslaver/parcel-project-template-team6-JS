@@ -12,7 +12,8 @@ const Theme = {
   const themeSwitcher = document.querySelector("#theme-switch-toggle");
   
   window.onload = () => {
-        themeSwitcher.addEventListener("change", () => {
+    try{
+      themeSwitcher.addEventListener("change", () => {
         delClassElem();
         if (themeSwitcher.checked) {
           localStorage.setItem("Theme", "darkTheme");
@@ -27,5 +28,7 @@ const Theme = {
         body.classList.add(Theme.DARK);
  
       }
+    }catch{};
+        
   }
  
