@@ -91,7 +91,7 @@
   margin-right: auto;
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 40px;
   @include tablet {
     margin-top: 50px;
   }
@@ -189,7 +189,7 @@
 
 //////////////////////////////   FORM_STYLE /////////////////////
 
-.search-form{
+.search-form__wraplib_lib .search-form{
   display: none;
 
 }

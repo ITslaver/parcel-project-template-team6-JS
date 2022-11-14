@@ -11,10 +11,10 @@ export default async function onSubmitQuery(evt, instance) {
     .toLowerCase();
   if (searchQuery === '') {
     spinnerOff();
-    if (instance.currentLang === 'en-US') {
-      return Notiflix.Notify.failure(`Please put some query!`);
-    } else {
+    if (instance.currentLang === 'uk-UA') {
       return Notiflix.Notify.failure(`Введіть запит!`);
+    } else {
+      return Notiflix.Notify.failure(`Please put some query!`);
     }
   }
   instance.query = searchQuery;
@@ -26,12 +26,12 @@ export default async function onSubmitQuery(evt, instance) {
       // gallery.innerHTML = '';
       // тимчасово, далі буде перевірка на мову
       spinnerOff();
-      if (instance.currentLang === 'en-US') {
+      if (instance.currentLang === 'uk-UA') {
+        return Notiflix.Notify.failure(`За вашим запитом фільмів не знайдено!`);
+      } else {
         return Notiflix.Notify.failure(
           `The films you requested could not be found!`
         );
-      } else {
-        return Notiflix.Notify.failure(`За вашим запитом фільмів не знайдено!`);
       }
     }
     // console.log(data.films);
@@ -43,18 +43,18 @@ export default async function onSubmitQuery(evt, instance) {
     //     noPosterCard.classList.add('visually-hidden');
     //   }
     // }
-    if (instance.currentLang === 'en-US') {
-      return Notiflix.Notify.success(`We found ${data.total_results} films.`);
-    } else {
+    if (instance.currentLang === 'uk-UA') {
       return Notiflix.Notify.success(
         `Ми знайшли ${data.total_results} фільмів.`
       );
+    } else {
+      return Notiflix.Notify.success(`We found ${data.total_results} films.`);
     }
   } catch (error) {
-    if (instance.currentLang === 'en-US') {
-      onErrorEN();
-    } else {
+    if (instance.currentLang === 'uk-UA') {
       onErrorUK();
+    } else {
+      onErrorEN();
     }
   }
 }
