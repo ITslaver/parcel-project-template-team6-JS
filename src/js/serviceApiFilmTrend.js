@@ -176,25 +176,17 @@ export default class FilmApiTrendFetch {
         film.release_date = film.release_date.slice(0, 4);
         // форматуємо кількість жанрів фільму
         if (film.genre_ids.length === 0) {
-          switch (this.currentLang) {
-            case 'uk-UA':
-              film.genre_ids[0] = 'Жанри не вказані';
-              break;
-
-            case 'en-US':
-              film.genre_ids[0] = 'No movie genre';
-              break;
+          if (this.currentLang === 'uk-UA') {
+            film.genre_ids[0] = 'Жанри не вказані';
+          } else {
+            film.genre_ids[0] = 'No movie genre';
           }
         }
         if (film.genre_ids.length >= 3) {
-          switch (this.currentLang) {
-            case 'uk-UA':
-              film.genre_ids[2] = 'Інші';
-              break;
-
-            case 'en-US':
-              film.genre_ids[2] = 'Other';
-              break;
+          if (this.currentLang === 'uk-UA') {
+            film.genre_ids[2] = 'Інші';
+          } else {
+            film.genre_ids[2] = 'Other';
           }
         }
         film.genre_ids = film.genre_ids.slice(0, 3).join(', ');
