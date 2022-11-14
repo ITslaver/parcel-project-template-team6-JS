@@ -20,6 +20,7 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
     border: 1px solid #000000;
 }
 
+
 .dark-theme .tui-pagination .tui-page-btn {
     color: #000;
     background: #ffffff;
@@ -28,7 +29,7 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
 }
 
 .dark-theme .tui-pagination .tui-is-selected, .tui-pagination strong {
-    background: var(--accent-color);
+    background:  rgba(255, 0, 0, 1);
     cursor: default;
     box-shadow: inset 0 0 7px 4px #22201f33;
 }
@@ -46,6 +47,10 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
 
   }
 
+  .dark-theme .logo-home__text{
+    text-shadow: 0px 8px 43px rgba(255, 0, 0, 1);
+
+  }
 
   .dark-theme .header__logo-svg {
     color: rgba(255, 0, 0, 0.6);
@@ -59,6 +64,21 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
   border: 1px solid #000000;
   box-shadow: 0px 8px 43px  rgba(255, 0, 0, 1);
 
+}
+
+////////////language-btn/////////////
+
+.dark-theme .language-btn{
+    &:hover,
+    &:focus {
+        background-color: var(--dark-mode-background-color);
+    }
+}
+
+/////////////////current/////////
+.dark-theme .current:after {
+  content: '';
+  background-color: rgba(255, 0, 0, 1);
 }
 
 /////////nav-menu//////
@@ -95,8 +115,64 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
     }
 }
 
+////////////////SOON/////////////////
+
+.dark-theme .gallery-coming-soon-title{
+    color: #ffffff;
+    text-shadow: 0px 8px 43px var(--dark-mode-shadow);
+}
+
+.dark-theme .coming-soon-list-item{
+border: 2px solid var(--dark-mode-background-color);
+
+&:hover {
+    box-shadow: 0px 4px 8px 0px var(--dark-mode-shadow);
+    transform: scale(1.1);
+  }
+}
+
+////////////////GALLERY/////////////////
+
+.dark-theme .card-bottom .card-bottom-genres{
+color: var(--dark-mode-background-color);
+}
+
+.dark-theme .card-bottom-year {
+    color: var(--dark-mode-background-color);
+}
+
+.dark-theme .card-title{
+color: #ffffff;
+}
+
+.dark-theme .card-rating{
+background-color: var(--dark-mode-background-color);
+color: #ffffff;
+}
+
+/////////////BTN-TO-TOP//////////////////
+
+.dark-theme .button-back-to-menu{
+    background-color: var(--dark-mode-background-color);
+}
+
+/////////////card-list-lib//////////////////
 
 
+.dark-theme .card-list p{
+    color: #ffffff;
+    text-shadow: 0px 8px 43px var(--dark-mode-shadow);
+}
+
+.dark-theme .username{
+color: var(--dark-mode-background-color);
+}
+
+//////////////////language-btn////////////
+
+.dark-theme .language-btn{
+    
+}
 
 /////////////SWITCH-BTN//////////////////
 
