@@ -18,7 +18,7 @@ import './js/footer-modal';
 import './js/notify-init';
 import renderCards from './js/render-cards';
 import { onErrorEN, onErrorUK } from './js/on-error';
-import './js/backButton.js'
+import './js/backButton.js';
 import Notiflix from 'notiflix';
 import { spinnerOff, spinnerOn } from './js/preloader.js';
 import { GENRES_URL, API_KEY, GENRES_ID_URL } from './js/serviceApiFilmTrend';
@@ -26,15 +26,13 @@ import { async } from 'regenerator-runtime';
 import './js/backButton.js';
 import './js/theme';
 
-
-
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
 const btnEn = document.querySelector('#en');
 const btnUk = document.querySelector('#uk');
 const searchForm = document.querySelector('#search-form');
 const upcomingList = document.querySelector('.coming-soon-list');
-let currentLang;
+let currentLang = 'en-US';
 
 window.addEventListener('load', onLoadPreloaderHide);
 
@@ -50,8 +48,7 @@ if (document.title === 'Filmoteka') {
   fetchUpcomingFilms();
   fetchApiFilms();
   selectFilmsGenres();
-  selectYears()
-
+  selectYears();
 } else getListById('favorite', uid);
 
 // ------------Переключение языка--------------
@@ -72,23 +69,21 @@ async function onUkClick() {
     filmApiTrendFetch.currentLang = 'uk-UA';
     await fetchApiFilms();
   } catch (error) {
-    onErrorUK()
+    onErrorUK();
   }
 }
 
 // ------------------------------------
 
-
-
-
 function selectYears() {
   for (let i = new Date().getFullYear(); i >= 1900; i -= 1) {
     if (document.getElementById('years')) {
-    document.getElementById('years').insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`)
-    }
+      document
+        .getElementById('years')
+        .insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`);
     }
   }
-  
+}
 
 async function onEnClick() {
   try {
@@ -252,7 +247,7 @@ async function fetchWithYers(year) {
   )
     .then(response => response.json())
     .then(results => {
-      console.log(results)
+      console.log(results);
       let data = results.results;
       return data;
     })
@@ -261,10 +256,10 @@ async function fetchWithYers(year) {
 
 if (document.getElementById('years')) {
   const year = document.getElementById('years');
-    year.addEventListener(
+  year.addEventListener(
     'change',
     (event = () => {
-      console.log(year.value)
+      console.log(year.value);
       renderYear(year.value);
     })
   );
@@ -281,16 +276,14 @@ if (document.getElementById('genres')) {
 }
 
 async function renderGenre(genre) {
- // films = await fetchWithGenres(genre);
+  // films = await fetchWithGenres(genre);
   renderCards(await filmsAndGenres(await fetchWithGenres(genre)));
 }
 
 async function renderYear(year) {
- // films = await fetchWithYers(year);
+  // films = await fetchWithYers(year);
   renderCards(await filmsAndGenres(await fetchWithYers(year)));
 }
-
-
 
 async function fetchUpcomingFilms() {
   upcomingList.addEventListener('click', onCardClick);
@@ -324,7 +317,7 @@ async function onCardClick(event) {
   // async function noPosterCard() {
   //    const noPosterCards = document.querySelector(
   //     "img[class='movie-poster']"
-  //   ); 
+  //   );
   //   for (const card of noPosterCards) {
   //     card.className = 'visually-hidden';
   //   }
@@ -339,7 +332,7 @@ async function onCardClick(event) {
     if (e.key === 'Escape' || e.key === 'Esc') {
       await closeModal();
     }
-  }; 
+  };
 
   await openModal();
 
@@ -353,28 +346,27 @@ async function onCardClick(event) {
         console.log(data);
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
-        modalCard.insertAdjacentHTML('beforeend', markup);        
+        modalCard.insertAdjacentHTML('beforeend', markup);
         // noPosterCard();
         spinnerOff();
-        if (uid === "guest") {
-          document.querySelector('.button-queue').disabled = "true";
-          document.querySelector('.button-watched').disabled = "true";
-        }
-          else if (list === 'favorite') {
-            switch (currentLang) {
-              case 'uk-UA':
-                document.querySelector('.button-queue').textContent = 'ВИДАЛИТИ З ЧЕРГИ';
-                break;
-        
-              case 'en-US':
-                document.querySelector('.button-queue').textContent = 'REMOVE FROM QUEUE';
-                break;
-            }
-          document.querySelector('.button-queue').name = "delFavorite";
-          document.querySelector('.button-queue').classList = "button-queue-del active-but";
+        if (uid === 'guest') {
+          document.querySelector('.button-queue').disabled = 'true';
+          document.querySelector('.button-watched').disabled = 'true';
+        } else if (list === 'favorite') {
+          switch (currentLang) {
+            case 'uk-UA':
+              document.querySelector('.button-queue').textContent =
+                'ВИДАЛИТИ З ЧЕРГИ';
+              break;
 
-        
-
+            case 'en-US':
+              document.querySelector('.button-queue').textContent =
+                'REMOVE FROM QUEUE';
+              break;
+          }
+          document.querySelector('.button-queue').name = 'delFavorite';
+          document.querySelector('.button-queue').classList =
+            'button-queue-del active-but';
         } else if (list === 'watched') {
           switch (currentLang) {
             case 'uk-UA':
@@ -413,27 +405,26 @@ async function onCardClick(event) {
     html.classList.remove('disable-scroll-all');
   }
 
-async function onPosterClick() { 
-    console.log("Это постер");
+  async function onPosterClick() {
+    console.log('Это постер');
 
     closeTrailerBtn.addEventListener('click', evt => {
       evt.preventDefault();
       closeTrailerModal();
     });
 
-    try {  spinnerOn();
+    try {
+      spinnerOn();
       await filmApiTrendFetch.fetchTrailerMovie().then(data => {
         // const markup = hbsTest(data);
         console.log('Это трейлер:', data.results);
 
-        
         console.log(filmApiTrendFetch.movie_id);
         const res = data.results;
         console.log('Это res:', res[0].key);
         // const mark = res.map(item =>
         //   `<li><iframe id="player" width="640" height="360" src="https://www.youtube.com/embed/${item.key}" title="YouTube video player" controls frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></li>`)
 
-        
         //   console.log(mark);
         trailerWindow.innerHTML = `<iframe
         id="player"
@@ -445,19 +436,19 @@ async function onPosterClick() {
         allowfullscreen
       ></iframe>`;
 
-      spinnerOff();
-              
-      const player = document.querySelector('#player');
+        spinnerOff();
 
-      trailerBox.addEventListener('click', evt => {
-        // if (evt.target !== trailerBox) {
-        //   // Notiflix.Notify.failure('Sorry, trailer not found 😢');
-        //   return;
-        // }
-        closeTrailerModal();
-      });
-      trailerBox.classList.remove('trailer__box--hidden');
-      html.classList.add('disable-scroll-all');
+        const player = document.querySelector('#player');
+
+        trailerBox.addEventListener('click', evt => {
+          // if (evt.target !== trailerBox) {
+          //   // Notiflix.Notify.failure('Sorry, trailer not found 😢');
+          //   return;
+          // }
+          closeTrailerModal();
+        });
+        trailerBox.classList.remove('trailer__box--hidden');
+        html.classList.add('disable-scroll-all');
 
         //  return trailerWindow.insertAdjacentHTML('beforebegin', mark);
         // trailerWindow.innerHTML = result;
@@ -472,7 +463,7 @@ async function onPosterClick() {
     // trailerBox.classList.remove('.trailer__box--hidden');
   }
 
-   // ------------- 
+  // -------------
 
   async function openModal() {
     console.log('это Модалка');
@@ -499,4 +490,4 @@ SmoothScroll({
   arrowScroll: 100,
 });
 
-// ------------------- 
+// -------------------
