@@ -1,3 +1,10 @@
+.soon{
+  display: none;
+  @include desktop{
+    display: block;
+    padding-top: 60px;
+  }
+}
 .gallery-coming-soon-title {
   display: none;
   @include desktop {
@@ -19,7 +26,6 @@
   @include desktop {
     display: flex;
     gap: 10px;
-    margin-bottom: 60px;
     // background-color: tomato;
   }
 }
