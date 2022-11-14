@@ -3,6 +3,11 @@ import FilmApiTrendFetch from './serviceApiFilmTrend';
 import renderCards from './render-cards';
 import { spinnerOff, spinnerOn } from './preloader';
 
+import { async } from 'regenerator-runtime';
+
+const GENRES_ID_URL = 'https://api.themoviedb.org/3/discover/movie';
+const API_KEY = '2f44dbe234f7609a16da7327d83f3eb3';
+
 const filmApiTrendFetch = new FilmApiTrendFetch();
 
 const pagination = new Pagination(document.getElementById('pagination'), {
@@ -15,10 +20,14 @@ const pagination = new Pagination(document.getElementById('pagination'), {
 const submitRef = document.querySelector('#search-form');
 const paginateSectionRef = document.querySelector('.pagination-section');
 const curentPage = document.querySelector('title');
-console.log(curentPage);
+const chooseGenresNameRef = document.querySelector('#genres');
 
 submitRef.addEventListener('submit', onSubmitforPaginate);
+chooseGenresNameRef.addEventListener('change', onSelectGenres);
+
 let searchQuery = '';
+let searchGenres = '';
+
 if (curentPage.text !== 'Filmoteka') {
   paginateSectionRef.classList.add('visually-hidden');
 }
@@ -45,17 +54,41 @@ async function onSubmitforPaginate(e) {
   }
 }
 
+async function onSelectGenres() {
+  searchGenres = chooseGenresNameRef.value;
+  console.log(searchGenres);
+  await pagination.setTotalItems(await fetchWithGenresBypaginate(searchGenres));
+  pagination.reset();
+}
+
 pagination.on('afterMove', function (eventData) {
-  if (searchQuery === '') {
+  console.log(searchGenres);
+  if (searchQuery === '' && searchGenres === '') {
     spinnerOn();
     filmApiTrendFetch.page = eventData.page;
     filmApiTrendFetch
       .filmsAndGenres()
       .then(data => {
         renderCards(data);
-        spinnerOff();
       })
       .catch(err => console.log(err));
+    spinnerOff();
+  } else if (searchGenres !== '') {
+    console.log(searchGenres);
+    spinnerOn();
+    filmApiTrendFetch.page = eventData.page;
+    filmApiTrendFetch.curentGenre = searchGenres;
+    filmApiTrendFetch
+      .filmsAndGenresAndForGenre()
+      .then(data => {
+        renderCards(data);
+      })
+      .catch(err => console.log(err));
+    spinnerOff();
+    // fetchWithGenres(searchGenres).then(data => {
+    //   renderCards(data);
+    //   spinnerOff();
+    // });
   } else {
     spinnerOn();
     filmApiTrendFetch.page = eventData.page;
@@ -74,4 +107,18 @@ async function getTotalItems(datas) {
   const taceResultbyFetch = await datas.total_results;
   await pagination.setTotalItems(taceResultbyFetch);
   pagination.reset();
+}
+
+async function fetchWithGenresBypaginate(searchGenres) {
+  return await fetch(
+    `${GENRES_ID_URL}?api_key=${API_KEY}&with_genres=${searchGenres}&page=${this.page}`
+  )
+    .then(response => response.json())
+    .then(results => {
+      let data = results.total_pages;
+      console.log(data);
+
+      return data;
+    })
+    .catch(err => console.log(err));
 }
