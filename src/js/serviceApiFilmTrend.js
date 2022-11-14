@@ -20,6 +20,7 @@ export default class FilmApiTrendFetch {
     this.films;
     this.movie_id;
     this.card;
+    this.curentGenre;
   }
 
   async fetchFilmsGenres() {
@@ -32,6 +33,18 @@ export default class FilmApiTrendFetch {
         localStorage.setItem(LOCAL_KEY_GENRES, JSON.stringify(this.genres));
 
         // return data.genres
+      })
+      .catch(err => console.log(err));
+  }
+  async fetchWithGenres() {
+    return await fetch(
+      `${GENRES_ID_URL}?api_key=${API_KEY}&with_genres=${this.curentGenre}&page=${this.page}`
+    )
+      .then(response => response.json())
+      .then(results => {
+        this.curentGenre = results.results;
+        let data = results.results;
+        return data;
       })
       .catch(err => console.log(err));
   }
@@ -65,6 +78,79 @@ export default class FilmApiTrendFetch {
         } else return result;
       })
       .catch(error => console.log('error', error));
+  }
+  async filmsAndGenresAndForGenre() {
+    try {
+      await this.fetchWithGenres();
+      await this.fetchFilmsGenres();
+      const films = this.curentGenre;
+      const genres = this.genres;
+      const watched = Object.keys(await this.getListId('watched', uid));
+      const favorite = Object.keys(await this.getListId('favorite', uid));
+
+      for (let film of films) {
+        film.genre_ids = searchGenres(film.genre_ids);
+        film.list = searchList(film.id, 'favorite', 'watched');
+
+        // форматуємо рейтинг
+        film.vote_average = film.vote_average.toFixed(1);
+        // форматуємо дату виходу фільму
+        film.release_date = film.release_date.slice(0, 4);
+        if (film.genre_ids.length === 0) {
+          switch (this.currentLang) {
+            case 'uk-UA':
+              film.genre_ids[0] = 'Жанри не вказані';
+              break;
+
+            case 'en-US':
+              film.genre_ids[0] = 'No movie genre';
+              break;
+          }
+        }
+        if (film.genre_ids.length >= 3) {
+          switch (this.currentLang) {
+            case 'uk-UA':
+              film.genre_ids[2] = 'Інші';
+              break;
+
+            case 'en-US':
+              film.genre_ids[2] = 'Other';
+              break;
+          }
+        }
+        film.genre_ids = film.genre_ids.slice(0, 3).join(', ');
+      }
+
+      function searchList(filmId, fav, watch) {
+        let list;
+
+        fav = favorite;
+        watch = watched;
+
+        if (fav.includes(filmId.toString())) {
+          list = 'favorite';
+        } else if (watch.includes(filmId.toString())) {
+          list = 'watched';
+        }
+
+        return list;
+      }
+
+      function searchGenres(ids) {
+        let genresNamesArr = [];
+        let searchId = ids;
+        let genreName;
+
+        for (let i = 0; i < ids.length; i += 1) {
+          genreName = genres.find(list => list.id === searchId[i]).name;
+          genresNamesArr.push(genreName);
+        }
+        return genresNamesArr;
+      }
+      return films;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async filmsAndGenres() {
