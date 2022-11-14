@@ -127,11 +127,13 @@ border: 2px solid var(--dark-mode-background-color);
 ////////////////GALLERY/////////////////
 
 .dark-theme .card-bottom .card-bottom-genres{
-color: var(--dark-mode-background-color);
+    color: #ff3c3c;
+    text-shadow: 4px 2px 5px rgba(0, 0, 0, 0.897);
 }
 
 .dark-theme .card-bottom-year {
-    color: var(--dark-mode-background-color);
+    color: #ff3c3c;
+    text-shadow: 4px 2px 5px rgba(0, 0, 0, 0.897); 
 }
 
 .dark-theme .card-title{
