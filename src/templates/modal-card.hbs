@@ -17,7 +17,7 @@
             <tr>
               <td class="list-keys">Vote / Votes</td>
               <td class="list-values">
-                <span class="vote-span">{{vote_average}}</span> / {{vote_count}}
+                <span class="vote-span">{{vote_average}}</span> / <span class="votes-count">{{vote_count}}</span>
               </td>
             </tr>
             <tr>
@@ -39,8 +39,8 @@
             <p class="info-overview">{{overview}}</p>
 
            <div class="buttons" id={{id}}>
-              <button type="submit" name="addWatched" id="{{id}}" class="button-watched" data-card='"id" : "{{id}}", "poster_path" : "{{poster_path}}", "title" : "{{title}}", "genre_ids" : "{{genres}}", "relesedate" : "{{release_date}}", "vote_average" : "{{vote_average}}", "overview" : "{{overview}}", "list" : "watched"'>Add to watched</button>
-              <button type="submit" name="addFavorite" id="{{id}}" class="button-queue" data-card='"id" : "{{id}}", "poster_path" : "{{poster_path}}", "title" : "{{title}}", "genre_ids" : "{{genres}}", "relesedate" : "{{release_date}}", "vote_average" : "{{vote_average}}", "overview" : "{{overview}}", "list" : "favorite"'>Add to queue</button>
+              <button type="submit" name="addWatched" id="{{id}}" class="button-watched btn" data-card='"id" : "{{id}}", "poster_path" : "{{poster_path}}", "title" : "{{title}}", "genre_ids" : "{{genres}}", "relesedate" : "{{release_date}}", "vote_average" : "{{vote_average}}", "overview" : "{{overview}}", "list" : "watched"'>Add to watched</button>
+              <button type="submit" name="addFavorite" id="{{id}}" class="button-queue btn" data-card='"id" : "{{id}}", "poster_path" : "{{poster_path}}", "title" : "{{title}}", "genre_ids" : "{{genres}}", "relesedate" : "{{release_date}}", "vote_average" : "{{vote_average}}", "overview" : "{{overview}}", "list" : "favorite"'>Add to queue</button>
             </div>  
         {{!-- <div class="button__thumb">
           <div class="rotating-button__wrapper">
