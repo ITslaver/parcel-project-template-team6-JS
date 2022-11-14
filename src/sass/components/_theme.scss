@@ -127,13 +127,15 @@ border: 2px solid var(--dark-mode-background-color);
 ////////////////GALLERY/////////////////
 
 .dark-theme .card-bottom .card-bottom-genres{
-    color: #ff3c3c;
-    text-shadow: 4px 2px 5px rgba(0, 0, 0, 0.897);
+    color: var(--accent-color);
+    // color: #ff3c3c;
+    // text-shadow: 4px 2px 5px rgba(0, 0, 0, 0.897);
 }
 
 .dark-theme .card-bottom-year {
-    color: #ff3c3c;
-    text-shadow: 4px 2px 5px rgba(0, 0, 0, 0.897); 
+    color: var(--accent-color);
+    // color: #ff3c3c;
+    // text-shadow: 4px 2px 5px rgba(0, 0, 0, 0.897);    
 }
 
 .dark-theme .card-title{
