@@ -31,6 +31,15 @@
   position: relative;
 }
 
+.header__container {
+  @include mobile {
+    text-align: left;
+  }
+  @include tablet {
+    text-align: center;
+  }
+}
+
 .header__wrap {
   display: flex;
   align-items: center;
@@ -232,20 +241,8 @@
 
 // ----------------------------------------Вибір жанру та року----
 .choice-genre__wrap {
-  @include mobile {
-    top: 190px;
-  }
-
-  @include tablet {
-    top: 180px;
-  }
-  @include desktop {
-    top: 175px;
-  }
-  position: absolute;
+  margin-top: 30px;
 }
-
-
 
 .choice-select {
   font-family: inherit;
@@ -261,4 +258,3 @@
 .choice-select option {
   background-color: var(--accent-color);
 }
-
