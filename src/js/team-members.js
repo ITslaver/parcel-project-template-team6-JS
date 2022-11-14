@@ -49,7 +49,7 @@ export default [
 
     {
         name: 'Ihor Kozhemiakin',
-        role: 'team member',
+        role: 'developer',
         genres: 'action, adventure',
         poster: `${memberImage003}`,
         poster2x: `${memberImage003x2}`,
@@ -57,7 +57,7 @@ export default [
 
     {
         name: 'Pavlo Mykhailenko',
-        role: 'team member',
+        role: 'developer',
         genres: 'horror, thriller',
         poster: `${memberImage004}`,
         poster2x: `${memberImage004x2}`,
@@ -65,7 +65,7 @@ export default [
 
     {
         name: 'Alla Semeniuta',
-        role: 'team member',
+        role: 'developer',
         genres: 'mystery, drama',
         poster: `${memberImage005}`,
         poster2x: `${memberImage005x2}`,
@@ -73,7 +73,7 @@ export default [
 
     {
         name: 'Ihor Slastonov',
-        role: 'team member',
+        role: 'developer',
         genres: 'science fiction',
         poster: `${memberImage006}`,
         poster2x: `${memberImage006x2}`,
@@ -81,7 +81,7 @@ export default [
 
     {
         name: 'Serhiy Bakun',
-        role: 'team member',
+        role: 'developer',
         genres: 'comedy, musicals',
         poster: `${memberImage007}`,
         poster2x: `${memberImage007x2}`,
@@ -89,7 +89,7 @@ export default [
 
     {
         name: 'Ruslana Sydorchuk',
-        role: 'team member',
+        role: 'developer',
         genres: 'fantasy, romance',
         poster: `${memberImage008}`,
         poster2x: `${memberImage008x2}`,
@@ -97,7 +97,7 @@ export default [
 
     {
         name: 'Mykyta Bazykin',
-        role: 'team member',
+        role: 'developer',
         genres: 'adventure, comedy',
         poster: `${memberImage009}`,
         poster2x: `${memberImage009x2}`,
@@ -105,7 +105,7 @@ export default [
 
     {
         name: 'Olena Solomko',
-        role: 'team member',
+        role: 'developer',
         genres: 'drama, horror',
         poster: `${memberImage010}`,
         poster2x: `${memberImage010x2}`,
