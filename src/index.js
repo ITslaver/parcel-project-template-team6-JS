@@ -290,6 +290,8 @@ async function renderYear(year) {
   renderCards(await filmsAndGenres(await fetchWithYers(year)));
 }
 
+
+
 async function fetchUpcomingFilms() {
   upcomingList.addEventListener('click', onCardClick);
   try {
@@ -319,14 +321,14 @@ async function onCardClick(event) {
     return;
   }
 
-  async function noPosterCard() {
-    const noPosterCards = document.querySelector(
-      "img[class='movie-poster']"
-    ); 
-    for (const card of noPosterCards) {
-      card.className = 'visually-hidden';
-    }
-  }
+  // async function noPosterCard() {
+  //    const noPosterCards = document.querySelector(
+  //     "img[class='movie-poster']"
+  //   ); 
+  //   for (const card of noPosterCards) {
+  //     card.className = 'visually-hidden';
+  //   }
+  // }
 
   filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
   const list = document.getElementById(filmApiTrendFetch.idFilm).dataset.list;
@@ -352,7 +354,7 @@ async function onCardClick(event) {
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);        
-        noPosterCard();
+        // noPosterCard();
         spinnerOff();
         if (uid === "guest") {
           document.querySelector('.button-queue').disabled = "true";
