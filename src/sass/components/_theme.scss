@@ -194,13 +194,15 @@ color: var(--dark-mode-background-color);
 .theme-switch {
     display: flex;
     z-index: 0;
-    // position: absolute;
-    // margin-right: 5px;
-        // margin-top: 140px;
+    position: absolute;
+    margin-right: -245px;
+    margin-top: 35px;
+    @include tablet {
+        margin-right: -280px;
+      }
+
     
-        @media screen and (max-width: 768px) {
-            margin-right: -130px;
-            }
+
 }
 .theme-switch-icon {
     fill: #ff6b01;
@@ -217,7 +219,7 @@ color: var(--dark-mode-background-color);
     flex-shrink: 0;
     position: relative;
     width: 60px;
-        height: 20px;
+    height: 20px;
     border-radius: 50em;
     padding: 3px 0;
 
