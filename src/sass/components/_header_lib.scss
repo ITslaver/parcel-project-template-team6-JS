@@ -91,9 +91,9 @@
   margin-right: auto;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 50px;
   @include tablet {
-    margin-top: 10px;
+    margin-top: 50px;
   }
 }
 
@@ -188,6 +188,12 @@
 }
 
 //////////////////////////////   FORM_STYLE /////////////////////
+
+.search-form{
+  display: none;
+
+}
+
 .search-form__wraplib {
   display: flex;
   justify-content: center;
