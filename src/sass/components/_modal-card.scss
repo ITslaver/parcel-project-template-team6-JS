@@ -295,6 +295,21 @@
   border-radius: 5px;
 }
 
+.votes-count {
+  .dark-theme & { 
+    // color: var(--header-color-text);
+    padding: 0px 5px;
+    background: var(--accent-color);
+    border-radius: 5px; 
+    background-color: white;
+    color: #484848;
+
+    // color: rgb(216, 213, 213); 
+    border: 1px solid white;     
+  }
+  
+}
+
 .info-about {
   margin-bottom: 8px;
   text-transform: uppercase;
@@ -328,10 +343,18 @@
   }
 }
 
+.btn {
+  .dark-theme & {  
+    background-color: #484848;
+    color: rgb(216, 213, 213); 
+    border: 1px solid white;     
+  }
+}
+
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 15px; 
+  gap: 15px;  
 
   button {
     width: 136px;
