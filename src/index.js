@@ -290,6 +290,8 @@ async function renderYear(year) {
   renderCards(await filmsAndGenres(await fetchWithYers(year)));
 }
 
+upcomingList.addEventListener('click', onCardClick);
+
 async function fetchUpcomingFilms() {
   try {
     await filmApiTrendFetch.fetchUpcomingFilms().then(data => {
