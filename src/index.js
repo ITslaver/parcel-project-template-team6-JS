@@ -328,6 +328,15 @@ async function onCardClick(event) {
     }
   };
 
+  async function noPosterCard() {
+    const noPosterCards = document.querySelectorAll(
+      "img[class='movie-poster']"
+    ); 
+    for (const card of noPosterCards) {
+      card.className = 'visually-hidden';
+    }
+  }
+
   await openModal();
 
   async function fetchModalCard() {
@@ -340,7 +349,8 @@ async function onCardClick(event) {
         console.log(data);
         console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
-        modalCard.insertAdjacentHTML('beforeend', markup);
+        modalCard.insertAdjacentHTML('beforeend', markup);        
+        noPosterCard();
         spinnerOff();
         if (uid === "guest") {
           document.querySelector('.button-queue').disabled = "true";

@@ -185,6 +185,10 @@
     width: 240px;
     height: 357px;
     flex-shrink: 0;
+    background-image: url(../images/no-poster-available.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
     overflow: hidden;
     transition: transform 250ms;
