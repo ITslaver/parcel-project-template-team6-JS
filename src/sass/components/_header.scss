@@ -60,6 +60,9 @@
   font-family: 'Roboto';
   font-size: 23px;
   line-height: 1.16;
+  .dark-theme & {
+    color: black;
+  }
 }
 
 .header-home__logo {
@@ -104,6 +107,9 @@
   display: flex;
   text-transform: uppercase;
   color: var(--header-color-text);
+  .dark-theme & {
+    color: black;
+  }
 }
 // ----------------------------------------------форма поиска------------------------
 .search-form__container {
@@ -148,10 +154,16 @@
     width: 350px;
   }
   width: 380px;
+  .dark-theme & {
+    border-bottom: 1px solid var(--dark-mode-background-color);
+  }
 }
 
 .search-form__input::placeholder {
   color: var(--header-color-text);
+  .dark-theme & {
+    // color: black;
+  }
 }
 
 .icon-search__logo {
@@ -171,6 +183,7 @@
   cursor: pointer;
   transition: var(--transition-duration);
   transition-timing-function: var(--timing-function);
+
   &:hover,
   &:focus {
     stroke: var(--card-genres-year-text-color);
@@ -210,6 +223,10 @@
   &:hover,
   &:focus {
     background-color: var(--accent-color);
+  }
+  .dark-theme & {
+    // color: black;
+    border: 1px solid var(--dark-mode-background-color);
   }
 }
 // <!-- ------------------------------------------------Блок користувача-->
@@ -253,8 +270,15 @@
   border: 1px solid var(--header-color-text);
   border-radius: 5px;
   transform: none;
+  .dark-theme & {
+    // color: black;
+    border: 1px solid var(--dark-mode-background-color);
+  }
 }
 
 .choice-select option {
   background-color: var(--accent-color);
+  .dark-theme & {
+    background-color: rgb(143, 66, 66);
+  }
 }
