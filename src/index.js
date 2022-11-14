@@ -290,9 +290,10 @@ async function renderYear(year) {
   renderCards(await filmsAndGenres(await fetchWithYers(year)));
 }
 
-upcomingList.addEventListener('click', onCardClick);
+
 
 async function fetchUpcomingFilms() {
+  upcomingList.addEventListener('click', onCardClick);
   try {
     await filmApiTrendFetch.fetchUpcomingFilms().then(data => {
       const makrup = data;
@@ -319,6 +320,16 @@ async function onCardClick(event) {
     spinnerOff();
     return;
   }
+
+  // async function noPosterCard() {
+  //    const noPosterCards = document.querySelector(
+  //     "img[class='movie-poster']"
+  //   ); 
+  //   for (const card of noPosterCards) {
+  //     card.className = 'visually-hidden';
+  //   }
+  // }
+
   filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
   const list = document.getElementById(filmApiTrendFetch.idFilm).dataset.list;
   console.log('Это data-film:', filmApiTrendFetch.idFilm, list);
@@ -328,16 +339,7 @@ async function onCardClick(event) {
     if (e.key === 'Escape' || e.key === 'Esc') {
       await closeModal();
     }
-  };
-
-  // async function noPosterCard() {
-  //   const noPosterCards = document.querySelectorAll(
-  //     "img[class='movie-poster']"
-  //   ); 
-  //   for (const card of noPosterCards) {
-  //     card.className = 'visually-hidden';
-  //   }
-  // }
+  }; 
 
   await openModal();
 
