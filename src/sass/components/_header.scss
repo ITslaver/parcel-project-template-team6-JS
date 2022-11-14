@@ -161,9 +161,6 @@
 
 .search-form__input::placeholder {
   color: var(--header-color-text);
-  .dark-theme & {
-    // color: black;
-  }
 }
 
 .icon-search__logo {
@@ -172,6 +169,12 @@
 }
 
 .search__button {
+  @include mobile {
+    margin-right: 10px;
+  }
+  @include tablet {
+    margin-right: 0px;
+  }
   padding: 0 0 4px 1px;
   bottom: 6px;
   border: none;
@@ -194,6 +197,14 @@
 // <!---------------------------------------------------Кнопки вибору мови-------- -->
 
 .language-btn__list {
+  @include mobile {
+    margin-top: 10px;
+    margin-left: 0px;
+  }
+  @include tablet {
+    display: flex;
+    margin-left: 10px;
+  }
   display: flex;
   margin-left: 10px;
 }
