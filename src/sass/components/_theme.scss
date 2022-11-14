@@ -59,9 +59,14 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
   border: 1px solid #000000;
   box-shadow: 0px 8px 43px  rgba(255, 0, 0, 1);
 
-  
 }
 
+/////////nav-menu//////
+
+
+.dark-theme .header__pages-item{
+    text-shadow: 0px 8px 43px rgba(255, 0, 0, 1);
+}
 
 //////header////
 
@@ -89,6 +94,8 @@ background-image: linear-gradient(rgba(255, 255, 255, 0.56),rgba(255, 255, 255, 
       }
     }
 }
+
+
 
 
 /////////////SWITCH-BTN//////////////////
