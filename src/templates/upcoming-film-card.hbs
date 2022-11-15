@@ -1,5 +1,10 @@
 {{#each this}}
-  <li class='coming-soon-list-item' data-film='{{id}}' id="{{id}}">
+<div class="swiper-slide">
+  <div class='coming-soon-list-item' data-film='{{id}}' id="{{id}}" >
     <img src='https://image.tmdb.org/t/p/w500{{poster_path}}' alt='{{title}}' data-film='{{id}}' />
-  </li>
+  </div>
+</div>
+  {{!-- <li class='coming-soon-list-item' data-film='{{id}}' id="{{id}}">
+    <img src='https://image.tmdb.org/t/p/w500{{poster_path}}' alt='{{title}}' data-film='{{id}}' />
+  </li> --}}
 {{/each}}

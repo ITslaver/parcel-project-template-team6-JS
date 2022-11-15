@@ -23,6 +23,7 @@ import Notiflix from 'notiflix';
 import { spinnerOff, spinnerOn } from './js/preloader.js';
 import { GENRES_URL, API_KEY, GENRES_ID_URL } from './js/serviceApiFilmTrend';
 import { async } from 'regenerator-runtime';
+import Swiper from 'swiper/swiper-bundle';
 import './js/backButton.js';
 import './js/theme';
 
@@ -31,7 +32,7 @@ const gallery = document.querySelector('.card-list');
 const btnEn = document.querySelector('#en');
 const btnUk = document.querySelector('#uk');
 const searchForm = document.querySelector('#search-form');
-const upcomingList = document.querySelector('.coming-soon-list');
+const upcomingList = document.querySelector('.swiper-wrapper');
 let currentLang = 'en-US';
 
 window.addEventListener('load', onLoadPreloaderHide);
@@ -292,6 +293,30 @@ async function fetchUpcomingFilms() {
       const makrup = data;
       upcomingList.innerHTML = '';
       upcomingList.insertAdjacentHTML('beforeend', card(makrup));
+
+      const swiper = new Swiper('.swiper', {
+        // Optional parameters
+        loop: true,
+        slidesPerView: 7,
+        spaceBetween: 30,
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        keyboard: {
+          enabled: true,
+          onlyInViewport: false,
+        },
+        // pagination: {
+        //   el: '.swiper-pagination',
+        //   type: 'bullets',
+        // },
+        scrollbar: {
+          el: '.swiper-scrollbar',
+          draggable: true,
+        },
+      });
     });
   } catch (error) {
     onErrorEN();

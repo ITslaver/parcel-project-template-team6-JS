@@ -26,6 +26,7 @@
     "notiflix": "^3.2.5",
     "regenerator-runtime": "^0.13.10",
     "smoothscroll-for-websites": "^1.4.10",
+    "swiper": "^8.4.4",
     "tui-pagination": "^3.4.1"
   },
   "devDependencies": {
