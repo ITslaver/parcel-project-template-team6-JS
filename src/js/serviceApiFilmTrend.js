@@ -353,11 +353,12 @@ export default class FilmApiTrendFetch {
       )
         .then(res => res.json())
         .then(data => {
-          let currentPosters = [];
-          for (let i = 0; i <= 7; i += 1) {
-            currentPosters.push(data.results[i]);
-          }
-          return currentPosters;
+          return data.results
+          // let currentPosters = [];
+          // for (let i = 0; i <= 7; i += 1) {
+          //   currentPosters.push(data.results[i]);
+          // }
+          // return currentPosters;
         });
     } catch (error) {
       console.log(error);
