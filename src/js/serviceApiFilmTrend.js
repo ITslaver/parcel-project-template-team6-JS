@@ -10,6 +10,8 @@ const UPCOMING_URL = 'https://api.themoviedb.org/3/movie/upcoming';
 
 const LOCAL_KEY_GENRES = 'genres';
 export const GENRES_ID_URL = 'https://api.themoviedb.org/3/discover/movie';
+const saveLang = localStorage.getItem('lang');
+currentLang = saveLang;
 
 export default class FilmApiTrendFetch {
   constructor() {
@@ -24,6 +26,7 @@ export default class FilmApiTrendFetch {
   }
 
   async fetchFilmsGenres() {
+    // console.log("фильмы конструктор:",this.currentLang);
     return await fetch(
       `${GENRES_URL}?api_key=${API_KEY}&language=${this.currentLang}`
     )
@@ -37,6 +40,8 @@ export default class FilmApiTrendFetch {
       .catch(err => console.log(err));
   }
   async fetchWithGenres() {
+    // console.log("жанры конструктор:",this.currentLang);
+    // console.log("query конструктор:",this.query);
     return await fetch(
       `${GENRES_ID_URL}?api_key=${API_KEY}&with_genres=${this.curentGenre}&page=${this.page}`
     )
@@ -50,6 +55,7 @@ export default class FilmApiTrendFetch {
   }
 
   async fetchFilmsTrend() {
+    // console.log(localStorage);
     return await fetch(
       `${TRENDING_URL}?api_key=${API_KEY}&page=${this.page}&language=${this.currentLang}`
     )

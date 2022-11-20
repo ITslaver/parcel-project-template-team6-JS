@@ -31,7 +31,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const KEY_ID = 'userId';
-let currentLang = 'en-US';
+let currentLang;
+// let currentLang = 'en-US';
+const saveLang = localStorage.getItem('lang');
+currentLang = saveLang;
+
 export let uid;
 
 getUserId();
@@ -261,7 +265,7 @@ async function fetchFilmCard(id) {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         return data;
       });
   } catch (error) {
@@ -323,7 +327,7 @@ export async function getListById(category, user) {
   const listItems = [];
   spinnerOn();
   for (const item of list) {
-    console.log(item);
+    // console.log(item);
     const film = await extendFetchFilmCard(item);
     film.list = category;
     listItems.push(film);

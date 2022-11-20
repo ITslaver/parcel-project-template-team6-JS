@@ -68,6 +68,11 @@ async function onSelectGenres() {
 }
 
 pagination.on('afterMove', function (eventData) {
+  // 
+  const saveLang = localStorage.getItem('lang');
+  console.log('saveLang', saveLang);
+  filmApiTrendFetch.currentLang = saveLang;
+  // 
   if (searchQuery === '' && searchGenres === '') {
     spinnerOn();
     filmApiTrendFetch.page = eventData.page;

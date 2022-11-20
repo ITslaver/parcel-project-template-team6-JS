@@ -293,3 +293,11 @@
     background-color: rgb(143, 66, 66);
   }
 }
+
+.active-btn {
+  background-color: var(--accent-color);
+  // color: black;
+  .dark-theme & {
+    background-color: rgb(143, 66, 66);
+  }
+}

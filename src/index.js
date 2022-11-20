@@ -34,10 +34,13 @@ const btnUk = document.querySelector('#uk');
 const searchForm = document.querySelector('#search-form');
 const upcomingList = document.querySelector('.swiper-wrapper');
 let currentLang = 'en-US';
+const saveLang = localStorage.getItem('lang');
+currentLang = saveLang;
 
 window.addEventListener('load', onLoadPreloaderHide);
 
 const filmApiTrendFetch = new FilmApiTrendFetch();
+filmApiTrendFetch.currentLang = saveLang;
 
 searchForm.addEventListener('submit', function (evt) {
   onSubmitQuery(evt, filmApiTrendFetch);
@@ -46,11 +49,29 @@ searchForm.addEventListener('submit', function (evt) {
 // --------- При открытии сайта ---------------------
 
 if (document.title === 'Filmoteka') {
+  checkLanguage()
   fetchUpcomingFilms();
   fetchApiFilms();
   selectFilmsGenres();
   selectYears();
 } else getListById('favorite', uid);
+
+if (document.title === 'Library') {
+  checkLanguage()
+}
+
+// ------------Проверка статуса выбранного языка------
+
+function checkLanguage() {  
+  if (currentLang === 'uk-UA') {
+    document.querySelector('#uk').classList.add('active-btn');
+    document.querySelector('#en').classList.remove('active-btn');
+  } if (currentLang === 'en-US') {
+    document.querySelector('#en').classList.add('active-btn');
+    document.querySelector('#uk').classList.remove('active-btn'); 
+  }  else 
+  return;
+}
 
 // ------------Переключение языка--------------
 btnEn.addEventListener('click', onEnClick);
@@ -59,6 +80,11 @@ btnUk.addEventListener('click', onUkClick);
 async function onEnClick() {
   try {
     filmApiTrendFetch.currentLang = 'en-US';
+    // 
+    localStorage.setItem('lang', 'en-US');
+    console.log(localStorage);
+    location.reload();
+    //
     await fetchApiFilms();
   } catch (error) {
     onErrorEN();
@@ -68,6 +94,11 @@ async function onEnClick() {
 async function onUkClick() {
   try {
     filmApiTrendFetch.currentLang = 'uk-UA';
+    // 
+    localStorage.setItem('lang', 'uk-UA');
+    console.log(localStorage);   
+    location.reload();
+    //
     await fetchApiFilms();
   } catch (error) {
     onErrorUK();
@@ -83,24 +114,6 @@ function selectYears() {
         .getElementById('years')
         .insertAdjacentHTML('beforeend', `<option value="${i}">${i}</option>`);
     }
-  }
-}
-
-async function onEnClick() {
-  try {
-    filmApiTrendFetch.currentLang = 'en-US';
-    await fetchApiFilms();
-  } catch (error) {
-    onErrorEN();
-  }
-}
-
-async function onUkClick() {
-  try {
-    filmApiTrendFetch.currentLang = 'uk-UA';
-    await fetchApiFilms();
-  } catch (error) {
-    onErrorUK();
   }
 }
 
@@ -150,6 +163,8 @@ async function selectFilmsGenres() {
 }
 
 async function fetchFilmsGenres() {
+  // const saveLang = localStorage.getItem('lang');
+  // currentLang = saveLang;
   return await fetch(`${GENRES_URL}?api_key=${API_KEY}&language=${currentLang}`)
     .then(res => res.json())
     .then(data => {
@@ -339,14 +354,21 @@ async function onCardClick(event) {
     return;
   }
 
-  // async function noPosterCard() {
-  //    const noPosterCards = document.querySelector(
-  //     "img[class='movie-poster']"
-  //   );
-  //   for (const card of noPosterCards) {
-  //     card.className = 'visually-hidden';
-  //   }
-  // }
+  async function noPosterCard() {
+    try{
+     const noPosterCards = document.querySelectorAll(
+      "img[class='movie-poster']"
+    );
+    for (const card of noPosterCards) {
+      console.log(card.src)
+      if (card.src === 'https://image.tmdb.org/t/p/w500/') {        
+        card.className = 'visually-hidden';
+      } else return;
+    }
+  } catch (error) {
+    console.log(error);
+  } 
+  }
 
   filmApiTrendFetch.idFilm = event.target.getAttribute('data-film');
   const list = document.getElementById(filmApiTrendFetch.idFilm).dataset.list;
@@ -368,11 +390,11 @@ async function onCardClick(event) {
         console.log('в лист ' + list);
         const markup = hbsContainer(data);
         // console.log(data.overview);
-        console.log(data);
-        console.log(filmApiTrendFetch.movie_id);
+        // console.log(data);
+        // console.log(filmApiTrendFetch.movie_id);
         modalCard.innerHTML = '';
         modalCard.insertAdjacentHTML('beforeend', markup);
-        // noPosterCard();
+        noPosterCard();
         spinnerOff();
         if (uid === 'guest') {
           document.querySelector('.button-queue').disabled = 'true';
