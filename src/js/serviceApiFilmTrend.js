@@ -11,6 +11,7 @@ const UPCOMING_URL = 'https://api.themoviedb.org/3/movie/upcoming';
 const LOCAL_KEY_GENRES = 'genres';
 export const GENRES_ID_URL = 'https://api.themoviedb.org/3/discover/movie';
 const saveLang = localStorage.getItem('lang');
+let currentLang;
 currentLang = saveLang;
 
 export default class FilmApiTrendFetch {
