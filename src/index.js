@@ -26,6 +26,7 @@ import { async } from 'regenerator-runtime';
 import Swiper from 'swiper/swiper-bundle';
 import './js/backButton.js';
 import './js/theme';
+import localization from './js/localization';
 
 const modalCard = document.querySelector('.modal-one-film__content');
 const gallery = document.querySelector('.card-list');
@@ -47,7 +48,7 @@ searchForm.addEventListener('submit', function (evt) {
 });
 
 // --------- При открытии сайта ---------------------
-
+localization()
 if (document.title === 'Filmoteka') {
   checkLanguage()
   fetchUpcomingFilms();

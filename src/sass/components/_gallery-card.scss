@@ -26,6 +26,7 @@
     width: 394px;
     height: 672px;
     cursor: pointer;
+    
   }
   &:hover {
     transform: scale(1.05);
@@ -68,10 +69,15 @@
   background-size: cover;
   @include tablet {
     height: 455px;
-    @include desktop {
+  }
+  @include desktop {
       height: 574px;
     }
-  }
+}
+.card-top img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .card-bottom {
